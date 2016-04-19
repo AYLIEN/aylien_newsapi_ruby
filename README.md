@@ -11,7 +11,7 @@ AYLIEN News API is the most powerful way of sourcing, searching and syndicating 
 
 Add this to the Gemfile:
 
-    gem 'aylien_news_api', '~> 0.0.1'
+    gem 'aylien_news_api'
 
 or install it directly:
 
