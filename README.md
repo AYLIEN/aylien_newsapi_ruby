@@ -1,4 +1,5 @@
 # AYLIEN News API
+[![Gem Version](https://badge.fury.io/rb/aylien_news_api.svg)](https://badge.fury.io/rb/aylien_news_api)
 
 The Ruby gem for the AYLIEN News API
 
