@@ -135,6 +135,7 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes state/province is the specified value.
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes city is the specified value.
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes level is the specified value.
+    # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
     # @option opts [Integer] :story_id A story id
     # @option opts [String] :story_url An article or webpage
     # @option opts [String] :story_title Title of the article
@@ -182,6 +183,7 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes state/province is the specified value.
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes city is the specified value.
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes level is the specified value.
+    # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
     # @option opts [Integer] :story_id A story id
     # @option opts [String] :story_url An article or webpage
     # @option opts [String] :story_title Title of the article
@@ -261,6 +263,7 @@ module AylienNewsApi
       form_params["source.scopes.state[]"] = @api_client.build_collection_param(opts[:'source_scopes_state'], :multi) if opts[:'source_scopes_state']
       form_params["source.scopes.city[]"] = @api_client.build_collection_param(opts[:'source_scopes_city'], :multi) if opts[:'source_scopes_city']
       form_params["source.scopes.level[]"] = @api_client.build_collection_param(opts[:'source_scopes_level'], :multi) if opts[:'source_scopes_level']
+      form_params["return[]"] = @api_client.build_collection_param(opts[:'_return'], :multi) if opts[:'_return']
       form_params["story_id"] = opts[:'story_id'] if opts[:'story_id']
       form_params["story_url"] = opts[:'story_url'] if opts[:'story_url']
       form_params["story_title"] = opts[:'story_title'] if opts[:'story_title']
@@ -494,6 +497,7 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes state/province is the specified value.
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes city is the specified value.
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes level is the specified value.
+    # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
     # @option opts [Integer] :story_id A story id
     # @option opts [String] :story_url An article or webpage
     # @option opts [String] :story_title Title of the article
@@ -541,6 +545,7 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes state/province is the specified value.
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes city is the specified value.
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes level is the specified value.
+    # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
     # @option opts [Integer] :story_id A story id
     # @option opts [String] :story_url An article or webpage
     # @option opts [String] :story_title Title of the article
@@ -624,6 +629,7 @@ module AylienNewsApi
       form_params["source.scopes.state[]"] = @api_client.build_collection_param(opts[:'source_scopes_state'], :multi) if opts[:'source_scopes_state']
       form_params["source.scopes.city[]"] = @api_client.build_collection_param(opts[:'source_scopes_city'], :multi) if opts[:'source_scopes_city']
       form_params["source.scopes.level[]"] = @api_client.build_collection_param(opts[:'source_scopes_level'], :multi) if opts[:'source_scopes_level']
+      form_params["return[]"] = @api_client.build_collection_param(opts[:'_return'], :multi) if opts[:'_return']
       form_params["story_id"] = opts[:'story_id'] if opts[:'story_id']
       form_params["story_url"] = opts[:'story_url'] if opts[:'story_url']
       form_params["story_title"] = opts[:'story_title'] if opts[:'story_title']

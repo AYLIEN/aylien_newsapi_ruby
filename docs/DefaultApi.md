@@ -28,7 +28,7 @@ require 'aylien_news_api'
 AylienNewsApi.configure do |config|
   # Configure API key authorization: app_id
   config.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'YOUR APP ID'
-  
+
   # Configure API key authorization: app_key
   config.api_key['X-AYLIEN-NewsAPI-Application-Key'] = 'YOUR APP KEY'
 end
@@ -92,7 +92,7 @@ require 'aylien_news_api'
 AylienNewsApi.configure do |config|
   # Configure API key authorization: app_id
   config.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'YOUR APP ID'
-  
+
   # Configure API key authorization: app_key
   config.api_key['X-AYLIEN-NewsAPI-Application-Key'] = 'YOUR APP KEY'
 end
@@ -131,6 +131,7 @@ opts = {
   source_scopes_state: ["source_scopes_state_example"], # Array<String> | This parameter is used for finding stories whose source scopes state/province is the specified value.
   source_scopes_city: ["source_scopes_city_example"], # Array<String> | This parameter is used for finding stories whose source scopes city is the specified value.
   source_scopes_level: ["source_scopes_level_example"], # Array<String> | This parameter is used for finding stories whose source scopes level is the specified value.
+  _return: ["_return_example"], # Array<String> | This parameter is used for specifying return fields.
   story_id: 789, # Integer | A story id
   story_url: "story_url_example", # String | An article or webpage
   story_title: "story_title_example", # String | Title of the article
@@ -184,6 +185,7 @@ Name | Type | Description  | Notes
  **source_scopes_state** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories whose source scopes state/province is the specified value. | [optional] 
  **source_scopes_city** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories whose source scopes city is the specified value. | [optional] 
  **source_scopes_level** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories whose source scopes level is the specified value. | [optional] 
+ **_return** | [**Array&lt;String&gt;**](String.md)| This parameter is used for specifying return fields. | [optional] 
  **story_id** | **Integer**| A story id | [optional] 
  **story_url** | **String**| An article or webpage | [optional] 
  **story_title** | **String**| Title of the article | [optional] 
@@ -222,7 +224,7 @@ require 'aylien_news_api'
 AylienNewsApi.configure do |config|
   # Configure API key authorization: app_id
   config.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'YOUR APP ID'
-  
+
   # Configure API key authorization: app_key
   config.api_key['X-AYLIEN-NewsAPI-Application-Key'] = 'YOUR APP KEY'
 end
@@ -346,7 +348,7 @@ require 'aylien_news_api'
 AylienNewsApi.configure do |config|
   # Configure API key authorization: app_id
   config.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'YOUR APP ID'
-  
+
   # Configure API key authorization: app_key
   config.api_key['X-AYLIEN-NewsAPI-Application-Key'] = 'YOUR APP KEY'
 end
@@ -385,6 +387,7 @@ opts = {
   source_scopes_state: ["source_scopes_state_example"], # Array<String> | This parameter is used for finding stories whose source scopes state/province is the specified value.
   source_scopes_city: ["source_scopes_city_example"], # Array<String> | This parameter is used for finding stories whose source scopes city is the specified value.
   source_scopes_level: ["source_scopes_level_example"], # Array<String> | This parameter is used for finding stories whose source scopes level is the specified value.
+  _return: ["_return_example"], # Array<String> | This parameter is used for specifying return fields.
   story_id: 789, # Integer | A story id
   story_url: "story_url_example", # String | An article or webpage
   story_title: "story_title_example", # String | Title of the article
@@ -438,6 +441,7 @@ Name | Type | Description  | Notes
  **source_scopes_state** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories whose source scopes state/province is the specified value. | [optional] 
  **source_scopes_city** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories whose source scopes city is the specified value. | [optional] 
  **source_scopes_level** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories whose source scopes level is the specified value. | [optional] 
+ **_return** | [**Array&lt;String&gt;**](String.md)| This parameter is used for specifying return fields. | [optional] 
  **story_id** | **Integer**| A story id | [optional] 
  **story_url** | **String**| An article or webpage | [optional] 
  **story_title** | **String**| Title of the article | [optional] 
@@ -476,7 +480,7 @@ require 'aylien_news_api'
 AylienNewsApi.configure do |config|
   # Configure API key authorization: app_id
   config.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'YOUR APP ID'
-  
+
   # Configure API key authorization: app_key
   config.api_key['X-AYLIEN-NewsAPI-Application-Key'] = 'YOUR APP KEY'
 end
@@ -606,7 +610,7 @@ require 'aylien_news_api'
 AylienNewsApi.configure do |config|
   # Configure API key authorization: app_id
   config.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'YOUR APP ID'
-  
+
   # Configure API key authorization: app_key
   config.api_key['X-AYLIEN-NewsAPI-Application-Key'] = 'YOUR APP KEY'
 end
@@ -724,7 +728,7 @@ require 'aylien_news_api'
 AylienNewsApi.configure do |config|
   # Configure API key authorization: app_id
   config.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'YOUR APP ID'
-  
+
   # Configure API key authorization: app_key
   config.api_key['X-AYLIEN-NewsAPI-Application-Key'] = 'YOUR APP KEY'
 end
