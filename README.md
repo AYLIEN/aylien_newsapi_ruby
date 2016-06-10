@@ -5,6 +5,8 @@ The Ruby gem for the AYLIEN News API
 
 AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content. If you haven't already done so, you will need to [sign up](https://newsapi.aylien.com/signup).
 
+Visit our [interactive documentation](https://newsapi.aylien.com/docs/#swagger-ui-container) to familiarize yourself with the API.
+
 ## Installation
 
 ### RubyGems
@@ -17,9 +19,9 @@ or install it directly:
 
 	gem install aylien_news_api
 
-### Install from Git
+### Git
 
-If the Ruby gem is hosted at a git repository: https://github.com/AYLIEN/aylien_newsapi_ruby, then add the following in the Gemfile:
+Add the following in the Gemfile:
 
     gem 'aylien_news_api', :git => 'https://github.com/AYLIEN/aylien_newsapi_ruby.git'
 
