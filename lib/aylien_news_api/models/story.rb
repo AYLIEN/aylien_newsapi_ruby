@@ -15,8 +15,9 @@
 require 'date'
 
 module AylienNewsApi
+
   class Story
-    # ID of the story which is unique identification
+    # ID of the story which is a unique identification
     attr_accessor :id
 
     # Title of the story
@@ -43,16 +44,16 @@ module AylienNewsApi
     # An array of suggested Story hashtags
     attr_accessor :hashtags
 
-    # Characters count of the story body
+    # Character count of the story body
     attr_accessor :characters_count
 
-    # Words count of the story body
+    # Word count of the story body
     attr_accessor :words_count
 
-    # Sentences count of the story body
+    # Sentence count of the story body
     attr_accessor :sentences_count
 
-    # Paragraphs count of the story body
+    # Paragraph count of the story body
     attr_accessor :paragraphs_count
 
     # Suggested categories for the story
@@ -75,6 +76,7 @@ module AylienNewsApi
 
     # Links which is related to the story
     attr_accessor :links
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -136,78 +138,111 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'id']
+      if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
-      if attributes[:'title']
+
+      if attributes.has_key?(:'title')
         self.title = attributes[:'title']
       end
-      if attributes[:'body']
+
+      if attributes.has_key?(:'body')
         self.body = attributes[:'body']
       end
-      if attributes[:'summary']
+
+      if attributes.has_key?(:'summary')
         self.summary = attributes[:'summary']
       end
-      if attributes[:'source']
+
+      if attributes.has_key?(:'source')
         self.source = attributes[:'source']
       end
-      if attributes[:'author']
+
+      if attributes.has_key?(:'author')
         self.author = attributes[:'author']
       end
-      if attributes[:'entities']
+
+      if attributes.has_key?(:'entities')
         self.entities = attributes[:'entities']
       end
-      if attributes[:'keywords']
+
+      if attributes.has_key?(:'keywords')
         if (value = attributes[:'keywords']).is_a?(Array)
           self.keywords = value
         end
       end
-      if attributes[:'hashtags']
+
+      if attributes.has_key?(:'hashtags')
         if (value = attributes[:'hashtags']).is_a?(Array)
           self.hashtags = value
         end
       end
-      if attributes[:'characters_count']
+
+      if attributes.has_key?(:'characters_count')
         self.characters_count = attributes[:'characters_count']
       end
-      if attributes[:'words_count']
+
+      if attributes.has_key?(:'words_count')
         self.words_count = attributes[:'words_count']
       end
-      if attributes[:'sentences_count']
+
+      if attributes.has_key?(:'sentences_count')
         self.sentences_count = attributes[:'sentences_count']
       end
-      if attributes[:'paragraphs_count']
+
+      if attributes.has_key?(:'paragraphs_count')
         self.paragraphs_count = attributes[:'paragraphs_count']
       end
-      if attributes[:'categories']
+
+      if attributes.has_key?(:'categories')
         if (value = attributes[:'categories']).is_a?(Array)
           self.categories = value
         end
       end
-      if attributes[:'social_shares_count']
+
+      if attributes.has_key?(:'social_shares_count')
         self.social_shares_count = attributes[:'social_shares_count']
       end
-      if attributes[:'media']
+
+      if attributes.has_key?(:'media')
         if (value = attributes[:'media']).is_a?(Array)
           self.media = value
         end
       end
-      if attributes[:'sentiment']
+
+      if attributes.has_key?(:'sentiment')
         self.sentiment = attributes[:'sentiment']
       end
-      if attributes[:'language']
+
+      if attributes.has_key?(:'language')
         self.language = attributes[:'language']
       end
-      if attributes[:'published_at']
+
+      if attributes.has_key?(:'published_at')
         self.published_at = attributes[:'published_at']
       end
-      if attributes[:'links']
+
+      if attributes.has_key?(:'links')
         self.links = attributes[:'links']
       end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return true
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -234,7 +269,7 @@ module AylienNewsApi
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -333,7 +368,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -350,4 +385,5 @@ module AylienNewsApi
     end
 
   end
+
 end

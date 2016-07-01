@@ -87,6 +87,13 @@ module AylienNewsApi
     # @return [true, false]
     attr_accessor :verify_ssl
 
+    # Set this to customize parameters encoding of array parameter with multi collectionFormat.
+    # Default to nil.
+    #
+    # @see The params_encoding option of Ethon. Related source code:
+    # https://github.com/typhoeus/ethon/blob/master/lib/ethon/easy/queryable.rb#L96
+    attr_accessor :params_encoding
+
     # Set this to customize the certificate file to verify the peer.
     #
     # @return [String] the path to the certificate file
@@ -113,6 +120,7 @@ module AylienNewsApi
       @api_key_prefix = {}
       @timeout = 0
       @verify_ssl = true
+      @params_encoding = :multi
       @cert_file = nil
       @key_file = nil
       @debugging = false

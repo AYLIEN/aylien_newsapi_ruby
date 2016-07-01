@@ -15,6 +15,7 @@
 require 'date'
 
 module AylienNewsApi
+
   class StoryLinks
     # The story permalink URL
     attr_accessor :permalink
@@ -24,6 +25,7 @@ module AylienNewsApi
 
     # The coverages URL
     attr_accessor :coverages
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -51,19 +53,35 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'permalink']
+      if attributes.has_key?(:'permalink')
         self.permalink = attributes[:'permalink']
       end
-      if attributes[:'related_stories']
+
+      if attributes.has_key?(:'related_stories')
         self.related_stories = attributes[:'related_stories']
       end
-      if attributes[:'coverages']
+
+      if attributes.has_key?(:'coverages')
         self.coverages = attributes[:'coverages']
       end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return true
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -73,7 +91,7 @@ module AylienNewsApi
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -172,7 +190,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -189,4 +207,5 @@ module AylienNewsApi
     end
 
   end
+
 end

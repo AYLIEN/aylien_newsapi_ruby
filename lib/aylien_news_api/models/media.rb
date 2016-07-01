@@ -15,12 +15,35 @@
 require 'date'
 
 module AylienNewsApi
+
   class Media
-    # Type of the media
+    # The type of media
     attr_accessor :type
 
     # A URL which points to the media file
     attr_accessor :url
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -46,26 +69,43 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'type']
+      if attributes.has_key?(:'type')
         self.type = attributes[:'type']
       end
-      if attributes[:'url']
+
+      if attributes.has_key?(:'url')
         self.url = attributes[:'url']
       end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      type_validator = EnumAttributeValidator.new('String', ["image", "video"])
+      return false unless type_validator.valid?(@type)
+      return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      allowed_values = ["image", "video"]
-      if type && !allowed_values.include?(type)
-        fail "invalid value for 'type', must be one of #{allowed_values}"
+      validator = EnumAttributeValidator.new('String', ["image", "video"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
       end
       @type = type
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -74,7 +114,7 @@ module AylienNewsApi
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -173,7 +213,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -190,4 +230,5 @@ module AylienNewsApi
     end
 
   end
+
 end

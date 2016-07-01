@@ -121,15 +121,14 @@ Class | Method | HTTP request | Description
 ## Documentation for Authorization
 
 
-### app_key
-
-- **Type**: API key
-- **API key parameter name**: X-AYLIEN-NewsAPI-Application-Key
-- **Location**: HTTP header
-
 ### app_id
 
 - **Type**: API key
 - **API key parameter name**: X-AYLIEN-NewsAPI-Application-ID
 - **Location**: HTTP header
 
+### app_key
+
+- **Type**: API key
+- **API key parameter name**: X-AYLIEN-NewsAPI-Application-Key
+- **Location**: HTTP header

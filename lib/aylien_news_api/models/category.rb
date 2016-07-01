@@ -15,6 +15,7 @@
 require 'date'
 
 module AylienNewsApi
+
   class Category
     # The ID of the category
     attr_accessor :id
@@ -33,6 +34,28 @@ module AylienNewsApi
 
     # Related links for the category
     attr_accessor :links
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -66,38 +89,59 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'id']
+      if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
-      if attributes[:'taxonomy']
+
+      if attributes.has_key?(:'taxonomy')
         self.taxonomy = attributes[:'taxonomy']
       end
-      if attributes[:'level']
+
+      if attributes.has_key?(:'level')
         self.level = attributes[:'level']
       end
-      if attributes[:'score']
+
+      if attributes.has_key?(:'score')
         self.score = attributes[:'score']
       end
-      if attributes[:'confident']
+
+      if attributes.has_key?(:'confident')
         self.confident = attributes[:'confident']
       end
-      if attributes[:'links']
+
+      if attributes.has_key?(:'links')
         self.links = attributes[:'links']
       end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      taxonomy_validator = EnumAttributeValidator.new('String', ["iab-qag", "iptc-subjectcode"])
+      return false unless taxonomy_validator.valid?(@taxonomy)
+      return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] taxonomy Object to be assigned
     def taxonomy=(taxonomy)
-      allowed_values = ["iab-qag", "iptc-subjectcode"]
-      if taxonomy && !allowed_values.include?(taxonomy)
-        fail "invalid value for 'taxonomy', must be one of #{allowed_values}"
+      validator = EnumAttributeValidator.new('String', ["iab-qag", "iptc-subjectcode"])
+      unless validator.valid?(taxonomy)
+        fail ArgumentError, "invalid value for 'taxonomy', must be one of #{validator.allowable_values}."
       end
       @taxonomy = taxonomy
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -110,7 +154,7 @@ module AylienNewsApi
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -209,7 +253,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -226,4 +270,5 @@ module AylienNewsApi
     end
 
   end
+
 end

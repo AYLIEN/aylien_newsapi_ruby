@@ -91,10 +91,10 @@ module AylienNewsApi
       update_params_for_auth! header_params, query_params, opts[:auth_names]
 
       req_opts = {
-        :params_encoding => :multi,
         :method => http_method,
         :headers => header_params,
         :params => query_params,
+        :params_encoding => @config.params_encoding,
         :timeout => @config.timeout,
         :ssl_verifypeer => @config.verify_ssl,
         :sslcert => @config.cert_file,
@@ -207,7 +207,7 @@ module AylienNewsApi
     # @return [Tempfile] the file downloaded
     def download_file(response)
       content_disposition = response.headers['Content-Disposition']
-      if content_disposition
+      if content_disposition and content_disposition =~ /filename=/i
         filename = content_disposition[/filename=['"]?([^'"\s]+)['"]?/, 1]
         prefix = sanitize_filename(filename)
       else

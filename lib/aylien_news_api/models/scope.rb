@@ -15,18 +15,41 @@
 require 'date'
 
 module AylienNewsApi
+
   class Scope
-    # The country code of the scope. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
+    # The source scope by country code. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes.
     attr_accessor :country
 
-    # The state of the scope
+    # The scope by state
     attr_accessor :state
 
-    # The city of the scope
+    # The scope by city
     attr_accessor :city
 
-    # The level of the scope
+    # The scope by level
     attr_accessor :level
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -56,32 +79,51 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'country']
+      if attributes.has_key?(:'country')
         self.country = attributes[:'country']
       end
-      if attributes[:'state']
+
+      if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
-      if attributes[:'city']
+
+      if attributes.has_key?(:'city')
         self.city = attributes[:'city']
       end
-      if attributes[:'level']
+
+      if attributes.has_key?(:'level')
         self.level = attributes[:'level']
       end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      level_validator = EnumAttributeValidator.new('String', ["international", "national", "local"])
+      return false unless level_validator.valid?(@level)
+      return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] level Object to be assigned
     def level=(level)
-      allowed_values = ["international", "national", "local"]
-      if level && !allowed_values.include?(level)
-        fail "invalid value for 'level', must be one of #{allowed_values}"
+      validator = EnumAttributeValidator.new('String', ["international", "national", "local"])
+      unless validator.valid?(level)
+        fail ArgumentError, "invalid value for 'level', must be one of #{validator.allowable_values}."
       end
       @level = level
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -92,7 +134,7 @@ module AylienNewsApi
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -191,7 +233,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -208,4 +250,5 @@ module AylienNewsApi
     end
 
   end
+
 end

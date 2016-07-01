@@ -15,6 +15,7 @@
 require 'date'
 
 module AylienNewsApi
+
   class RelatedStories
     # The input story title
     attr_accessor :story_title
@@ -28,13 +29,18 @@ module AylienNewsApi
     # An array of related stories for the input story
     attr_accessor :related_stories
 
+    # An array of clusters
+    attr_accessor :clusters
+
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'story_title' => :'story_title',
         :'story_body' => :'story_body',
         :'story_language' => :'story_language',
-        :'related_stories' => :'related_stories'
+        :'related_stories' => :'related_stories',
+        :'clusters' => :'clusters'
       }
     end
 
@@ -44,7 +50,8 @@ module AylienNewsApi
         :'story_title' => :'String',
         :'story_body' => :'String',
         :'story_language' => :'String',
-        :'related_stories' => :'Array<Story>'
+        :'related_stories' => :'Array<Story>',
+        :'clusters' => :'Array<StoryCluster>'
       }
     end
 
@@ -56,35 +63,59 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'story_title']
+      if attributes.has_key?(:'story_title')
         self.story_title = attributes[:'story_title']
       end
-      if attributes[:'story_body']
+
+      if attributes.has_key?(:'story_body')
         self.story_body = attributes[:'story_body']
       end
-      if attributes[:'story_language']
+
+      if attributes.has_key?(:'story_language')
         self.story_language = attributes[:'story_language']
       end
-      if attributes[:'related_stories']
+
+      if attributes.has_key?(:'related_stories')
         if (value = attributes[:'related_stories']).is_a?(Array)
           self.related_stories = value
         end
       end
+
+      if attributes.has_key?(:'clusters')
+        if (value = attributes[:'clusters']).is_a?(Array)
+          self.clusters = value
+        end
+      end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return true
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           story_title == o.story_title &&
           story_body == o.story_body &&
           story_language == o.story_language &&
-          related_stories == o.related_stories
+          related_stories == o.related_stories &&
+          clusters == o.clusters
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -92,7 +123,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [story_title, story_body, story_language, related_stories].hash
+      [story_title, story_body, story_language, related_stories, clusters].hash
     end
 
     # Builds the object from hash
@@ -183,7 +214,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -200,4 +231,5 @@ module AylienNewsApi
     end
 
   end
+
 end

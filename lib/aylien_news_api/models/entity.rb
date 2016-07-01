@@ -15,6 +15,7 @@
 require 'date'
 
 module AylienNewsApi
+
   class Entity
     # The entity text
     attr_accessor :text
@@ -30,6 +31,7 @@ module AylienNewsApi
 
     # The indices of the entity text
     attr_accessor :indices
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -61,29 +63,67 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'text']
+      if attributes.has_key?(:'text')
         self.text = attributes[:'text']
       end
-      if attributes[:'score']
+
+      if attributes.has_key?(:'score')
         self.score = attributes[:'score']
       end
-      if attributes[:'types']
+
+      if attributes.has_key?(:'types')
         if (value = attributes[:'types']).is_a?(Array)
           self.types = value
         end
       end
-      if attributes[:'links']
+
+      if attributes.has_key?(:'links')
         self.links = attributes[:'links']
       end
-      if attributes[:'indices']
+
+      if attributes.has_key?(:'indices')
         if (value = attributes[:'indices']).is_a?(Array)
           self.indices = value
         end
       end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return false if @score > 1.0
+      return false if @score < 0.0
+      return true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] score Value to be assigned
+    def score=(score)
+      if score.nil?
+        fail ArgumentError, "score cannot be nil"
+      end
+
+      if score > 1.0
+        fail ArgumentError, "invalid value for 'score', must be smaller than or equal to 1.0."
+      end
+
+      if score < 0.0
+        fail ArgumentError, "invalid value for 'score', must be greater than or equal to 0.0."
+      end
+
+      @score = score
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -95,7 +135,7 @@ module AylienNewsApi
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -194,7 +234,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -211,4 +251,5 @@ module AylienNewsApi
     end
 
   end
+
 end

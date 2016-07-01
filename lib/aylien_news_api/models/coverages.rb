@@ -15,6 +15,7 @@
 require 'date'
 
 module AylienNewsApi
+
   class Coverages
     # The input story title
     attr_accessor :story_title
@@ -31,6 +32,10 @@ module AylienNewsApi
     # An array of coverages for the input story
     attr_accessor :coverages
 
+    # An array of clusters
+    attr_accessor :clusters
+
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +43,8 @@ module AylienNewsApi
         :'story_body' => :'story_body',
         :'story_published_at' => :'story_published_at',
         :'story_language' => :'story_language',
-        :'coverages' => :'coverages'
+        :'coverages' => :'coverages',
+        :'clusters' => :'clusters'
       }
     end
 
@@ -49,7 +55,8 @@ module AylienNewsApi
         :'story_body' => :'String',
         :'story_published_at' => :'DateTime',
         :'story_language' => :'String',
-        :'coverages' => :'Array<Story>'
+        :'coverages' => :'Array<Story>',
+        :'clusters' => :'Array<StoryCluster>'
       }
     end
 
@@ -61,27 +68,51 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'story_title']
+      if attributes.has_key?(:'story_title')
         self.story_title = attributes[:'story_title']
       end
-      if attributes[:'story_body']
+
+      if attributes.has_key?(:'story_body')
         self.story_body = attributes[:'story_body']
       end
-      if attributes[:'story_published_at']
+
+      if attributes.has_key?(:'story_published_at')
         self.story_published_at = attributes[:'story_published_at']
       end
-      if attributes[:'story_language']
+
+      if attributes.has_key?(:'story_language')
         self.story_language = attributes[:'story_language']
       end
-      if attributes[:'coverages']
+
+      if attributes.has_key?(:'coverages')
         if (value = attributes[:'coverages']).is_a?(Array)
           self.coverages = value
         end
       end
+
+      if attributes.has_key?(:'clusters')
+        if (value = attributes[:'clusters']).is_a?(Array)
+          self.clusters = value
+        end
+      end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return true
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -89,11 +120,12 @@ module AylienNewsApi
           story_body == o.story_body &&
           story_published_at == o.story_published_at &&
           story_language == o.story_language &&
-          coverages == o.coverages
+          coverages == o.coverages &&
+          clusters == o.clusters
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -101,7 +133,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [story_title, story_body, story_published_at, story_language, coverages].hash
+      [story_title, story_body, story_published_at, story_language, coverages, clusters].hash
     end
 
     # Builds the object from hash
@@ -192,7 +224,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -209,4 +241,5 @@ module AylienNewsApi
     end
 
   end
+
 end

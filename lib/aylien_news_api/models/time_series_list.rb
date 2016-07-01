@@ -15,6 +15,7 @@
 require 'date'
 
 module AylienNewsApi
+
   class TimeSeriesList
     # An array of time series
     attr_accessor :time_series
@@ -27,6 +28,7 @@ module AylienNewsApi
 
     # The end published date of the time series
     attr_accessor :published_at_end
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -56,24 +58,41 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes[:'time_series']
+      if attributes.has_key?(:'time_series')
         if (value = attributes[:'time_series']).is_a?(Array)
           self.time_series = value
         end
       end
-      if attributes[:'period']
+
+      if attributes.has_key?(:'period')
         self.period = attributes[:'period']
       end
-      if attributes[:'published_at.start']
+
+      if attributes.has_key?(:'published_at.start')
         self.published_at_start = attributes[:'published_at.start']
       end
-      if attributes[:'published_at.end']
+
+      if attributes.has_key?(:'published_at.end')
         self.published_at_end = attributes[:'published_at.end']
       end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return true
     end
 
     # Checks equality by comparing each attribute.
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
@@ -84,7 +103,7 @@ module AylienNewsApi
     end
 
     # @see the `==` method
-    # @param [Object] Object to be compared 
+    # @param [Object] Object to be compared
     def eql?(o)
       self == o
     end
@@ -183,7 +202,7 @@ module AylienNewsApi
 
     # Outputs non-array value in the form of hash
     # For object, use to_hash. Otherwise, just return the value
-    # @param [Object] value Any valid value 
+    # @param [Object] value Any valid value
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
@@ -200,4 +219,5 @@ module AylienNewsApi
     end
 
   end
+
 end
