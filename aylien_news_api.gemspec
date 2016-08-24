@@ -20,9 +20,9 @@ Gem::Specification.new do |s|
   s.name        = "aylien_news_api"
   s.version     = AylienNewsApi::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["AYLIEN Inc.", "Hamed Ramezanian Nik"]
+  s.authors     = ["AYLIEN Inc.", "Hamed R. Nik"]
   s.email       = ["support@aylien.com", "hamed.r.nik@gmail.com"]
-  s.homepage    = "https://github.com/AYLIEN/aylien_newsapi_ruby"
+  s.homepage    = "https://newsapi.aylien.com/"
   s.summary     = "AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content"
   s.description = "AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content."
   s.license     = "Apache-2.0"

@@ -55,9 +55,19 @@ module AylienNewsApi
       end
       # verify the required parameter 'term' is set
       fail ArgumentError, "Missing the required parameter 'term' when calling DefaultApi.list_autocompletes" if term.nil?
+      if term.to_s.length < 1
+        fail ArgumentError, 'invalid value for "term" when calling DefaultApi.list_autocompletes, the character length must be great than or equal to 1.'
+      end
 
       if opts[:'language'] && !['en', 'de', 'fr', 'it', 'es', 'pt'].include?(opts[:'language'])
         fail ArgumentError, 'invalid value for "language", must be one of en, de, fr, it, es, pt'
+      end
+      if !opts[:'per_page'].nil? && opts[:'per_page'] > 100.0
+        fail ArgumentError, 'invalid value for "opts[:"per_page"]" when calling DefaultApi.list_autocompletes, must be smaller than or equal to 100.0.'
+      end
+
+      if !opts[:'per_page'].nil? && opts[:'per_page'] < 1.0
+        fail ArgumentError, 'invalid value for "opts[:"per_page"]" when calling DefaultApi.list_autocompletes, must be greater than or equal to 1.0.'
       end
 
       # resource path
@@ -138,6 +148,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [BOOLEAN] :cluster This parameter enables clustering for the returned stories. (default to false)
     # @option opts [String] :cluster_algorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. (default to lingo)
     # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
@@ -192,6 +207,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [BOOLEAN] :cluster This parameter enables clustering for the returned stories.
     # @option opts [String] :cluster_algorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
     # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
@@ -207,6 +227,9 @@ module AylienNewsApi
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DefaultApi.list_coverages ..."
       end
+      if opts[:'language'] && !opts[:'language'].all?{|l| ['en', 'de', 'fr', 'it', 'es', 'pt'].include?(l)}
+        fail ArgumentError, 'invalid value for "language", must be one of en, de, fr, it, es, pt'
+      end
       if opts[:'categories_taxonomy'] && !['iab-qag', 'iptc-subjectcode'].include?(opts[:'categories_taxonomy'])
         fail ArgumentError, 'invalid value for "categories_taxonomy", must be one of iab-qag, iptc-subjectcode'
       end
@@ -216,12 +239,56 @@ module AylienNewsApi
       if opts[:'sentiment_body_polarity'] && !['positive', 'neutral', 'negative'].include?(opts[:'sentiment_body_polarity'])
         fail ArgumentError, 'invalid value for "sentiment_body_polarity", must be one of positive, neutral, negative'
       end
+      if !opts[:'media_images_count_min'].nil? && opts[:'media_images_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_min"]" when calling DefaultApi.list_coverages, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_images_count_max'].nil? && opts[:'media_images_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_max"]" when calling DefaultApi.list_coverages, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_min'].nil? && opts[:'media_videos_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_min"]" when calling DefaultApi.list_coverages, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_max'].nil? && opts[:'media_videos_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_max"]" when calling DefaultApi.list_coverages, must be greater than or equal to 0.0.'
+      end
+
+      if opts[:'source_scopes_level'] && !opts[:'source_scopes_level'].all?{|l| ['international', 'national', 'local'].include?(l)}
+        fail ArgumentError, 'invalid value for "source_scopes_level", must be one of international, national, local'
+      end
+      if !opts[:'source_links_in_count_min'].nil? && opts[:'source_links_in_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_min"]" when calling DefaultApi.list_coverages, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_links_in_count_max'].nil? && opts[:'source_links_in_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_max"]" when calling DefaultApi.list_coverages, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_min'].nil? && opts[:'source_rankings_alexa_rank_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_min"]" when calling DefaultApi.list_coverages, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_max'].nil? && opts[:'source_rankings_alexa_rank_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_max"]" when calling DefaultApi.list_coverages, must be greater than or equal to 0.0.'
+      end
 
       if opts[:'cluster_algorithm'] && !['stc', 'lingo', 'kmeans'].include?(opts[:'cluster_algorithm'])
         fail ArgumentError, 'invalid value for "cluster_algorithm", must be one of stc, lingo, kmeans'
       end
+      if opts[:'_return'] && !opts[:'_return'].all?{|l| ['id', 'title', 'body', 'summary', 'source', 'author', 'entities', 'keywords', 'hashtags', 'characters_count', 'words_count', 'sentences_count', 'paragraphs_count', 'categories', 'social_shares_count', 'media', 'sentiment', 'language', 'published_at', 'links'].include?(l)}
+        fail ArgumentError, 'invalid value for "_return", must be one of id, title, body, summary, source, author, entities, keywords, hashtags, characters_count, words_count, sentences_count, paragraphs_count, categories, social_shares_count, media, sentiment, language, published_at, links'
+      end
       if opts[:'story_language'] && !['auto', 'en', 'de', 'fr', 'it', 'es', 'pt'].include?(opts[:'story_language'])
         fail ArgumentError, 'invalid value for "story_language", must be one of auto, en, de, fr, it, es, pt'
+      end
+      if !opts[:'per_page'].nil? && opts[:'per_page'] > 100.0
+        fail ArgumentError, 'invalid value for "opts[:"per_page"]" when calling DefaultApi.list_coverages, must be smaller than or equal to 100.0.'
+      end
+
+      if !opts[:'per_page'].nil? && opts[:'per_page'] < 1.0
+        fail ArgumentError, 'invalid value for "opts[:"per_page"]" when calling DefaultApi.list_coverages, must be greater than or equal to 1.0.'
       end
 
       # resource path
@@ -278,6 +345,11 @@ module AylienNewsApi
       form_params["source.scopes.state[]"] = @api_client.build_collection_param(opts[:'source_scopes_state'], :multi) if !opts[:'source_scopes_state'].nil?
       form_params["source.scopes.city[]"] = @api_client.build_collection_param(opts[:'source_scopes_city'], :multi) if !opts[:'source_scopes_city'].nil?
       form_params["source.scopes.level[]"] = @api_client.build_collection_param(opts[:'source_scopes_level'], :multi) if !opts[:'source_scopes_level'].nil?
+      form_params["source.links_in_count.min"] = opts[:'source_links_in_count_min'] if !opts[:'source_links_in_count_min'].nil?
+      form_params["source.links_in_count.max"] = opts[:'source_links_in_count_max'] if !opts[:'source_links_in_count_max'].nil?
+      form_params["source.rankings.alexa.rank.min"] = opts[:'source_rankings_alexa_rank_min'] if !opts[:'source_rankings_alexa_rank_min'].nil?
+      form_params["source.rankings.alexa.rank.max"] = opts[:'source_rankings_alexa_rank_max'] if !opts[:'source_rankings_alexa_rank_max'].nil?
+      form_params["source.rankings.alexa.country[]"] = @api_client.build_collection_param(opts[:'source_rankings_alexa_country'], :multi) if !opts[:'source_rankings_alexa_country'].nil?
       form_params["cluster"] = opts[:'cluster'] if !opts[:'cluster'].nil?
       form_params["cluster.algorithm"] = opts[:'cluster_algorithm'] if !opts[:'cluster_algorithm'].nil?
       form_params["return[]"] = @api_client.build_collection_param(opts[:'_return'], :multi) if !opts[:'_return'].nil?
@@ -343,6 +415,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [Integer] :interval_start This parameter is used for setting the start data point of histogram intervals.
     # @option opts [Integer] :interval_end This parameter is used for setting the end data point of histogram intervals.
     # @option opts [Integer] :interval_width This parameter is used for setting the width of histogram intervals.
@@ -391,6 +468,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [Integer] :interval_start This parameter is used for setting the start data point of histogram intervals.
     # @option opts [Integer] :interval_end This parameter is used for setting the end data point of histogram intervals.
     # @option opts [Integer] :interval_width This parameter is used for setting the width of histogram intervals.
@@ -399,6 +481,9 @@ module AylienNewsApi
     def list_histograms_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DefaultApi.list_histograms ..."
+      end
+      if opts[:'language'] && !opts[:'language'].all?{|l| ['en', 'de', 'fr', 'it', 'es', 'pt'].include?(l)}
+        fail ArgumentError, 'invalid value for "language", must be one of en, de, fr, it, es, pt'
       end
       if opts[:'categories_taxonomy'] && !['iab-qag', 'iptc-subjectcode'].include?(opts[:'categories_taxonomy'])
         fail ArgumentError, 'invalid value for "categories_taxonomy", must be one of iab-qag, iptc-subjectcode'
@@ -409,9 +494,43 @@ module AylienNewsApi
       if opts[:'sentiment_body_polarity'] && !['positive', 'neutral', 'negative'].include?(opts[:'sentiment_body_polarity'])
         fail ArgumentError, 'invalid value for "sentiment_body_polarity", must be one of positive, neutral, negative'
       end
+      if !opts[:'media_images_count_min'].nil? && opts[:'media_images_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_min"]" when calling DefaultApi.list_histograms, must be greater than or equal to 0.0.'
+      end
 
-      if opts[:'field'] && !['social_shares_count', 'social_shares_count.facebook', 'social_shares_count.linkedin', 'social_shares_count.reddit', 'social_shares_count.google_plus', 'characters_count', 'words_count', 'sentences_count', 'paragraphs_count', 'media.images.count', 'media.videos.count'].include?(opts[:'field'])
-        fail ArgumentError, 'invalid value for "field", must be one of social_shares_count, social_shares_count.facebook, social_shares_count.linkedin, social_shares_count.reddit, social_shares_count.google_plus, characters_count, words_count, sentences_count, paragraphs_count, media.images.count, media.videos.count'
+      if !opts[:'media_images_count_max'].nil? && opts[:'media_images_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_max"]" when calling DefaultApi.list_histograms, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_min'].nil? && opts[:'media_videos_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_min"]" when calling DefaultApi.list_histograms, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_max'].nil? && opts[:'media_videos_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_max"]" when calling DefaultApi.list_histograms, must be greater than or equal to 0.0.'
+      end
+
+      if opts[:'source_scopes_level'] && !opts[:'source_scopes_level'].all?{|l| ['international', 'national', 'local'].include?(l)}
+        fail ArgumentError, 'invalid value for "source_scopes_level", must be one of international, national, local'
+      end
+      if !opts[:'source_links_in_count_min'].nil? && opts[:'source_links_in_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_min"]" when calling DefaultApi.list_histograms, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_links_in_count_max'].nil? && opts[:'source_links_in_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_max"]" when calling DefaultApi.list_histograms, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_min'].nil? && opts[:'source_rankings_alexa_rank_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_min"]" when calling DefaultApi.list_histograms, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_max'].nil? && opts[:'source_rankings_alexa_rank_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_max"]" when calling DefaultApi.list_histograms, must be greater than or equal to 0.0.'
+      end
+
+      if opts[:'field'] && !['social_shares_count', 'social_shares_count.facebook', 'social_shares_count.linkedin', 'social_shares_count.reddit', 'social_shares_count.google_plus', 'characters_count', 'words_count', 'sentences_count', 'paragraphs_count', 'media.images.count', 'media.videos.count', 'source.links_in_count', 'source.rankings.alexa.rank', 'source.rankings.alexa.rank.AF', 'source.rankings.alexa.rank.AX', 'source.rankings.alexa.rank.AL', 'source.rankings.alexa.rank.DZ', 'source.rankings.alexa.rank.AS', 'source.rankings.alexa.rank.AD', 'source.rankings.alexa.rank.AO', 'source.rankings.alexa.rank.AI', 'source.rankings.alexa.rank.AQ', 'source.rankings.alexa.rank.AG', 'source.rankings.alexa.rank.AR', 'source.rankings.alexa.rank.AM', 'source.rankings.alexa.rank.AW', 'source.rankings.alexa.rank.AU', 'source.rankings.alexa.rank.AT', 'source.rankings.alexa.rank.AZ', 'source.rankings.alexa.rank.BS', 'source.rankings.alexa.rank.BH', 'source.rankings.alexa.rank.BD', 'source.rankings.alexa.rank.BB', 'source.rankings.alexa.rank.BY', 'source.rankings.alexa.rank.BE', 'source.rankings.alexa.rank.BZ', 'source.rankings.alexa.rank.BJ', 'source.rankings.alexa.rank.BM', 'source.rankings.alexa.rank.BT', 'source.rankings.alexa.rank.BO', 'source.rankings.alexa.rank.BQ', 'source.rankings.alexa.rank.BA', 'source.rankings.alexa.rank.BW', 'source.rankings.alexa.rank.BV', 'source.rankings.alexa.rank.BR', 'source.rankings.alexa.rank.IO', 'source.rankings.alexa.rank.BN', 'source.rankings.alexa.rank.BG', 'source.rankings.alexa.rank.BF', 'source.rankings.alexa.rank.BI', 'source.rankings.alexa.rank.KH', 'source.rankings.alexa.rank.CM', 'source.rankings.alexa.rank.CA', 'source.rankings.alexa.rank.CV', 'source.rankings.alexa.rank.KY', 'source.rankings.alexa.rank.CF', 'source.rankings.alexa.rank.TD', 'source.rankings.alexa.rank.CL', 'source.rankings.alexa.rank.CN', 'source.rankings.alexa.rank.CX', 'source.rankings.alexa.rank.CC', 'source.rankings.alexa.rank.CO', 'source.rankings.alexa.rank.KM', 'source.rankings.alexa.rank.CG', 'source.rankings.alexa.rank.CD', 'source.rankings.alexa.rank.CK', 'source.rankings.alexa.rank.CR', 'source.rankings.alexa.rank.CI', 'source.rankings.alexa.rank.HR', 'source.rankings.alexa.rank.CU', 'source.rankings.alexa.rank.CW', 'source.rankings.alexa.rank.CY', 'source.rankings.alexa.rank.CZ', 'source.rankings.alexa.rank.DK', 'source.rankings.alexa.rank.DJ', 'source.rankings.alexa.rank.DM', 'source.rankings.alexa.rank.DO', 'source.rankings.alexa.rank.EC', 'source.rankings.alexa.rank.EG', 'source.rankings.alexa.rank.SV', 'source.rankings.alexa.rank.GQ', 'source.rankings.alexa.rank.ER', 'source.rankings.alexa.rank.EE', 'source.rankings.alexa.rank.ET', 'source.rankings.alexa.rank.FK', 'source.rankings.alexa.rank.FO', 'source.rankings.alexa.rank.FJ', 'source.rankings.alexa.rank.FI', 'source.rankings.alexa.rank.FR', 'source.rankings.alexa.rank.GF', 'source.rankings.alexa.rank.PF', 'source.rankings.alexa.rank.TF', 'source.rankings.alexa.rank.GA', 'source.rankings.alexa.rank.GM', 'source.rankings.alexa.rank.GE', 'source.rankings.alexa.rank.DE', 'source.rankings.alexa.rank.GH', 'source.rankings.alexa.rank.GI', 'source.rankings.alexa.rank.GR', 'source.rankings.alexa.rank.GL', 'source.rankings.alexa.rank.GD', 'source.rankings.alexa.rank.GP', 'source.rankings.alexa.rank.GU', 'source.rankings.alexa.rank.GT', 'source.rankings.alexa.rank.GG', 'source.rankings.alexa.rank.GN', 'source.rankings.alexa.rank.GW', 'source.rankings.alexa.rank.GY', 'source.rankings.alexa.rank.HT', 'source.rankings.alexa.rank.HM', 'source.rankings.alexa.rank.VA', 'source.rankings.alexa.rank.HN', 'source.rankings.alexa.rank.HK', 'source.rankings.alexa.rank.HU', 'source.rankings.alexa.rank.IS', 'source.rankings.alexa.rank.IN', 'source.rankings.alexa.rank.ID', 'source.rankings.alexa.rank.IR', 'source.rankings.alexa.rank.IQ', 'source.rankings.alexa.rank.IE', 'source.rankings.alexa.rank.IM', 'source.rankings.alexa.rank.IL', 'source.rankings.alexa.rank.IT', 'source.rankings.alexa.rank.JM', 'source.rankings.alexa.rank.JP', 'source.rankings.alexa.rank.JE', 'source.rankings.alexa.rank.JO', 'source.rankings.alexa.rank.KZ', 'source.rankings.alexa.rank.KE', 'source.rankings.alexa.rank.KI', 'source.rankings.alexa.rank.KP', 'source.rankings.alexa.rank.KR', 'source.rankings.alexa.rank.KW', 'source.rankings.alexa.rank.KG', 'source.rankings.alexa.rank.LA', 'source.rankings.alexa.rank.LV', 'source.rankings.alexa.rank.LB', 'source.rankings.alexa.rank.LS', 'source.rankings.alexa.rank.LR', 'source.rankings.alexa.rank.LY', 'source.rankings.alexa.rank.LI', 'source.rankings.alexa.rank.LT', 'source.rankings.alexa.rank.LU', 'source.rankings.alexa.rank.MO', 'source.rankings.alexa.rank.MK', 'source.rankings.alexa.rank.MG', 'source.rankings.alexa.rank.MW', 'source.rankings.alexa.rank.MY', 'source.rankings.alexa.rank.MV', 'source.rankings.alexa.rank.ML', 'source.rankings.alexa.rank.MT', 'source.rankings.alexa.rank.MH', 'source.rankings.alexa.rank.MQ', 'source.rankings.alexa.rank.MR', 'source.rankings.alexa.rank.MU', 'source.rankings.alexa.rank.YT', 'source.rankings.alexa.rank.MX', 'source.rankings.alexa.rank.FM', 'source.rankings.alexa.rank.MD', 'source.rankings.alexa.rank.MC', 'source.rankings.alexa.rank.MN', 'source.rankings.alexa.rank.ME', 'source.rankings.alexa.rank.MS', 'source.rankings.alexa.rank.MA', 'source.rankings.alexa.rank.MZ', 'source.rankings.alexa.rank.MM', 'source.rankings.alexa.rank.NA', 'source.rankings.alexa.rank.NR', 'source.rankings.alexa.rank.NP', 'source.rankings.alexa.rank.NL', 'source.rankings.alexa.rank.NC', 'source.rankings.alexa.rank.NZ', 'source.rankings.alexa.rank.NI', 'source.rankings.alexa.rank.NE', 'source.rankings.alexa.rank.NG', 'source.rankings.alexa.rank.NU', 'source.rankings.alexa.rank.NF', 'source.rankings.alexa.rank.MP', 'source.rankings.alexa.rank.NO', 'source.rankings.alexa.rank.OM', 'source.rankings.alexa.rank.PK', 'source.rankings.alexa.rank.PW', 'source.rankings.alexa.rank.PS', 'source.rankings.alexa.rank.PA', 'source.rankings.alexa.rank.PG', 'source.rankings.alexa.rank.PY', 'source.rankings.alexa.rank.PE', 'source.rankings.alexa.rank.PH', 'source.rankings.alexa.rank.PN', 'source.rankings.alexa.rank.PL', 'source.rankings.alexa.rank.PT', 'source.rankings.alexa.rank.PR', 'source.rankings.alexa.rank.QA', 'source.rankings.alexa.rank.RE', 'source.rankings.alexa.rank.RO', 'source.rankings.alexa.rank.RU', 'source.rankings.alexa.rank.RW', 'source.rankings.alexa.rank.BL', 'source.rankings.alexa.rank.SH', 'source.rankings.alexa.rank.KN', 'source.rankings.alexa.rank.LC', 'source.rankings.alexa.rank.MF', 'source.rankings.alexa.rank.PM', 'source.rankings.alexa.rank.VC', 'source.rankings.alexa.rank.WS', 'source.rankings.alexa.rank.SM', 'source.rankings.alexa.rank.ST', 'source.rankings.alexa.rank.SA', 'source.rankings.alexa.rank.SN', 'source.rankings.alexa.rank.RS', 'source.rankings.alexa.rank.SC', 'source.rankings.alexa.rank.SL', 'source.rankings.alexa.rank.SG', 'source.rankings.alexa.rank.SX', 'source.rankings.alexa.rank.SK', 'source.rankings.alexa.rank.SI', 'source.rankings.alexa.rank.SB', 'source.rankings.alexa.rank.SO', 'source.rankings.alexa.rank.ZA', 'source.rankings.alexa.rank.GS', 'source.rankings.alexa.rank.SS', 'source.rankings.alexa.rank.ES', 'source.rankings.alexa.rank.LK', 'source.rankings.alexa.rank.SD', 'source.rankings.alexa.rank.SR', 'source.rankings.alexa.rank.SJ', 'source.rankings.alexa.rank.SZ', 'source.rankings.alexa.rank.SE', 'source.rankings.alexa.rank.CH', 'source.rankings.alexa.rank.SY', 'source.rankings.alexa.rank.TW', 'source.rankings.alexa.rank.TJ', 'source.rankings.alexa.rank.TZ', 'source.rankings.alexa.rank.TH', 'source.rankings.alexa.rank.TL', 'source.rankings.alexa.rank.TG', 'source.rankings.alexa.rank.TK', 'source.rankings.alexa.rank.TO', 'source.rankings.alexa.rank.TT', 'source.rankings.alexa.rank.TN', 'source.rankings.alexa.rank.TR', 'source.rankings.alexa.rank.TM', 'source.rankings.alexa.rank.TC', 'source.rankings.alexa.rank.TV', 'source.rankings.alexa.rank.UG', 'source.rankings.alexa.rank.UA', 'source.rankings.alexa.rank.AE', 'source.rankings.alexa.rank.GB', 'source.rankings.alexa.rank.US', 'source.rankings.alexa.rank.UM', 'source.rankings.alexa.rank.UY', 'source.rankings.alexa.rank.UZ', 'source.rankings.alexa.rank.VU', 'source.rankings.alexa.rank.VE', 'source.rankings.alexa.rank.VN', 'source.rankings.alexa.rank.VG', 'source.rankings.alexa.rank.VI', 'source.rankings.alexa.rank.WF', 'source.rankings.alexa.rank.EH', 'source.rankings.alexa.rank.YE', 'source.rankings.alexa.rank.ZM', 'source.rankings.alexa.rank.ZW'].include?(opts[:'field'])
+        fail ArgumentError, 'invalid value for "field", must be one of social_shares_count, social_shares_count.facebook, social_shares_count.linkedin, social_shares_count.reddit, social_shares_count.google_plus, characters_count, words_count, sentences_count, paragraphs_count, media.images.count, media.videos.count, source.links_in_count, source.rankings.alexa.rank, source.rankings.alexa.rank.AF, source.rankings.alexa.rank.AX, source.rankings.alexa.rank.AL, source.rankings.alexa.rank.DZ, source.rankings.alexa.rank.AS, source.rankings.alexa.rank.AD, source.rankings.alexa.rank.AO, source.rankings.alexa.rank.AI, source.rankings.alexa.rank.AQ, source.rankings.alexa.rank.AG, source.rankings.alexa.rank.AR, source.rankings.alexa.rank.AM, source.rankings.alexa.rank.AW, source.rankings.alexa.rank.AU, source.rankings.alexa.rank.AT, source.rankings.alexa.rank.AZ, source.rankings.alexa.rank.BS, source.rankings.alexa.rank.BH, source.rankings.alexa.rank.BD, source.rankings.alexa.rank.BB, source.rankings.alexa.rank.BY, source.rankings.alexa.rank.BE, source.rankings.alexa.rank.BZ, source.rankings.alexa.rank.BJ, source.rankings.alexa.rank.BM, source.rankings.alexa.rank.BT, source.rankings.alexa.rank.BO, source.rankings.alexa.rank.BQ, source.rankings.alexa.rank.BA, source.rankings.alexa.rank.BW, source.rankings.alexa.rank.BV, source.rankings.alexa.rank.BR, source.rankings.alexa.rank.IO, source.rankings.alexa.rank.BN, source.rankings.alexa.rank.BG, source.rankings.alexa.rank.BF, source.rankings.alexa.rank.BI, source.rankings.alexa.rank.KH, source.rankings.alexa.rank.CM, source.rankings.alexa.rank.CA, source.rankings.alexa.rank.CV, source.rankings.alexa.rank.KY, source.rankings.alexa.rank.CF, source.rankings.alexa.rank.TD, source.rankings.alexa.rank.CL, source.rankings.alexa.rank.CN, source.rankings.alexa.rank.CX, source.rankings.alexa.rank.CC, source.rankings.alexa.rank.CO, source.rankings.alexa.rank.KM, source.rankings.alexa.rank.CG, source.rankings.alexa.rank.CD, source.rankings.alexa.rank.CK, source.rankings.alexa.rank.CR, source.rankings.alexa.rank.CI, source.rankings.alexa.rank.HR, source.rankings.alexa.rank.CU, source.rankings.alexa.rank.CW, source.rankings.alexa.rank.CY, source.rankings.alexa.rank.CZ, source.rankings.alexa.rank.DK, source.rankings.alexa.rank.DJ, source.rankings.alexa.rank.DM, source.rankings.alexa.rank.DO, source.rankings.alexa.rank.EC, source.rankings.alexa.rank.EG, source.rankings.alexa.rank.SV, source.rankings.alexa.rank.GQ, source.rankings.alexa.rank.ER, source.rankings.alexa.rank.EE, source.rankings.alexa.rank.ET, source.rankings.alexa.rank.FK, source.rankings.alexa.rank.FO, source.rankings.alexa.rank.FJ, source.rankings.alexa.rank.FI, source.rankings.alexa.rank.FR, source.rankings.alexa.rank.GF, source.rankings.alexa.rank.PF, source.rankings.alexa.rank.TF, source.rankings.alexa.rank.GA, source.rankings.alexa.rank.GM, source.rankings.alexa.rank.GE, source.rankings.alexa.rank.DE, source.rankings.alexa.rank.GH, source.rankings.alexa.rank.GI, source.rankings.alexa.rank.GR, source.rankings.alexa.rank.GL, source.rankings.alexa.rank.GD, source.rankings.alexa.rank.GP, source.rankings.alexa.rank.GU, source.rankings.alexa.rank.GT, source.rankings.alexa.rank.GG, source.rankings.alexa.rank.GN, source.rankings.alexa.rank.GW, source.rankings.alexa.rank.GY, source.rankings.alexa.rank.HT, source.rankings.alexa.rank.HM, source.rankings.alexa.rank.VA, source.rankings.alexa.rank.HN, source.rankings.alexa.rank.HK, source.rankings.alexa.rank.HU, source.rankings.alexa.rank.IS, source.rankings.alexa.rank.IN, source.rankings.alexa.rank.ID, source.rankings.alexa.rank.IR, source.rankings.alexa.rank.IQ, source.rankings.alexa.rank.IE, source.rankings.alexa.rank.IM, source.rankings.alexa.rank.IL, source.rankings.alexa.rank.IT, source.rankings.alexa.rank.JM, source.rankings.alexa.rank.JP, source.rankings.alexa.rank.JE, source.rankings.alexa.rank.JO, source.rankings.alexa.rank.KZ, source.rankings.alexa.rank.KE, source.rankings.alexa.rank.KI, source.rankings.alexa.rank.KP, source.rankings.alexa.rank.KR, source.rankings.alexa.rank.KW, source.rankings.alexa.rank.KG, source.rankings.alexa.rank.LA, source.rankings.alexa.rank.LV, source.rankings.alexa.rank.LB, source.rankings.alexa.rank.LS, source.rankings.alexa.rank.LR, source.rankings.alexa.rank.LY, source.rankings.alexa.rank.LI, source.rankings.alexa.rank.LT, source.rankings.alexa.rank.LU, source.rankings.alexa.rank.MO, source.rankings.alexa.rank.MK, source.rankings.alexa.rank.MG, source.rankings.alexa.rank.MW, source.rankings.alexa.rank.MY, source.rankings.alexa.rank.MV, source.rankings.alexa.rank.ML, source.rankings.alexa.rank.MT, source.rankings.alexa.rank.MH, source.rankings.alexa.rank.MQ, source.rankings.alexa.rank.MR, source.rankings.alexa.rank.MU, source.rankings.alexa.rank.YT, source.rankings.alexa.rank.MX, source.rankings.alexa.rank.FM, source.rankings.alexa.rank.MD, source.rankings.alexa.rank.MC, source.rankings.alexa.rank.MN, source.rankings.alexa.rank.ME, source.rankings.alexa.rank.MS, source.rankings.alexa.rank.MA, source.rankings.alexa.rank.MZ, source.rankings.alexa.rank.MM, source.rankings.alexa.rank.NA, source.rankings.alexa.rank.NR, source.rankings.alexa.rank.NP, source.rankings.alexa.rank.NL, source.rankings.alexa.rank.NC, source.rankings.alexa.rank.NZ, source.rankings.alexa.rank.NI, source.rankings.alexa.rank.NE, source.rankings.alexa.rank.NG, source.rankings.alexa.rank.NU, source.rankings.alexa.rank.NF, source.rankings.alexa.rank.MP, source.rankings.alexa.rank.NO, source.rankings.alexa.rank.OM, source.rankings.alexa.rank.PK, source.rankings.alexa.rank.PW, source.rankings.alexa.rank.PS, source.rankings.alexa.rank.PA, source.rankings.alexa.rank.PG, source.rankings.alexa.rank.PY, source.rankings.alexa.rank.PE, source.rankings.alexa.rank.PH, source.rankings.alexa.rank.PN, source.rankings.alexa.rank.PL, source.rankings.alexa.rank.PT, source.rankings.alexa.rank.PR, source.rankings.alexa.rank.QA, source.rankings.alexa.rank.RE, source.rankings.alexa.rank.RO, source.rankings.alexa.rank.RU, source.rankings.alexa.rank.RW, source.rankings.alexa.rank.BL, source.rankings.alexa.rank.SH, source.rankings.alexa.rank.KN, source.rankings.alexa.rank.LC, source.rankings.alexa.rank.MF, source.rankings.alexa.rank.PM, source.rankings.alexa.rank.VC, source.rankings.alexa.rank.WS, source.rankings.alexa.rank.SM, source.rankings.alexa.rank.ST, source.rankings.alexa.rank.SA, source.rankings.alexa.rank.SN, source.rankings.alexa.rank.RS, source.rankings.alexa.rank.SC, source.rankings.alexa.rank.SL, source.rankings.alexa.rank.SG, source.rankings.alexa.rank.SX, source.rankings.alexa.rank.SK, source.rankings.alexa.rank.SI, source.rankings.alexa.rank.SB, source.rankings.alexa.rank.SO, source.rankings.alexa.rank.ZA, source.rankings.alexa.rank.GS, source.rankings.alexa.rank.SS, source.rankings.alexa.rank.ES, source.rankings.alexa.rank.LK, source.rankings.alexa.rank.SD, source.rankings.alexa.rank.SR, source.rankings.alexa.rank.SJ, source.rankings.alexa.rank.SZ, source.rankings.alexa.rank.SE, source.rankings.alexa.rank.CH, source.rankings.alexa.rank.SY, source.rankings.alexa.rank.TW, source.rankings.alexa.rank.TJ, source.rankings.alexa.rank.TZ, source.rankings.alexa.rank.TH, source.rankings.alexa.rank.TL, source.rankings.alexa.rank.TG, source.rankings.alexa.rank.TK, source.rankings.alexa.rank.TO, source.rankings.alexa.rank.TT, source.rankings.alexa.rank.TN, source.rankings.alexa.rank.TR, source.rankings.alexa.rank.TM, source.rankings.alexa.rank.TC, source.rankings.alexa.rank.TV, source.rankings.alexa.rank.UG, source.rankings.alexa.rank.UA, source.rankings.alexa.rank.AE, source.rankings.alexa.rank.GB, source.rankings.alexa.rank.US, source.rankings.alexa.rank.UM, source.rankings.alexa.rank.UY, source.rankings.alexa.rank.UZ, source.rankings.alexa.rank.VU, source.rankings.alexa.rank.VE, source.rankings.alexa.rank.VN, source.rankings.alexa.rank.VG, source.rankings.alexa.rank.VI, source.rankings.alexa.rank.WF, source.rankings.alexa.rank.EH, source.rankings.alexa.rank.YE, source.rankings.alexa.rank.ZM, source.rankings.alexa.rank.ZW'
       end
       # resource path
       local_var_path = "/histograms".sub('{format}','json')
@@ -453,6 +572,11 @@ module AylienNewsApi
       query_params[:'source.scopes.state[]'] = @api_client.build_collection_param(opts[:'source_scopes_state'], :multi) if !opts[:'source_scopes_state'].nil?
       query_params[:'source.scopes.city[]'] = @api_client.build_collection_param(opts[:'source_scopes_city'], :multi) if !opts[:'source_scopes_city'].nil?
       query_params[:'source.scopes.level[]'] = @api_client.build_collection_param(opts[:'source_scopes_level'], :multi) if !opts[:'source_scopes_level'].nil?
+      query_params[:'source.links_in_count.min'] = opts[:'source_links_in_count_min'] if !opts[:'source_links_in_count_min'].nil?
+      query_params[:'source.links_in_count.max'] = opts[:'source_links_in_count_max'] if !opts[:'source_links_in_count_max'].nil?
+      query_params[:'source.rankings.alexa.rank.min'] = opts[:'source_rankings_alexa_rank_min'] if !opts[:'source_rankings_alexa_rank_min'].nil?
+      query_params[:'source.rankings.alexa.rank.max'] = opts[:'source_rankings_alexa_rank_max'] if !opts[:'source_rankings_alexa_rank_max'].nil?
+      query_params[:'source.rankings.alexa.country[]'] = @api_client.build_collection_param(opts[:'source_rankings_alexa_country'], :multi) if !opts[:'source_rankings_alexa_country'].nil?
       query_params[:'interval.start'] = opts[:'interval_start'] if !opts[:'interval_start'].nil?
       query_params[:'interval.end'] = opts[:'interval_end'] if !opts[:'interval_end'].nil?
       query_params[:'interval.width'] = opts[:'interval_width'] if !opts[:'interval_width'].nil?
@@ -526,6 +650,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [BOOLEAN] :cluster This parameter enables clustering for the returned stories. (default to false)
     # @option opts [String] :cluster_algorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. (default to lingo)
     # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
@@ -580,6 +709,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes  is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [BOOLEAN] :cluster This parameter enables clustering for the returned stories.
     # @option opts [String] :cluster_algorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
     # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
@@ -595,6 +729,9 @@ module AylienNewsApi
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DefaultApi.list_related_stories ..."
       end
+      if opts[:'language'] && !opts[:'language'].all?{|l| ['en', 'de', 'fr', 'it', 'es', 'pt'].include?(l)}
+        fail ArgumentError, 'invalid value for "language", must be one of en, de, fr, it, es, pt'
+      end
       if opts[:'categories_taxonomy'] && !['iab-qag', 'iptc-subjectcode'].include?(opts[:'categories_taxonomy'])
         fail ArgumentError, 'invalid value for "categories_taxonomy", must be one of iab-qag, iptc-subjectcode'
       end
@@ -604,15 +741,59 @@ module AylienNewsApi
       if opts[:'sentiment_body_polarity'] && !['positive', 'neutral', 'negative'].include?(opts[:'sentiment_body_polarity'])
         fail ArgumentError, 'invalid value for "sentiment_body_polarity", must be one of positive, neutral, negative'
       end
+      if !opts[:'media_images_count_min'].nil? && opts[:'media_images_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_min"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_images_count_max'].nil? && opts[:'media_images_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_max"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_min'].nil? && opts[:'media_videos_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_min"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_max'].nil? && opts[:'media_videos_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_max"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 0.0.'
+      end
+
+      if opts[:'source_scopes_level'] && !opts[:'source_scopes_level'].all?{|l| ['international', 'national', 'local'].include?(l)}
+        fail ArgumentError, 'invalid value for "source_scopes_level", must be one of international, national, local'
+      end
+      if !opts[:'source_links_in_count_min'].nil? && opts[:'source_links_in_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_min"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_links_in_count_max'].nil? && opts[:'source_links_in_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_max"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_min'].nil? && opts[:'source_rankings_alexa_rank_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_min"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_max'].nil? && opts[:'source_rankings_alexa_rank_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_max"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 0.0.'
+      end
 
       if opts[:'cluster_algorithm'] && !['stc', 'lingo', 'kmeans'].include?(opts[:'cluster_algorithm'])
         fail ArgumentError, 'invalid value for "cluster_algorithm", must be one of stc, lingo, kmeans'
+      end
+      if opts[:'_return'] && !opts[:'_return'].all?{|l| ['id', 'title', 'body', 'summary', 'source', 'author', 'entities', 'keywords', 'hashtags', 'characters_count', 'words_count', 'sentences_count', 'paragraphs_count', 'categories', 'social_shares_count', 'media', 'sentiment', 'language', 'published_at', 'links'].include?(l)}
+        fail ArgumentError, 'invalid value for "_return", must be one of id, title, body, summary, source, author, entities, keywords, hashtags, characters_count, words_count, sentences_count, paragraphs_count, categories, social_shares_count, media, sentiment, language, published_at, links'
       end
       if opts[:'boost_by'] && !['recency', 'popularity'].include?(opts[:'boost_by'])
         fail ArgumentError, 'invalid value for "boost_by", must be one of recency, popularity'
       end
       if opts[:'story_language'] && !['auto', 'en', 'de', 'fr', 'it', 'es', 'pt'].include?(opts[:'story_language'])
         fail ArgumentError, 'invalid value for "story_language", must be one of auto, en, de, fr, it, es, pt'
+      end
+      if !opts[:'per_page'].nil? && opts[:'per_page'] > 100.0
+        fail ArgumentError, 'invalid value for "opts[:"per_page"]" when calling DefaultApi.list_related_stories, must be smaller than or equal to 100.0.'
+      end
+
+      if !opts[:'per_page'].nil? && opts[:'per_page'] < 1.0
+        fail ArgumentError, 'invalid value for "opts[:"per_page"]" when calling DefaultApi.list_related_stories, must be greater than or equal to 1.0.'
       end
 
       # resource path
@@ -669,6 +850,11 @@ module AylienNewsApi
       form_params["source.scopes.state[]"] = @api_client.build_collection_param(opts[:'source_scopes_state'], :multi) if !opts[:'source_scopes_state'].nil?
       form_params["source.scopes.city[]"] = @api_client.build_collection_param(opts[:'source_scopes_city'], :multi) if !opts[:'source_scopes_city'].nil?
       form_params["source.scopes.level[]"] = @api_client.build_collection_param(opts[:'source_scopes_level'], :multi) if !opts[:'source_scopes_level'].nil?
+      form_params["source.links_in_count.min"] = opts[:'source_links_in_count_min'] if !opts[:'source_links_in_count_min'].nil?
+      form_params["source.links_in_count.max"] = opts[:'source_links_in_count_max'] if !opts[:'source_links_in_count_max'].nil?
+      form_params["source.rankings.alexa.rank.min"] = opts[:'source_rankings_alexa_rank_min'] if !opts[:'source_rankings_alexa_rank_min'].nil?
+      form_params["source.rankings.alexa.rank.max"] = opts[:'source_rankings_alexa_rank_max'] if !opts[:'source_rankings_alexa_rank_max'].nil?
+      form_params["source.rankings.alexa.country[]"] = @api_client.build_collection_param(opts[:'source_rankings_alexa_country'], :multi) if !opts[:'source_rankings_alexa_country'].nil?
       form_params["cluster"] = opts[:'cluster'] if !opts[:'cluster'].nil?
       form_params["cluster.algorithm"] = opts[:'cluster_algorithm'] if !opts[:'cluster_algorithm'].nil?
       form_params["return[]"] = @api_client.build_collection_param(opts[:'_return'], :multi) if !opts[:'_return'].nil?
@@ -734,6 +920,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [BOOLEAN] :cluster This parameter enables clustering for the returned stories. (default to false)
     # @option opts [String] :cluster_algorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms. (default to lingo)
     # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
@@ -785,6 +976,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [BOOLEAN] :cluster This parameter enables clustering for the returned stories.
     # @option opts [String] :cluster_algorithm This parameter is used for specifying the clustering algorithm you wish to use. It supprts STC, Lingo and [k-means](https://en.wikipedia.org/wiki/K-means_clustering) algorithms.
     # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
@@ -797,6 +993,9 @@ module AylienNewsApi
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DefaultApi.list_stories ..."
       end
+      if opts[:'language'] && !opts[:'language'].all?{|l| ['en', 'de', 'fr', 'it', 'es', 'pt'].include?(l)}
+        fail ArgumentError, 'invalid value for "language", must be one of en, de, fr, it, es, pt'
+      end
       if opts[:'categories_taxonomy'] && !['iab-qag', 'iptc-subjectcode'].include?(opts[:'categories_taxonomy'])
         fail ArgumentError, 'invalid value for "categories_taxonomy", must be one of iab-qag, iptc-subjectcode'
       end
@@ -806,15 +1005,59 @@ module AylienNewsApi
       if opts[:'sentiment_body_polarity'] && !['positive', 'neutral', 'negative'].include?(opts[:'sentiment_body_polarity'])
         fail ArgumentError, 'invalid value for "sentiment_body_polarity", must be one of positive, neutral, negative'
       end
+      if !opts[:'media_images_count_min'].nil? && opts[:'media_images_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_min"]" when calling DefaultApi.list_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_images_count_max'].nil? && opts[:'media_images_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_max"]" when calling DefaultApi.list_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_min'].nil? && opts[:'media_videos_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_min"]" when calling DefaultApi.list_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_max'].nil? && opts[:'media_videos_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_max"]" when calling DefaultApi.list_stories, must be greater than or equal to 0.0.'
+      end
+
+      if opts[:'source_scopes_level'] && !opts[:'source_scopes_level'].all?{|l| ['international', 'national', 'local'].include?(l)}
+        fail ArgumentError, 'invalid value for "source_scopes_level", must be one of international, national, local'
+      end
+      if !opts[:'source_links_in_count_min'].nil? && opts[:'source_links_in_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_min"]" when calling DefaultApi.list_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_links_in_count_max'].nil? && opts[:'source_links_in_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_max"]" when calling DefaultApi.list_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_min'].nil? && opts[:'source_rankings_alexa_rank_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_min"]" when calling DefaultApi.list_stories, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_max'].nil? && opts[:'source_rankings_alexa_rank_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_max"]" when calling DefaultApi.list_stories, must be greater than or equal to 0.0.'
+      end
 
       if opts[:'cluster_algorithm'] && !['stc', 'lingo', 'kmeans'].include?(opts[:'cluster_algorithm'])
         fail ArgumentError, 'invalid value for "cluster_algorithm", must be one of stc, lingo, kmeans'
       end
-      if opts[:'sort_by'] && !['relevance', 'recency', 'hotness', 'published_at', 'social_shares_count', 'social_shares_count.facebook', 'social_shares_count.linkedin', 'social_shares_count.google_plus', 'social_shares_count.reddit', 'media.images.count', 'media.videos.count'].include?(opts[:'sort_by'])
-        fail ArgumentError, 'invalid value for "sort_by", must be one of relevance, recency, hotness, published_at, social_shares_count, social_shares_count.facebook, social_shares_count.linkedin, social_shares_count.google_plus, social_shares_count.reddit, media.images.count, media.videos.count'
+      if opts[:'_return'] && !opts[:'_return'].all?{|l| ['id', 'title', 'body', 'summary', 'source', 'author', 'entities', 'keywords', 'hashtags', 'characters_count', 'words_count', 'sentences_count', 'paragraphs_count', 'categories', 'social_shares_count', 'media', 'sentiment', 'language', 'published_at', 'links'].include?(l)}
+        fail ArgumentError, 'invalid value for "_return", must be one of id, title, body, summary, source, author, entities, keywords, hashtags, characters_count, words_count, sentences_count, paragraphs_count, categories, social_shares_count, media, sentiment, language, published_at, links'
+      end
+      if opts[:'sort_by'] && !['relevance', 'recency', 'hotness', 'published_at', 'social_shares_count', 'social_shares_count.facebook', 'social_shares_count.linkedin', 'social_shares_count.google_plus', 'social_shares_count.reddit', 'media.images.count', 'media.videos.count', 'source.links_in_count', 'source.rankings.alexa.rank', 'source.rankings.alexa.rank.AF', 'source.rankings.alexa.rank.AX', 'source.rankings.alexa.rank.AL', 'source.rankings.alexa.rank.DZ', 'source.rankings.alexa.rank.AS', 'source.rankings.alexa.rank.AD', 'source.rankings.alexa.rank.AO', 'source.rankings.alexa.rank.AI', 'source.rankings.alexa.rank.AQ', 'source.rankings.alexa.rank.AG', 'source.rankings.alexa.rank.AR', 'source.rankings.alexa.rank.AM', 'source.rankings.alexa.rank.AW', 'source.rankings.alexa.rank.AU', 'source.rankings.alexa.rank.AT', 'source.rankings.alexa.rank.AZ', 'source.rankings.alexa.rank.BS', 'source.rankings.alexa.rank.BH', 'source.rankings.alexa.rank.BD', 'source.rankings.alexa.rank.BB', 'source.rankings.alexa.rank.BY', 'source.rankings.alexa.rank.BE', 'source.rankings.alexa.rank.BZ', 'source.rankings.alexa.rank.BJ', 'source.rankings.alexa.rank.BM', 'source.rankings.alexa.rank.BT', 'source.rankings.alexa.rank.BO', 'source.rankings.alexa.rank.BQ', 'source.rankings.alexa.rank.BA', 'source.rankings.alexa.rank.BW', 'source.rankings.alexa.rank.BV', 'source.rankings.alexa.rank.BR', 'source.rankings.alexa.rank.IO', 'source.rankings.alexa.rank.BN', 'source.rankings.alexa.rank.BG', 'source.rankings.alexa.rank.BF', 'source.rankings.alexa.rank.BI', 'source.rankings.alexa.rank.KH', 'source.rankings.alexa.rank.CM', 'source.rankings.alexa.rank.CA', 'source.rankings.alexa.rank.CV', 'source.rankings.alexa.rank.KY', 'source.rankings.alexa.rank.CF', 'source.rankings.alexa.rank.TD', 'source.rankings.alexa.rank.CL', 'source.rankings.alexa.rank.CN', 'source.rankings.alexa.rank.CX', 'source.rankings.alexa.rank.CC', 'source.rankings.alexa.rank.CO', 'source.rankings.alexa.rank.KM', 'source.rankings.alexa.rank.CG', 'source.rankings.alexa.rank.CD', 'source.rankings.alexa.rank.CK', 'source.rankings.alexa.rank.CR', 'source.rankings.alexa.rank.CI', 'source.rankings.alexa.rank.HR', 'source.rankings.alexa.rank.CU', 'source.rankings.alexa.rank.CW', 'source.rankings.alexa.rank.CY', 'source.rankings.alexa.rank.CZ', 'source.rankings.alexa.rank.DK', 'source.rankings.alexa.rank.DJ', 'source.rankings.alexa.rank.DM', 'source.rankings.alexa.rank.DO', 'source.rankings.alexa.rank.EC', 'source.rankings.alexa.rank.EG', 'source.rankings.alexa.rank.SV', 'source.rankings.alexa.rank.GQ', 'source.rankings.alexa.rank.ER', 'source.rankings.alexa.rank.EE', 'source.rankings.alexa.rank.ET', 'source.rankings.alexa.rank.FK', 'source.rankings.alexa.rank.FO', 'source.rankings.alexa.rank.FJ', 'source.rankings.alexa.rank.FI', 'source.rankings.alexa.rank.FR', 'source.rankings.alexa.rank.GF', 'source.rankings.alexa.rank.PF', 'source.rankings.alexa.rank.TF', 'source.rankings.alexa.rank.GA', 'source.rankings.alexa.rank.GM', 'source.rankings.alexa.rank.GE', 'source.rankings.alexa.rank.DE', 'source.rankings.alexa.rank.GH', 'source.rankings.alexa.rank.GI', 'source.rankings.alexa.rank.GR', 'source.rankings.alexa.rank.GL', 'source.rankings.alexa.rank.GD', 'source.rankings.alexa.rank.GP', 'source.rankings.alexa.rank.GU', 'source.rankings.alexa.rank.GT', 'source.rankings.alexa.rank.GG', 'source.rankings.alexa.rank.GN', 'source.rankings.alexa.rank.GW', 'source.rankings.alexa.rank.GY', 'source.rankings.alexa.rank.HT', 'source.rankings.alexa.rank.HM', 'source.rankings.alexa.rank.VA', 'source.rankings.alexa.rank.HN', 'source.rankings.alexa.rank.HK', 'source.rankings.alexa.rank.HU', 'source.rankings.alexa.rank.IS', 'source.rankings.alexa.rank.IN', 'source.rankings.alexa.rank.ID', 'source.rankings.alexa.rank.IR', 'source.rankings.alexa.rank.IQ', 'source.rankings.alexa.rank.IE', 'source.rankings.alexa.rank.IM', 'source.rankings.alexa.rank.IL', 'source.rankings.alexa.rank.IT', 'source.rankings.alexa.rank.JM', 'source.rankings.alexa.rank.JP', 'source.rankings.alexa.rank.JE', 'source.rankings.alexa.rank.JO', 'source.rankings.alexa.rank.KZ', 'source.rankings.alexa.rank.KE', 'source.rankings.alexa.rank.KI', 'source.rankings.alexa.rank.KP', 'source.rankings.alexa.rank.KR', 'source.rankings.alexa.rank.KW', 'source.rankings.alexa.rank.KG', 'source.rankings.alexa.rank.LA', 'source.rankings.alexa.rank.LV', 'source.rankings.alexa.rank.LB', 'source.rankings.alexa.rank.LS', 'source.rankings.alexa.rank.LR', 'source.rankings.alexa.rank.LY', 'source.rankings.alexa.rank.LI', 'source.rankings.alexa.rank.LT', 'source.rankings.alexa.rank.LU', 'source.rankings.alexa.rank.MO', 'source.rankings.alexa.rank.MK', 'source.rankings.alexa.rank.MG', 'source.rankings.alexa.rank.MW', 'source.rankings.alexa.rank.MY', 'source.rankings.alexa.rank.MV', 'source.rankings.alexa.rank.ML', 'source.rankings.alexa.rank.MT', 'source.rankings.alexa.rank.MH', 'source.rankings.alexa.rank.MQ', 'source.rankings.alexa.rank.MR', 'source.rankings.alexa.rank.MU', 'source.rankings.alexa.rank.YT', 'source.rankings.alexa.rank.MX', 'source.rankings.alexa.rank.FM', 'source.rankings.alexa.rank.MD', 'source.rankings.alexa.rank.MC', 'source.rankings.alexa.rank.MN', 'source.rankings.alexa.rank.ME', 'source.rankings.alexa.rank.MS', 'source.rankings.alexa.rank.MA', 'source.rankings.alexa.rank.MZ', 'source.rankings.alexa.rank.MM', 'source.rankings.alexa.rank.NA', 'source.rankings.alexa.rank.NR', 'source.rankings.alexa.rank.NP', 'source.rankings.alexa.rank.NL', 'source.rankings.alexa.rank.NC', 'source.rankings.alexa.rank.NZ', 'source.rankings.alexa.rank.NI', 'source.rankings.alexa.rank.NE', 'source.rankings.alexa.rank.NG', 'source.rankings.alexa.rank.NU', 'source.rankings.alexa.rank.NF', 'source.rankings.alexa.rank.MP', 'source.rankings.alexa.rank.NO', 'source.rankings.alexa.rank.OM', 'source.rankings.alexa.rank.PK', 'source.rankings.alexa.rank.PW', 'source.rankings.alexa.rank.PS', 'source.rankings.alexa.rank.PA', 'source.rankings.alexa.rank.PG', 'source.rankings.alexa.rank.PY', 'source.rankings.alexa.rank.PE', 'source.rankings.alexa.rank.PH', 'source.rankings.alexa.rank.PN', 'source.rankings.alexa.rank.PL', 'source.rankings.alexa.rank.PT', 'source.rankings.alexa.rank.PR', 'source.rankings.alexa.rank.QA', 'source.rankings.alexa.rank.RE', 'source.rankings.alexa.rank.RO', 'source.rankings.alexa.rank.RU', 'source.rankings.alexa.rank.RW', 'source.rankings.alexa.rank.BL', 'source.rankings.alexa.rank.SH', 'source.rankings.alexa.rank.KN', 'source.rankings.alexa.rank.LC', 'source.rankings.alexa.rank.MF', 'source.rankings.alexa.rank.PM', 'source.rankings.alexa.rank.VC', 'source.rankings.alexa.rank.WS', 'source.rankings.alexa.rank.SM', 'source.rankings.alexa.rank.ST', 'source.rankings.alexa.rank.SA', 'source.rankings.alexa.rank.SN', 'source.rankings.alexa.rank.RS', 'source.rankings.alexa.rank.SC', 'source.rankings.alexa.rank.SL', 'source.rankings.alexa.rank.SG', 'source.rankings.alexa.rank.SX', 'source.rankings.alexa.rank.SK', 'source.rankings.alexa.rank.SI', 'source.rankings.alexa.rank.SB', 'source.rankings.alexa.rank.SO', 'source.rankings.alexa.rank.ZA', 'source.rankings.alexa.rank.GS', 'source.rankings.alexa.rank.SS', 'source.rankings.alexa.rank.ES', 'source.rankings.alexa.rank.LK', 'source.rankings.alexa.rank.SD', 'source.rankings.alexa.rank.SR', 'source.rankings.alexa.rank.SJ', 'source.rankings.alexa.rank.SZ', 'source.rankings.alexa.rank.SE', 'source.rankings.alexa.rank.CH', 'source.rankings.alexa.rank.SY', 'source.rankings.alexa.rank.TW', 'source.rankings.alexa.rank.TJ', 'source.rankings.alexa.rank.TZ', 'source.rankings.alexa.rank.TH', 'source.rankings.alexa.rank.TL', 'source.rankings.alexa.rank.TG', 'source.rankings.alexa.rank.TK', 'source.rankings.alexa.rank.TO', 'source.rankings.alexa.rank.TT', 'source.rankings.alexa.rank.TN', 'source.rankings.alexa.rank.TR', 'source.rankings.alexa.rank.TM', 'source.rankings.alexa.rank.TC', 'source.rankings.alexa.rank.TV', 'source.rankings.alexa.rank.UG', 'source.rankings.alexa.rank.UA', 'source.rankings.alexa.rank.AE', 'source.rankings.alexa.rank.GB', 'source.rankings.alexa.rank.US', 'source.rankings.alexa.rank.UM', 'source.rankings.alexa.rank.UY', 'source.rankings.alexa.rank.UZ', 'source.rankings.alexa.rank.VU', 'source.rankings.alexa.rank.VE', 'source.rankings.alexa.rank.VN', 'source.rankings.alexa.rank.VG', 'source.rankings.alexa.rank.VI', 'source.rankings.alexa.rank.WF', 'source.rankings.alexa.rank.EH', 'source.rankings.alexa.rank.YE', 'source.rankings.alexa.rank.ZM', 'source.rankings.alexa.rank.ZW'].include?(opts[:'sort_by'])
+        fail ArgumentError, 'invalid value for "sort_by", must be one of relevance, recency, hotness, published_at, social_shares_count, social_shares_count.facebook, social_shares_count.linkedin, social_shares_count.google_plus, social_shares_count.reddit, media.images.count, media.videos.count, source.links_in_count, source.rankings.alexa.rank, source.rankings.alexa.rank.AF, source.rankings.alexa.rank.AX, source.rankings.alexa.rank.AL, source.rankings.alexa.rank.DZ, source.rankings.alexa.rank.AS, source.rankings.alexa.rank.AD, source.rankings.alexa.rank.AO, source.rankings.alexa.rank.AI, source.rankings.alexa.rank.AQ, source.rankings.alexa.rank.AG, source.rankings.alexa.rank.AR, source.rankings.alexa.rank.AM, source.rankings.alexa.rank.AW, source.rankings.alexa.rank.AU, source.rankings.alexa.rank.AT, source.rankings.alexa.rank.AZ, source.rankings.alexa.rank.BS, source.rankings.alexa.rank.BH, source.rankings.alexa.rank.BD, source.rankings.alexa.rank.BB, source.rankings.alexa.rank.BY, source.rankings.alexa.rank.BE, source.rankings.alexa.rank.BZ, source.rankings.alexa.rank.BJ, source.rankings.alexa.rank.BM, source.rankings.alexa.rank.BT, source.rankings.alexa.rank.BO, source.rankings.alexa.rank.BQ, source.rankings.alexa.rank.BA, source.rankings.alexa.rank.BW, source.rankings.alexa.rank.BV, source.rankings.alexa.rank.BR, source.rankings.alexa.rank.IO, source.rankings.alexa.rank.BN, source.rankings.alexa.rank.BG, source.rankings.alexa.rank.BF, source.rankings.alexa.rank.BI, source.rankings.alexa.rank.KH, source.rankings.alexa.rank.CM, source.rankings.alexa.rank.CA, source.rankings.alexa.rank.CV, source.rankings.alexa.rank.KY, source.rankings.alexa.rank.CF, source.rankings.alexa.rank.TD, source.rankings.alexa.rank.CL, source.rankings.alexa.rank.CN, source.rankings.alexa.rank.CX, source.rankings.alexa.rank.CC, source.rankings.alexa.rank.CO, source.rankings.alexa.rank.KM, source.rankings.alexa.rank.CG, source.rankings.alexa.rank.CD, source.rankings.alexa.rank.CK, source.rankings.alexa.rank.CR, source.rankings.alexa.rank.CI, source.rankings.alexa.rank.HR, source.rankings.alexa.rank.CU, source.rankings.alexa.rank.CW, source.rankings.alexa.rank.CY, source.rankings.alexa.rank.CZ, source.rankings.alexa.rank.DK, source.rankings.alexa.rank.DJ, source.rankings.alexa.rank.DM, source.rankings.alexa.rank.DO, source.rankings.alexa.rank.EC, source.rankings.alexa.rank.EG, source.rankings.alexa.rank.SV, source.rankings.alexa.rank.GQ, source.rankings.alexa.rank.ER, source.rankings.alexa.rank.EE, source.rankings.alexa.rank.ET, source.rankings.alexa.rank.FK, source.rankings.alexa.rank.FO, source.rankings.alexa.rank.FJ, source.rankings.alexa.rank.FI, source.rankings.alexa.rank.FR, source.rankings.alexa.rank.GF, source.rankings.alexa.rank.PF, source.rankings.alexa.rank.TF, source.rankings.alexa.rank.GA, source.rankings.alexa.rank.GM, source.rankings.alexa.rank.GE, source.rankings.alexa.rank.DE, source.rankings.alexa.rank.GH, source.rankings.alexa.rank.GI, source.rankings.alexa.rank.GR, source.rankings.alexa.rank.GL, source.rankings.alexa.rank.GD, source.rankings.alexa.rank.GP, source.rankings.alexa.rank.GU, source.rankings.alexa.rank.GT, source.rankings.alexa.rank.GG, source.rankings.alexa.rank.GN, source.rankings.alexa.rank.GW, source.rankings.alexa.rank.GY, source.rankings.alexa.rank.HT, source.rankings.alexa.rank.HM, source.rankings.alexa.rank.VA, source.rankings.alexa.rank.HN, source.rankings.alexa.rank.HK, source.rankings.alexa.rank.HU, source.rankings.alexa.rank.IS, source.rankings.alexa.rank.IN, source.rankings.alexa.rank.ID, source.rankings.alexa.rank.IR, source.rankings.alexa.rank.IQ, source.rankings.alexa.rank.IE, source.rankings.alexa.rank.IM, source.rankings.alexa.rank.IL, source.rankings.alexa.rank.IT, source.rankings.alexa.rank.JM, source.rankings.alexa.rank.JP, source.rankings.alexa.rank.JE, source.rankings.alexa.rank.JO, source.rankings.alexa.rank.KZ, source.rankings.alexa.rank.KE, source.rankings.alexa.rank.KI, source.rankings.alexa.rank.KP, source.rankings.alexa.rank.KR, source.rankings.alexa.rank.KW, source.rankings.alexa.rank.KG, source.rankings.alexa.rank.LA, source.rankings.alexa.rank.LV, source.rankings.alexa.rank.LB, source.rankings.alexa.rank.LS, source.rankings.alexa.rank.LR, source.rankings.alexa.rank.LY, source.rankings.alexa.rank.LI, source.rankings.alexa.rank.LT, source.rankings.alexa.rank.LU, source.rankings.alexa.rank.MO, source.rankings.alexa.rank.MK, source.rankings.alexa.rank.MG, source.rankings.alexa.rank.MW, source.rankings.alexa.rank.MY, source.rankings.alexa.rank.MV, source.rankings.alexa.rank.ML, source.rankings.alexa.rank.MT, source.rankings.alexa.rank.MH, source.rankings.alexa.rank.MQ, source.rankings.alexa.rank.MR, source.rankings.alexa.rank.MU, source.rankings.alexa.rank.YT, source.rankings.alexa.rank.MX, source.rankings.alexa.rank.FM, source.rankings.alexa.rank.MD, source.rankings.alexa.rank.MC, source.rankings.alexa.rank.MN, source.rankings.alexa.rank.ME, source.rankings.alexa.rank.MS, source.rankings.alexa.rank.MA, source.rankings.alexa.rank.MZ, source.rankings.alexa.rank.MM, source.rankings.alexa.rank.NA, source.rankings.alexa.rank.NR, source.rankings.alexa.rank.NP, source.rankings.alexa.rank.NL, source.rankings.alexa.rank.NC, source.rankings.alexa.rank.NZ, source.rankings.alexa.rank.NI, source.rankings.alexa.rank.NE, source.rankings.alexa.rank.NG, source.rankings.alexa.rank.NU, source.rankings.alexa.rank.NF, source.rankings.alexa.rank.MP, source.rankings.alexa.rank.NO, source.rankings.alexa.rank.OM, source.rankings.alexa.rank.PK, source.rankings.alexa.rank.PW, source.rankings.alexa.rank.PS, source.rankings.alexa.rank.PA, source.rankings.alexa.rank.PG, source.rankings.alexa.rank.PY, source.rankings.alexa.rank.PE, source.rankings.alexa.rank.PH, source.rankings.alexa.rank.PN, source.rankings.alexa.rank.PL, source.rankings.alexa.rank.PT, source.rankings.alexa.rank.PR, source.rankings.alexa.rank.QA, source.rankings.alexa.rank.RE, source.rankings.alexa.rank.RO, source.rankings.alexa.rank.RU, source.rankings.alexa.rank.RW, source.rankings.alexa.rank.BL, source.rankings.alexa.rank.SH, source.rankings.alexa.rank.KN, source.rankings.alexa.rank.LC, source.rankings.alexa.rank.MF, source.rankings.alexa.rank.PM, source.rankings.alexa.rank.VC, source.rankings.alexa.rank.WS, source.rankings.alexa.rank.SM, source.rankings.alexa.rank.ST, source.rankings.alexa.rank.SA, source.rankings.alexa.rank.SN, source.rankings.alexa.rank.RS, source.rankings.alexa.rank.SC, source.rankings.alexa.rank.SL, source.rankings.alexa.rank.SG, source.rankings.alexa.rank.SX, source.rankings.alexa.rank.SK, source.rankings.alexa.rank.SI, source.rankings.alexa.rank.SB, source.rankings.alexa.rank.SO, source.rankings.alexa.rank.ZA, source.rankings.alexa.rank.GS, source.rankings.alexa.rank.SS, source.rankings.alexa.rank.ES, source.rankings.alexa.rank.LK, source.rankings.alexa.rank.SD, source.rankings.alexa.rank.SR, source.rankings.alexa.rank.SJ, source.rankings.alexa.rank.SZ, source.rankings.alexa.rank.SE, source.rankings.alexa.rank.CH, source.rankings.alexa.rank.SY, source.rankings.alexa.rank.TW, source.rankings.alexa.rank.TJ, source.rankings.alexa.rank.TZ, source.rankings.alexa.rank.TH, source.rankings.alexa.rank.TL, source.rankings.alexa.rank.TG, source.rankings.alexa.rank.TK, source.rankings.alexa.rank.TO, source.rankings.alexa.rank.TT, source.rankings.alexa.rank.TN, source.rankings.alexa.rank.TR, source.rankings.alexa.rank.TM, source.rankings.alexa.rank.TC, source.rankings.alexa.rank.TV, source.rankings.alexa.rank.UG, source.rankings.alexa.rank.UA, source.rankings.alexa.rank.AE, source.rankings.alexa.rank.GB, source.rankings.alexa.rank.US, source.rankings.alexa.rank.UM, source.rankings.alexa.rank.UY, source.rankings.alexa.rank.UZ, source.rankings.alexa.rank.VU, source.rankings.alexa.rank.VE, source.rankings.alexa.rank.VN, source.rankings.alexa.rank.VG, source.rankings.alexa.rank.VI, source.rankings.alexa.rank.WF, source.rankings.alexa.rank.EH, source.rankings.alexa.rank.YE, source.rankings.alexa.rank.ZM, source.rankings.alexa.rank.ZW'
       end
       if opts[:'sort_direction'] && !['asc', 'desc'].include?(opts[:'sort_direction'])
         fail ArgumentError, 'invalid value for "sort_direction", must be one of asc, desc'
+      end
+      if !opts[:'per_page'].nil? && opts[:'per_page'] > 100.0
+        fail ArgumentError, 'invalid value for "opts[:"per_page"]" when calling DefaultApi.list_stories, must be smaller than or equal to 100.0.'
+      end
+
+      if !opts[:'per_page'].nil? && opts[:'per_page'] < 1.0
+        fail ArgumentError, 'invalid value for "opts[:"per_page"]" when calling DefaultApi.list_stories, must be greater than or equal to 1.0.'
       end
 
       # resource path
@@ -857,6 +1100,11 @@ module AylienNewsApi
       query_params[:'source.scopes.state[]'] = @api_client.build_collection_param(opts[:'source_scopes_state'], :multi) if !opts[:'source_scopes_state'].nil?
       query_params[:'source.scopes.city[]'] = @api_client.build_collection_param(opts[:'source_scopes_city'], :multi) if !opts[:'source_scopes_city'].nil?
       query_params[:'source.scopes.level[]'] = @api_client.build_collection_param(opts[:'source_scopes_level'], :multi) if !opts[:'source_scopes_level'].nil?
+      query_params[:'source.links_in_count.min'] = opts[:'source_links_in_count_min'] if !opts[:'source_links_in_count_min'].nil?
+      query_params[:'source.links_in_count.max'] = opts[:'source_links_in_count_max'] if !opts[:'source_links_in_count_max'].nil?
+      query_params[:'source.rankings.alexa.rank.min'] = opts[:'source_rankings_alexa_rank_min'] if !opts[:'source_rankings_alexa_rank_min'].nil?
+      query_params[:'source.rankings.alexa.rank.max'] = opts[:'source_rankings_alexa_rank_max'] if !opts[:'source_rankings_alexa_rank_max'].nil?
+      query_params[:'source.rankings.alexa.country[]'] = @api_client.build_collection_param(opts[:'source_rankings_alexa_country'], :multi) if !opts[:'source_rankings_alexa_country'].nil?
       query_params[:'cluster'] = opts[:'cluster'] if !opts[:'cluster'].nil?
       query_params[:'cluster.algorithm'] = opts[:'cluster_algorithm'] if !opts[:'cluster_algorithm'].nil?
       query_params[:'return[]'] = @api_client.build_collection_param(opts[:'_return'], :multi) if !opts[:'_return'].nil?
@@ -931,6 +1179,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [String] :published_at_start This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). (default to NOW-7DAYS/DAY)
     # @option opts [String] :published_at_end This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). (default to NOW/DAY)
     # @option opts [String] :period The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math). (default to +1DAY)
@@ -976,6 +1229,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [String] :published_at_start This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
     # @option opts [String] :published_at_end This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).
     # @option opts [String] :period The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math).
@@ -983,6 +1241,9 @@ module AylienNewsApi
     def list_time_series_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DefaultApi.list_time_series ..."
+      end
+      if opts[:'language'] && !opts[:'language'].all?{|l| ['en', 'de', 'fr', 'it', 'es', 'pt'].include?(l)}
+        fail ArgumentError, 'invalid value for "language", must be one of en, de, fr, it, es, pt'
       end
       if opts[:'categories_taxonomy'] && !['iab-qag', 'iptc-subjectcode'].include?(opts[:'categories_taxonomy'])
         fail ArgumentError, 'invalid value for "categories_taxonomy", must be one of iab-qag, iptc-subjectcode'
@@ -992,6 +1253,40 @@ module AylienNewsApi
       end
       if opts[:'sentiment_body_polarity'] && !['positive', 'neutral', 'negative'].include?(opts[:'sentiment_body_polarity'])
         fail ArgumentError, 'invalid value for "sentiment_body_polarity", must be one of positive, neutral, negative'
+      end
+      if !opts[:'media_images_count_min'].nil? && opts[:'media_images_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_min"]" when calling DefaultApi.list_time_series, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_images_count_max'].nil? && opts[:'media_images_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_max"]" when calling DefaultApi.list_time_series, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_min'].nil? && opts[:'media_videos_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_min"]" when calling DefaultApi.list_time_series, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_max'].nil? && opts[:'media_videos_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_max"]" when calling DefaultApi.list_time_series, must be greater than or equal to 0.0.'
+      end
+
+      if opts[:'source_scopes_level'] && !opts[:'source_scopes_level'].all?{|l| ['international', 'national', 'local'].include?(l)}
+        fail ArgumentError, 'invalid value for "source_scopes_level", must be one of international, national, local'
+      end
+      if !opts[:'source_links_in_count_min'].nil? && opts[:'source_links_in_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_min"]" when calling DefaultApi.list_time_series, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_links_in_count_max'].nil? && opts[:'source_links_in_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_max"]" when calling DefaultApi.list_time_series, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_min'].nil? && opts[:'source_rankings_alexa_rank_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_min"]" when calling DefaultApi.list_time_series, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_max'].nil? && opts[:'source_rankings_alexa_rank_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_max"]" when calling DefaultApi.list_time_series, must be greater than or equal to 0.0.'
       end
 
       # resource path
@@ -1032,6 +1327,11 @@ module AylienNewsApi
       query_params[:'source.scopes.state[]'] = @api_client.build_collection_param(opts[:'source_scopes_state'], :multi) if !opts[:'source_scopes_state'].nil?
       query_params[:'source.scopes.city[]'] = @api_client.build_collection_param(opts[:'source_scopes_city'], :multi) if !opts[:'source_scopes_city'].nil?
       query_params[:'source.scopes.level[]'] = @api_client.build_collection_param(opts[:'source_scopes_level'], :multi) if !opts[:'source_scopes_level'].nil?
+      query_params[:'source.links_in_count.min'] = opts[:'source_links_in_count_min'] if !opts[:'source_links_in_count_min'].nil?
+      query_params[:'source.links_in_count.max'] = opts[:'source_links_in_count_max'] if !opts[:'source_links_in_count_max'].nil?
+      query_params[:'source.rankings.alexa.rank.min'] = opts[:'source_rankings_alexa_rank_min'] if !opts[:'source_rankings_alexa_rank_min'].nil?
+      query_params[:'source.rankings.alexa.rank.max'] = opts[:'source_rankings_alexa_rank_max'] if !opts[:'source_rankings_alexa_rank_max'].nil?
+      query_params[:'source.rankings.alexa.country[]'] = @api_client.build_collection_param(opts[:'source_rankings_alexa_country'], :multi) if !opts[:'source_rankings_alexa_country'].nil?
       query_params[:'published_at.start'] = opts[:'published_at_start'] if !opts[:'published_at_start'].nil?
       query_params[:'published_at.end'] = opts[:'published_at_end'] if !opts[:'published_at_end'].nil?
       query_params[:'period'] = opts[:'period'] if !opts[:'period'].nil?
@@ -1104,6 +1404,11 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [String] :field This parameter is used to specify the trend field.
     # @return [Trends]
     def list_trends(opts = {})
@@ -1149,11 +1454,19 @@ module AylienNewsApi
     # @option opts [Array<String>] :source_scopes_state This parameter is used for finding stories whose source scopes is the specified state/province value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_city This parameter is used for finding stories whose source scopes is the specified city value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
     # @option opts [Array<String>] :source_scopes_level This parameter is used for finding stories whose source scopes is the specified level value. [Here](https://newsapi.aylien.com/docs/working-with-locations) you can find more information about how [to work with locations](https://newsapi.aylien.com/docs/working-with-locations).
+    # @option opts [Integer] :source_links_in_count_min This parameter is used for finding stories from sources whose Links in count is greater than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_links_in_count_max This parameter is used for finding stories from sources whose Links in count is less than or equal to the specified value. You can read more about working with Links in count here [https://newsapi.aylien.com/docs/working-with-links-in-count](https://newsapi.aylien.com/docs/working-with-links-in-count).
+    # @option opts [Integer] :source_rankings_alexa_rank_min This parameter is used for finding stories from sources whose Alexa rank is greater than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Integer] :source_rankings_alexa_rank_max This parameter is used for finding stories from sources whose Alexa rank is less than or equal to the specified value. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
+    # @option opts [Array<String>] :source_rankings_alexa_country This parameter is used for finding stories from sources whose Alexa rank is in the specified country value. It supports [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. You can read more about working with Alexa ranks here [https://newsapi.aylien.com/docs/working-with-alexa-ranks](https://newsapi.aylien.com/docs/working-with-alexa-ranks).
     # @option opts [String] :field This parameter is used to specify the trend field.
     # @return [Array<(Trends, Fixnum, Hash)>] Trends data, response status code and response headers
     def list_trends_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: DefaultApi.list_trends ..."
+      end
+      if opts[:'language'] && !opts[:'language'].all?{|l| ['en', 'de', 'fr', 'it', 'es', 'pt'].include?(l)}
+        fail ArgumentError, 'invalid value for "language", must be one of en, de, fr, it, es, pt'
       end
       if opts[:'categories_taxonomy'] && !['iab-qag', 'iptc-subjectcode'].include?(opts[:'categories_taxonomy'])
         fail ArgumentError, 'invalid value for "categories_taxonomy", must be one of iab-qag, iptc-subjectcode'
@@ -1163,6 +1476,40 @@ module AylienNewsApi
       end
       if opts[:'sentiment_body_polarity'] && !['positive', 'neutral', 'negative'].include?(opts[:'sentiment_body_polarity'])
         fail ArgumentError, 'invalid value for "sentiment_body_polarity", must be one of positive, neutral, negative'
+      end
+      if !opts[:'media_images_count_min'].nil? && opts[:'media_images_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_min"]" when calling DefaultApi.list_trends, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_images_count_max'].nil? && opts[:'media_images_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_images_count_max"]" when calling DefaultApi.list_trends, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_min'].nil? && opts[:'media_videos_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_min"]" when calling DefaultApi.list_trends, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'media_videos_count_max'].nil? && opts[:'media_videos_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"media_videos_count_max"]" when calling DefaultApi.list_trends, must be greater than or equal to 0.0.'
+      end
+
+      if opts[:'source_scopes_level'] && !opts[:'source_scopes_level'].all?{|l| ['international', 'national', 'local'].include?(l)}
+        fail ArgumentError, 'invalid value for "source_scopes_level", must be one of international, national, local'
+      end
+      if !opts[:'source_links_in_count_min'].nil? && opts[:'source_links_in_count_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_min"]" when calling DefaultApi.list_trends, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_links_in_count_max'].nil? && opts[:'source_links_in_count_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_links_in_count_max"]" when calling DefaultApi.list_trends, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_min'].nil? && opts[:'source_rankings_alexa_rank_min'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_min"]" when calling DefaultApi.list_trends, must be greater than or equal to 0.0.'
+      end
+
+      if !opts[:'source_rankings_alexa_rank_max'].nil? && opts[:'source_rankings_alexa_rank_max'] < 0.0
+        fail ArgumentError, 'invalid value for "opts[:"source_rankings_alexa_rank_max"]" when calling DefaultApi.list_trends, must be greater than or equal to 0.0.'
       end
 
       if opts[:'field'] && !['author.name', 'source.name', 'source.domain', 'keywords', 'entities.title.text', 'entities.title.type', 'entities.title.links.dbpedia', 'entities.body.text', 'entities.body.type', 'entities.body.links.dbpedia', 'hashtags', 'categories.id', 'sentiment.title.polarity', 'sentiment.body.polarity'].include?(opts[:'field'])
@@ -1208,6 +1555,11 @@ module AylienNewsApi
       query_params[:'source.scopes.state[]'] = @api_client.build_collection_param(opts[:'source_scopes_state'], :multi) if !opts[:'source_scopes_state'].nil?
       query_params[:'source.scopes.city[]'] = @api_client.build_collection_param(opts[:'source_scopes_city'], :multi) if !opts[:'source_scopes_city'].nil?
       query_params[:'source.scopes.level[]'] = @api_client.build_collection_param(opts[:'source_scopes_level'], :multi) if !opts[:'source_scopes_level'].nil?
+      query_params[:'source.links_in_count.min'] = opts[:'source_links_in_count_min'] if !opts[:'source_links_in_count_min'].nil?
+      query_params[:'source.links_in_count.max'] = opts[:'source_links_in_count_max'] if !opts[:'source_links_in_count_max'].nil?
+      query_params[:'source.rankings.alexa.rank.min'] = opts[:'source_rankings_alexa_rank_min'] if !opts[:'source_rankings_alexa_rank_min'].nil?
+      query_params[:'source.rankings.alexa.rank.max'] = opts[:'source_rankings_alexa_rank_max'] if !opts[:'source_rankings_alexa_rank_max'].nil?
+      query_params[:'source.rankings.alexa.country[]'] = @api_client.build_collection_param(opts[:'source_rankings_alexa_country'], :multi) if !opts[:'source_rankings_alexa_country'].nil?
       query_params[:'field'] = opts[:'field'] if !opts[:'field'].nil?
 
       # header parameters

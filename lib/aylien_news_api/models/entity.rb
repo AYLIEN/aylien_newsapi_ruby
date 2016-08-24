@@ -93,29 +93,35 @@ module AylienNewsApi
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+
+      if !@score.nil? && @score > 1.0
+        invalid_properties.push("invalid value for 'score', must be smaller than or equal to 1.0.")
+      end
+
+      if !@score.nil? && @score < 0.0
+        invalid_properties.push("invalid value for 'score', must be greater than or equal to 0.0.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @score > 1.0
-      return false if @score < 0.0
+      return false if !@score.nil? && @score > 1.0
+      return false if !@score.nil? && @score < 0.0
       return true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] score Value to be assigned
     def score=(score)
-      if score.nil?
-        fail ArgumentError, "score cannot be nil"
-      end
 
-      if score > 1.0
+      if !score.nil? && score > 1.0
         fail ArgumentError, "invalid value for 'score', must be smaller than or equal to 1.0."
       end
 
-      if score < 0.0
+      if !score.nil? && score < 0.0
         fail ArgumentError, "invalid value for 'score', must be greater than or equal to 0.0."
       end
 

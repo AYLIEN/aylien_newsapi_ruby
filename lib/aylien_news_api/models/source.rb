@@ -23,7 +23,19 @@ module AylienNewsApi
     # The source name
     attr_accessor :name
 
-    # Domain name of the source which is extracted from the source URL
+    # The title of the home page URL
+    attr_accessor :title
+
+    # A general explanation about the source
+    attr_accessor :description
+
+    # The number of websites that link to the source
+    attr_accessor :links_in_count
+
+    # The home page URL of the source
+    attr_accessor :home_page_url
+
+    # The domain name of the source which is extracted from the source URL
     attr_accessor :domain
 
     # A URL which points to the source logo
@@ -32,8 +44,11 @@ module AylienNewsApi
     # The source locations which are tend to be the physical locations of the source, e.g. BBC headquarter is located in London.
     attr_accessor :locations
 
-    # The source scopes which is tend to be scope locations of the source, e.g. BBC scopes is international. 
+    # The source scopes which is tend to be scope locations of the source, e.g. BBC scopes is international.
     attr_accessor :scopes
+
+    # The web rankings of the source
+    attr_accessor :rankings
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -41,10 +56,15 @@ module AylienNewsApi
       {
         :'id' => :'id',
         :'name' => :'name',
+        :'title' => :'title',
+        :'description' => :'description',
+        :'links_in_count' => :'links_in_count',
+        :'home_page_url' => :'home_page_url',
         :'domain' => :'domain',
         :'logo_url' => :'logo_url',
         :'locations' => :'locations',
-        :'scopes' => :'scopes'
+        :'scopes' => :'scopes',
+        :'rankings' => :'rankings'
       }
     end
 
@@ -53,10 +73,15 @@ module AylienNewsApi
       {
         :'id' => :'Integer',
         :'name' => :'String',
+        :'title' => :'String',
+        :'description' => :'String',
+        :'links_in_count' => :'Integer',
+        :'home_page_url' => :'String',
         :'domain' => :'String',
         :'logo_url' => :'String',
         :'locations' => :'Array<Location>',
-        :'scopes' => :'Array<Scope>'
+        :'scopes' => :'Array<Scope>',
+        :'rankings' => :'Rankings'
       }
     end
 
@@ -74,6 +99,22 @@ module AylienNewsApi
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.has_key?(:'title')
+        self.title = attributes[:'title']
+      end
+
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.has_key?(:'links_in_count')
+        self.links_in_count = attributes[:'links_in_count']
+      end
+
+      if attributes.has_key?(:'home_page_url')
+        self.home_page_url = attributes[:'home_page_url']
       end
 
       if attributes.has_key?(:'domain')
@@ -94,6 +135,10 @@ module AylienNewsApi
         if (value = attributes[:'scopes']).is_a?(Array)
           self.scopes = value
         end
+      end
+
+      if attributes.has_key?(:'rankings')
+        self.rankings = attributes[:'rankings']
       end
 
     end
@@ -118,10 +163,15 @@ module AylienNewsApi
       self.class == o.class &&
           id == o.id &&
           name == o.name &&
+          title == o.title &&
+          description == o.description &&
+          links_in_count == o.links_in_count &&
+          home_page_url == o.home_page_url &&
           domain == o.domain &&
           logo_url == o.logo_url &&
           locations == o.locations &&
-          scopes == o.scopes
+          scopes == o.scopes &&
+          rankings == o.rankings
     end
 
     # @see the `==` method
@@ -133,7 +183,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, domain, logo_url, locations, scopes].hash
+      [id, name, title, description, links_in_count, home_page_url, domain, logo_url, locations, scopes, rankings].hash
     end
 
     # Builds the object from hash

@@ -16,48 +16,32 @@ require 'date'
 
 module AylienNewsApi
 
-  class Sentiment
-    # Polarity of the sentiment
-    attr_accessor :polarity
+  class Rank
+    # The rank
+    attr_accessor :rank
 
-    # Polarity score of the sentiment
-    attr_accessor :score
+    # The country code which the rank is in it
+    attr_accessor :country
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    # The fetched date of the rank
+    attr_accessor :fetched_at
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'polarity' => :'polarity',
-        :'score' => :'score'
+        :'rank' => :'rank',
+        :'country' => :'country',
+        :'fetched_at' => :'fetched_at'
       }
     end
 
     # Attribute type mapping.
     def self.api_types
       {
-        :'polarity' => :'String',
-        :'score' => :'Float'
+        :'rank' => :'Integer',
+        :'country' => :'String',
+        :'fetched_at' => :'DateTime'
       }
     end
 
@@ -69,12 +53,16 @@ module AylienNewsApi
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'polarity')
-        self.polarity = attributes[:'polarity']
+      if attributes.has_key?(:'rank')
+        self.rank = attributes[:'rank']
       end
 
-      if attributes.has_key?(:'score')
-        self.score = attributes[:'score']
+      if attributes.has_key?(:'country')
+        self.country = attributes[:'country']
+      end
+
+      if attributes.has_key?(:'fetched_at')
+        self.fetched_at = attributes[:'fetched_at']
       end
 
     end
@@ -83,51 +71,13 @@ module AylienNewsApi
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-
-      if !@score.nil? && @score > 1.0
-        invalid_properties.push("invalid value for 'score', must be smaller than or equal to 1.0.")
-      end
-
-      if !@score.nil? && @score < 0.0
-        invalid_properties.push("invalid value for 'score', must be greater than or equal to 0.0.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      polarity_validator = EnumAttributeValidator.new('String', ["positive", "neutral", "negative"])
-      return false unless polarity_validator.valid?(@polarity)
-      return false if !@score.nil? && @score > 1.0
-      return false if !@score.nil? && @score < 0.0
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] polarity Object to be assigned
-    def polarity=(polarity)
-      validator = EnumAttributeValidator.new('String', ["positive", "neutral", "negative"])
-      unless validator.valid?(polarity)
-        fail ArgumentError, "invalid value for 'polarity', must be one of #{validator.allowable_values}."
-      end
-      @polarity = polarity
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] score Value to be assigned
-    def score=(score)
-
-      if !score.nil? && score > 1.0
-        fail ArgumentError, "invalid value for 'score', must be smaller than or equal to 1.0."
-      end
-
-      if !score.nil? && score < 0.0
-        fail ArgumentError, "invalid value for 'score', must be greater than or equal to 0.0."
-      end
-
-      @score = score
     end
 
     # Checks equality by comparing each attribute.
@@ -135,8 +85,9 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          polarity == o.polarity &&
-          score == o.score
+          rank == o.rank &&
+          country == o.country &&
+          fetched_at == o.fetched_at
     end
 
     # @see the `==` method
@@ -148,7 +99,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [polarity, score].hash
+      [rank, country, fetched_at].hash
     end
 
     # Builds the object from hash
