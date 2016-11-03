@@ -20,12 +20,13 @@ Gem::Specification.new do |s|
   s.name        = "aylien_news_api"
   s.version     = AylienNewsApi::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["AYLIEN Inc.", "Hamed R. Nik"]
-  s.email       = ["support@aylien.com", "hamed.r.nik@gmail.com"]
+  s.authors     = ["Hamed R. Nik"]
+  s.email       = ["hamed.r.nik@gmail.com"]
   s.homepage    = "https://newsapi.aylien.com/"
   s.summary     = "AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content"
   s.description = "AYLIEN News API is the most powerful way of sourcing, searching and syndicating analyzed and enriched news content."
   s.license     = "Apache-2.0"
+  s.required_ruby_version = ">= 1.9"
 
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'json', '~> 1.8', '>= 1.8.3'

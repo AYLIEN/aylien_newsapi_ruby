@@ -57,10 +57,18 @@ module AylienNewsApi
       end
 
       unless response.success?
-        fail ApiError.new(:code => response.code,
-                          :response_headers => response.headers,
-                          :response_body => response.body),
-             response.status_message
+        if response.timed_out?
+          fail ApiError.new('Connection timed out')
+        elsif response.code == 0
+          # Errors from libcurl will be made visible here
+          fail ApiError.new(:code => 0,
+                            :message => response.return_message)
+        else
+          fail ApiError.new(:code => response.code,
+                            :response_headers => response.headers,
+                            :response_body => response.body),
+               response.status_message
+        end
       end
 
       if opts[:return_type]
@@ -126,7 +134,7 @@ module AylienNewsApi
     #   application/json; charset=UTF8
     #   APPLICATION/JSON
     # @param [String] mime MIME
-    # @return [Boolean] True if the MIME is applicaton/json
+    # @return [Boolean] True if the MIME is application/json
     def json_mime?(mime)
        !(mime =~ /\Aapplication\/json(;.*)?\z/i).nil?
     end

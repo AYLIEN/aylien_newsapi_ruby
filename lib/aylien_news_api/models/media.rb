@@ -23,6 +23,18 @@ module AylienNewsApi
     # A URL which points to the media file
     attr_accessor :url
 
+    # The format of media
+    attr_accessor :format
+
+    # The content length of media
+    attr_accessor :content_length
+
+    # The width of media
+    attr_accessor :width
+
+    # The height of media
+    attr_accessor :height
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -49,7 +61,11 @@ module AylienNewsApi
     def self.attribute_map
       {
         :'type' => :'type',
-        :'url' => :'url'
+        :'url' => :'url',
+        :'format' => :'format',
+        :'content_length' => :'content_length',
+        :'width' => :'width',
+        :'height' => :'height'
       }
     end
 
@@ -57,7 +73,11 @@ module AylienNewsApi
     def self.api_types
       {
         :'type' => :'String',
-        :'url' => :'String'
+        :'url' => :'String',
+        :'format' => :'String',
+        :'content_length' => :'Integer',
+        :'width' => :'Integer',
+        :'height' => :'Integer'
       }
     end
 
@@ -77,6 +97,22 @@ module AylienNewsApi
         self.url = attributes[:'url']
       end
 
+      if attributes.has_key?(:'format')
+        self.format = attributes[:'format']
+      end
+
+      if attributes.has_key?(:'content_length')
+        self.content_length = attributes[:'content_length']
+      end
+
+      if attributes.has_key?(:'width')
+        self.width = attributes[:'width']
+      end
+
+      if attributes.has_key?(:'height')
+        self.height = attributes[:'height']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -91,6 +127,8 @@ module AylienNewsApi
     def valid?
       type_validator = EnumAttributeValidator.new('String', ["image", "video"])
       return false unless type_validator.valid?(@type)
+      format_validator = EnumAttributeValidator.new('String', ["BMP", "GIF", "JPEG", "PNG", "TIFF", "PSD", "ICO", "CUR", "WEBP", "SVG"])
+      return false unless format_validator.valid?(@format)
       return true
     end
 
@@ -104,13 +142,27 @@ module AylienNewsApi
       @type = type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] format Object to be assigned
+    def format=(format)
+      validator = EnumAttributeValidator.new('String', ["BMP", "GIF", "JPEG", "PNG", "TIFF", "PSD", "ICO", "CUR", "WEBP", "SVG"])
+      unless validator.valid?(format)
+        fail ArgumentError, "invalid value for 'format', must be one of #{validator.allowable_values}."
+      end
+      @format = format
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
-          url == o.url
+          url == o.url &&
+          format == o.format &&
+          content_length == o.content_length &&
+          width == o.width &&
+          height == o.height
     end
 
     # @see the `==` method
@@ -122,7 +174,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [type, url].hash
+      [type, url, format, content_length, width, height].hash
     end
 
     # Builds the object from hash
@@ -131,7 +183,7 @@ module AylienNewsApi
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.api_types.each_pair do |key, type|
-        if type =~ /^Array<(.*)>/i
+        if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
@@ -162,7 +214,7 @@ module AylienNewsApi
       when :Float
         value.to_f
       when :BOOLEAN
-        if value.to_s =~ /^(true|t|yes|y|1)$/i
+        if value.to_s =~ /\A(true|t|yes|y|1)\z/i
           true
         else
           false
@@ -173,7 +225,7 @@ module AylienNewsApi
       when /\AArray<(?<inner_type>.+)>\z/
         inner_type = Regexp.last_match[:inner_type]
         value.map { |v| _deserialize(inner_type, v) }
-      when /\AHash<(?<k_type>.+), (?<v_type>.+)>\z/
+      when /\AHash<(?<k_type>.+?), (?<v_type>.+)>\z/
         k_type = Regexp.last_match[:k_type]
         v_type = Regexp.last_match[:v_type]
         {}.tap do |hash|

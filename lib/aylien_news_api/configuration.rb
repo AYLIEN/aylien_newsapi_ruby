@@ -192,19 +192,19 @@ module AylienNewsApi
     # Returns Auth Settings hash for api client.
     def auth_settings
       {
-        'app_key' =>
-          {
-            type: 'api_key',
-            in: 'header',
-            key: 'X-AYLIEN-NewsAPI-Application-Key',
-            value: api_key_with_prefix('X-AYLIEN-NewsAPI-Application-Key')
-          },
         'app_id' =>
           {
             type: 'api_key',
             in: 'header',
             key: 'X-AYLIEN-NewsAPI-Application-ID',
             value: api_key_with_prefix('X-AYLIEN-NewsAPI-Application-ID')
+          },
+        'app_key' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'X-AYLIEN-NewsAPI-Application-Key',
+            value: api_key_with_prefix('X-AYLIEN-NewsAPI-Application-Key')
           },
       }
     end
