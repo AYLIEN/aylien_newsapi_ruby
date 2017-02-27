@@ -1,16 +1,18 @@
-# Copyright 2016 Aylien, Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+=begin
+Copyright 2017 Aylien, Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+=end
 
 require 'date'
 
@@ -93,12 +95,12 @@ module AylienNewsApi
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@score.nil? && @score > 1.0
-        invalid_properties.push("invalid value for 'score', must be smaller than or equal to 1.0.")
+      if !@score.nil? && @score > 1
+        invalid_properties.push("invalid value for 'score', must be smaller than or equal to 1.")
       end
 
-      if !@score.nil? && @score < 0.0
-        invalid_properties.push("invalid value for 'score', must be greater than or equal to 0.0.")
+      if !@score.nil? && @score < 0
+        invalid_properties.push("invalid value for 'score', must be greater than or equal to 0.")
       end
 
       return invalid_properties
@@ -107,8 +109,8 @@ module AylienNewsApi
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@score.nil? && @score > 1.0
-      return false if !@score.nil? && @score < 0.0
+      return false if !@score.nil? && @score > 1
+      return false if !@score.nil? && @score < 0
       return true
     end
 
@@ -116,12 +118,12 @@ module AylienNewsApi
     # @param [Object] score Value to be assigned
     def score=(score)
 
-      if !score.nil? && score > 1.0
-        fail ArgumentError, "invalid value for 'score', must be smaller than or equal to 1.0."
+      if !score.nil? && score > 1
+        fail ArgumentError, "invalid value for 'score', must be smaller than or equal to 1."
       end
 
-      if !score.nil? && score < 0.0
-        fail ArgumentError, "invalid value for 'score', must be greater than or equal to 0.0."
+      if !score.nil? && score < 0
+        fail ArgumentError, "invalid value for 'score', must be greater than or equal to 0."
       end
 
       @score = score

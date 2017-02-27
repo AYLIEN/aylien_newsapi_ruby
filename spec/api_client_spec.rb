@@ -1,16 +1,18 @@
-# Copyright 2016 Aylien, Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+=begin
+Copyright 2017 Aylien, Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+=end
 
 require 'spec_helper'
 
@@ -53,53 +55,6 @@ describe AylienNewsApi::ApiClient do
     end
   end
 
-  describe "#update_params_for_auth!" do
-    it "sets header api-key parameter with prefix" do
-      AylienNewsApi.configure do |c|
-        c.api_key_prefix['X-AYLIEN-NewsAPI-Application-ID'] = 'PREFIX'
-        c.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'special-key'
-      end
-
-      api_client = AylienNewsApi::ApiClient.new
-
-      config2 = AylienNewsApi::Configuration.new do |c|
-        c.api_key_prefix['X-AYLIEN-NewsAPI-Application-ID'] = 'PREFIX2'
-        c.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'special-key2'
-      end
-      api_client2 = AylienNewsApi::ApiClient.new(config2)
-
-      auth_names = ['app_id']
-
-      header_params = {}
-      query_params = {}
-      api_client.update_params_for_auth! header_params, query_params, auth_names
-      expect(header_params).to eq({'X-AYLIEN-NewsAPI-Application-ID' => 'PREFIX special-key'})
-      expect(query_params).to eq({})
-
-      header_params = {}
-      query_params = {}
-      api_client2.update_params_for_auth! header_params, query_params, auth_names
-      expect(header_params).to eq({'X-AYLIEN-NewsAPI-Application-ID' => 'PREFIX2 special-key2'})
-      expect(query_params).to eq({})
-    end
-
-    it "sets header api-key parameter without prefix" do
-      AylienNewsApi.configure do |c|
-        c.api_key_prefix['X-AYLIEN-NewsAPI-Application-ID'] = nil
-        c.api_key['X-AYLIEN-NewsAPI-Application-ID'] = 'special-key'
-      end
-
-      api_client = AylienNewsApi::ApiClient.new
-
-      header_params = {}
-      query_params = {}
-      auth_names = ['app_id']
-      api_client.update_params_for_auth! header_params, query_params, auth_names
-      expect(header_params).to eq({'X-AYLIEN-NewsAPI-Application-ID' => 'special-key'})
-      expect(query_params).to eq({})
-    end
-  end
-
   describe "params_encoding in #build_request" do
     let(:config) { AylienNewsApi::Configuration.new }
     let(:api_client) { AylienNewsApi::ApiClient.new(config) }
@@ -113,9 +68,9 @@ describe AylienNewsApi::ApiClient do
     end
 
     it "can be customized" do
-      config.params_encoding = nil
+      config.params_encoding = :multi
       request = api_client.build_request(:get, '/test')
-      expect(request.options[:params_encoding]).to eq(nil)
+      expect(request.options[:params_encoding]).to eq(:multi)
     end
   end
 
@@ -165,49 +120,18 @@ describe AylienNewsApi::ApiClient do
       expect(data).to be_instance_of(Hash)
       expect(data).to eq({:message => 'Hello'})
     end
-
-    it "handles Hash<String, Story>" do
-      api_client = AylienNewsApi::ApiClient.new
-      headers = {'Content-Type' => 'application/json'}
-      response = double('response', headers: headers, body: '{"story": {"id": 1}}')
-      data = api_client.deserialize(response, 'Hash<String, Story>')
-      expect(data).to be_instance_of(Hash)
-      expect(data.keys).to eq([:story])
-
-      story = data[:story]
-      expect(story).to be_instance_of(AylienNewsApi::Story)
-      expect(story.id).to eq(1)
-    end
-
-    it "handles Hash<String, Hash<String, Story>>" do
-      api_client = AylienNewsApi::ApiClient.new
-      headers = {'Content-Type' => 'application/json'}
-      response = double('response', headers: headers, body: '{"data": {"story": {"id": 1}}}')
-      result = api_client.deserialize(response, 'Hash<String, Hash<String, Story>>')
-      expect(result).to be_instance_of(Hash)
-      expect(result.keys).to match_array([:data])
-
-      data = result[:data]
-      expect(data).to be_instance_of(Hash)
-      expect(data.keys).to match_array([:story])
-
-      story = data[:story]
-      expect(story).to be_instance_of(AylienNewsApi::Story)
-      expect(story.id).to eq(1)
-    end
   end
 
   describe "#object_to_hash" do
     it "ignores nils and includes empty arrays" do
-      api_client = AylienNewsApi::ApiClient.new
-      story = AylienNewsApi::Story.new
-      story.id = 1
-      story.title = ''
-      story.published_at = nil
-      story.body = nil
-      story.hashtags = []
-      expected = {id: 1, title: '', hashtags: []}
-      expect(api_client.object_to_hash(story)).to eq(expected)
+      # uncomment below to test object_to_hash for model
+      #api_client = AylienNewsApi::ApiClient.new
+      #_model = AylienNewsApi::ModelName.new
+      # update the model attribute below
+      #_model.id = 1 
+      # update the expected value (hash) below
+      #expected = {id: 1, name: '', tags: []}
+      #expect(api_client.object_to_hash(_model)).to eq(expected)
     end
   end
 

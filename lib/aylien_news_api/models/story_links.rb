@@ -1,16 +1,18 @@
-# Copyright 2016 Aylien, Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+=begin
+Copyright 2017 Aylien, Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+=end
 
 require 'date'
 
@@ -26,13 +28,17 @@ module AylienNewsApi
     # The coverages URL
     attr_accessor :coverages
 
+    # The story canonical URL
+    attr_accessor :canonical
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'permalink' => :'permalink',
         :'related_stories' => :'related_stories',
-        :'coverages' => :'coverages'
+        :'coverages' => :'coverages',
+        :'canonical' => :'canonical'
       }
     end
 
@@ -41,7 +47,8 @@ module AylienNewsApi
       {
         :'permalink' => :'String',
         :'related_stories' => :'String',
-        :'coverages' => :'String'
+        :'coverages' => :'String',
+        :'canonical' => :'String'
       }
     end
 
@@ -63,6 +70,10 @@ module AylienNewsApi
 
       if attributes.has_key?(:'coverages')
         self.coverages = attributes[:'coverages']
+      end
+
+      if attributes.has_key?(:'canonical')
+        self.canonical = attributes[:'canonical']
       end
 
     end
@@ -87,7 +98,8 @@ module AylienNewsApi
       self.class == o.class &&
           permalink == o.permalink &&
           related_stories == o.related_stories &&
-          coverages == o.coverages
+          coverages == o.coverages &&
+          canonical == o.canonical
     end
 
     # @see the `==` method
@@ -99,7 +111,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [permalink, related_stories, coverages].hash
+      [permalink, related_stories, coverages, canonical].hash
     end
 
     # Builds the object from hash
