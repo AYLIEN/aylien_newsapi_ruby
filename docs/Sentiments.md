@@ -1,9 +1,19 @@
 # AylienNewsApi::Sentiments
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**title** | [**Sentiment**](Sentiment.md) | The sentiment for the story title | [optional] 
-**body** | [**Sentiment**](Sentiment.md) | The sentiment for the story body | [optional] 
+**body** | [**Sentiment**](Sentiment.md) |  | [optional] 
+**title** | [**Sentiment**](Sentiment.md) |  | [optional] 
+
+## Code Sample
+
+```ruby
+require 'AylienNewsApi'
+
+instance = AylienNewsApi::Sentiments.new(body: null,
+                                 title: null)
+```
 
 
