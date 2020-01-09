@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**polarity** | **String** | Polarity of the sentiment | [optional] 
+**polarity** | [**SentimentPolarity**](SentimentPolarity.md) |  | [optional] 
 **score** | **Float** | Polarity score of the sentiment | [optional] 
 
 ## Code Sample

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **level** | **Integer** | The level of the category | [optional] 
 **links** | [**CategoryLinks**](CategoryLinks.md) |  | [optional] 
 **score** | **Float** | The score of the category | [optional] 
-**taxonomy** | **String** | The taxonomy of the category | [optional] 
+**taxonomy** | [**CategoryTaxonomy**](CategoryTaxonomy.md) |  | [optional] 
 
 ## Code Sample
 
