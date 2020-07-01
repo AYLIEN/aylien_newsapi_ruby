@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **canonical** | **String** | The story canonical URL | [optional] 
-**coverages** | **String** | The coverages URL | [optional] 
 **permalink** | **String** | The story permalink URL | [optional] 
 **related_stories** | **String** | The related stories URL | [optional] 
+**clusters** | **String** | The clusters endpoint URL for this story | [optional] 
 
 ## Code Sample
 
@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 require 'AylienNewsApi'
 
 instance = AylienNewsApi::StoryLinks.new(canonical: null,
-                                 coverages: null,
                                  permalink: null,
-                                 related_stories: null)
+                                 related_stories: null,
+                                 clusters: null)
 ```
 
 
