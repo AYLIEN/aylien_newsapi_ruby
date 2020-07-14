@@ -60,6 +60,7 @@ require 'aylien_news_api/models/time_series'
 require 'aylien_news_api/models/time_series_list'
 require 'aylien_news_api/models/trend'
 require 'aylien_news_api/models/trends'
+require 'aylien_news_api/models/warning'
 
 # APIs
 require 'aylien_news_api/api/default_api'

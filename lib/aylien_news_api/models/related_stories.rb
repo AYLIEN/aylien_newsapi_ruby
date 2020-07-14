@@ -26,13 +26,21 @@ module AylienNewsApi
     # The input story title
     attr_accessor :story_title
 
+    # The end of a period in which searched stories were published
+    attr_accessor :published_at_end
+
+    # The start of a period in which searched stories were published
+    attr_accessor :published_at_start
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'related_stories' => :'related_stories',
         :'story_body' => :'story_body',
         :'story_language' => :'story_language',
-        :'story_title' => :'story_title'
+        :'story_title' => :'story_title',
+        :'published_at_end' => :'published_at.end',
+        :'published_at_start' => :'published_at.start'
       }
     end
 
@@ -42,7 +50,9 @@ module AylienNewsApi
         :'related_stories' => :'Array<Story>',
         :'story_body' => :'String',
         :'story_language' => :'String',
-        :'story_title' => :'String'
+        :'story_title' => :'String',
+        :'published_at_end' => :'DateTime',
+        :'published_at_start' => :'DateTime'
       }
     end
 
@@ -84,6 +94,14 @@ module AylienNewsApi
       if attributes.key?(:'story_title')
         self.story_title = attributes[:'story_title']
       end
+
+      if attributes.key?(:'published_at_end')
+        self.published_at_end = attributes[:'published_at_end']
+      end
+
+      if attributes.key?(:'published_at_start')
+        self.published_at_start = attributes[:'published_at_start']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -107,7 +125,9 @@ module AylienNewsApi
           related_stories == o.related_stories &&
           story_body == o.story_body &&
           story_language == o.story_language &&
-          story_title == o.story_title
+          story_title == o.story_title &&
+          published_at_end == o.published_at_end &&
+          published_at_start == o.published_at_start
     end
 
     # @see the `==` method
@@ -119,7 +139,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [related_stories, story_body, story_language, story_title].hash
+      [related_stories, story_body, story_language, story_title, published_at_end, published_at_start].hash
     end
 
     # Builds the object from hash

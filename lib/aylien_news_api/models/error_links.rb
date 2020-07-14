@@ -16,17 +16,21 @@ module AylienNewsApi
   class ErrorLinks
     attr_accessor :about
 
+    attr_accessor :docs
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'about' => :'about'
+        :'about' => :'about',
+        :'docs' => :'docs'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'about' => :'String'
+        :'about' => :'String',
+        :'docs' => :'String'
       }
     end
 
@@ -54,6 +58,10 @@ module AylienNewsApi
       if attributes.key?(:'about')
         self.about = attributes[:'about']
       end
+
+      if attributes.key?(:'docs')
+        self.docs = attributes[:'docs']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -74,7 +82,8 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          about == o.about
+          about == o.about &&
+          docs == o.docs
     end
 
     # @see the `==` method
@@ -86,7 +95,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [about].hash
+      [about, docs].hash
     end
 
     # Builds the object from hash
