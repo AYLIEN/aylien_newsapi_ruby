@@ -60,6 +60,7 @@ module AylienNewsApi
           conn.request :multipart
           conn.request :url_encoded
         end
+        conn.options.open_timeout = @config.open_timeout
         conn.adapter(Faraday.default_adapter)
       end
 

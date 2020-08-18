@@ -74,6 +74,10 @@ module AylienNewsApi
     # Default to 0 (never times out).
     attr_accessor :timeout
 
+    # The timeout for opening the connection in seconds.
+    # Default to 2.
+    attr_accessor :open_timeout
+
     # Set this to false to skip client side validation in the operation.
     # Default to true.
     # @return [true, false]
@@ -127,6 +131,7 @@ module AylienNewsApi
       @api_key = {}
       @api_key_prefix = {}
       @timeout = 0
+      @open_timeout = 2
       @client_side_validation = true
       @ssl_verify = true
       @ssl_verify_mode = nil
