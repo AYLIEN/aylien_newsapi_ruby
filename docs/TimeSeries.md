@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **count** | **Integer** | The count of time series bin | [optional] 
 **published_at** | **DateTime** | The published date of the time series bin | [optional] 
+**sentiment** | [**AggregatedSentiment**](AggregatedSentiment.md) |  | [optional] 
 
 ## Code Sample
 
@@ -13,7 +14,8 @@ Name | Type | Description | Notes
 require 'AylienNewsApi'
 
 instance = AylienNewsApi::TimeSeries.new(count: null,
-                                 published_at: null)
+                                 published_at: null,
+                                 sentiment: null)
 ```
 
 

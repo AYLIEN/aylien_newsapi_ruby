@@ -13,30 +13,25 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  class TimeSeries
-    # The count of time series bin
-    attr_accessor :count
+  class EntitySentiment
+    attr_accessor :polarity
 
-    # The published date of the time series bin
-    attr_accessor :published_at
-
-    attr_accessor :sentiment
+    # Polarity confidence of the sentiment
+    attr_accessor :confidence
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'count' => :'count',
-        :'published_at' => :'published_at',
-        :'sentiment' => :'sentiment'
+        :'polarity' => :'polarity',
+        :'confidence' => :'confidence'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'count' => :'Integer',
-        :'published_at' => :'DateTime',
-        :'sentiment' => :'AggregatedSentiment'
+        :'polarity' => :'SentimentPolarity',
+        :'confidence' => :'Float'
       }
     end
 
@@ -50,27 +45,23 @@ module AylienNewsApi
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::TimeSeries` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::EntitySentiment` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::TimeSeries`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::EntitySentiment`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'count')
-        self.count = attributes[:'count']
+      if attributes.key?(:'polarity')
+        self.polarity = attributes[:'polarity']
       end
 
-      if attributes.key?(:'published_at')
-        self.published_at = attributes[:'published_at']
-      end
-
-      if attributes.key?(:'sentiment')
-        self.sentiment = attributes[:'sentiment']
+      if attributes.key?(:'confidence')
+        self.confidence = attributes[:'confidence']
       end
     end
 
@@ -78,13 +69,37 @@ module AylienNewsApi
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@confidence.nil? && @confidence > 1
+        invalid_properties.push('invalid value for "confidence", must be smaller than or equal to 1.')
+      end
+
+      if !@confidence.nil? && @confidence < 0
+        invalid_properties.push('invalid value for "confidence", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@confidence.nil? && @confidence > 1
+      return false if !@confidence.nil? && @confidence < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] confidence Value to be assigned
+    def confidence=(confidence)
+      if !confidence.nil? && confidence > 1
+        fail ArgumentError, 'invalid value for "confidence", must be smaller than or equal to 1.'
+      end
+
+      if !confidence.nil? && confidence < 0
+        fail ArgumentError, 'invalid value for "confidence", must be greater than or equal to 0.'
+      end
+
+      @confidence = confidence
     end
 
     # Checks equality by comparing each attribute.
@@ -92,9 +107,8 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          count == o.count &&
-          published_at == o.published_at &&
-          sentiment == o.sentiment
+          polarity == o.polarity &&
+          confidence == o.confidence
     end
 
     # @see the `==` method
@@ -106,7 +120,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [count, published_at, sentiment].hash
+      [polarity, confidence].hash
     end
 
     # Builds the object from hash

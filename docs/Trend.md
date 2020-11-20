@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **count** | **Integer** | The count of the trend | [optional] 
 **value** | **String** | The value of the trend | [optional] 
+**sentiment** | [**AggregatedSentiment**](AggregatedSentiment.md) |  | [optional] 
 
 ## Code Sample
 
@@ -13,7 +14,8 @@ Name | Type | Description | Notes
 require 'AylienNewsApi'
 
 instance = AylienNewsApi::Trend.new(count: null,
-                                 value: null)
+                                 value: null,
+                                 sentiment: null)
 ```
 
 

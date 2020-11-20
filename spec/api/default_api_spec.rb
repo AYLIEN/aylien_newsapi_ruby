@@ -32,6 +32,25 @@ describe 'DefaultApi' do
     end
   end
 
+  # unit tests for advanced_list_stories
+  # List Stories
+  # The stories endpoint is used to return stories based on the json query you set in your request body. The News API crawler gathers articles in near real-time and stores information about them, or metadata. Below you can see all of the query parameters, and JSON schema for the body, which you can use to narrow down your query. 
+  # @param unknown_base_type /stories body schema to perform an advanced search with logical operators and nested objects. 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :published_at_start This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
+  # @option opts [String] :published_at_end This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
+  # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
+  # @option opts [String] :sort_by This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
+  # @option opts [String] :sort_direction This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
+  # @option opts [String] :cursor This parameter is used for finding a specific page. You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results). 
+  # @option opts [Integer] :per_page This parameter is used for specifying number of items in each page You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results) 
+  # @return [Stories]
+  describe 'advanced_list_stories test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for list_autocompletes
   # List autocompletes
   # The autocompletes endpoint a string of characters provided to it, and then returns suggested terms that are the most likely full words or strings. The terms returned by the News API are based on parameters the type parameters you can see below. For example, if you provide the autocompletes endpoint with the term &#x60;New York C&#x60; and select the type &#x60;dbpedia_resources&#x60;, the API will return links to the DBpedia resources &#x60;New_York_City&#x60;, &#x60;New_York_City_Subway&#x60;, &#x60;New_York_City_Police_Department&#x60;, and so on. 

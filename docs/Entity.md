@@ -4,22 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **String** | The unique ID of the entity | [optional] 
 **indices** | **Array&lt;Array&lt;Integer&gt;&gt;** | The indices of the entity text | [optional] 
 **links** | [**EntityLinks**](EntityLinks.md) |  | [optional] 
-**score** | **Float** | The entity score | [optional] 
 **text** | **String** | The entity text | [optional] 
-**types** | **Array&lt;String&gt;** | An array of the dbpedia types | [optional] 
+**stock_ticker** | **String** | The stock_ticker of the entity (might be null) | [optional] 
+**types** | **Array&lt;String&gt;** | An array of the entity types | [optional] 
+**sentiment** | [**EntitySentiment**](EntitySentiment.md) |  | [optional] 
+**surface_forms** | [**Array&lt;EntitySurfaceForm&gt;**](EntitySurfaceForm.md) |  | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'AylienNewsApi'
 
-instance = AylienNewsApi::Entity.new(indices: null,
+instance = AylienNewsApi::Entity.new(id: null,
+                                 indices: null,
                                  links: null,
-                                 score: null,
                                  text: null,
-                                 types: null)
+                                 stock_ticker: null,
+                                 types: null,
+                                 sentiment: null,
+                                 surface_forms: null)
 ```
 
 

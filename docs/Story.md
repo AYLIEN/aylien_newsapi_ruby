@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **title** | **String** | Title of the story | [optional] 
 **translations** | [**StoryTranslations**](StoryTranslations.md) |  | [optional] 
 **words_count** | **Integer** | Word count of the story body | [optional] 
+**license_type** | **Integer** | License type of the story | [optional] 
 
 ## Code Sample
 
@@ -53,7 +54,8 @@ instance = AylienNewsApi::Story.new(author: null,
                                  summary: null,
                                  title: null,
                                  translations: null,
-                                 words_count: null)
+                                 words_count: null,
+                                 license_type: null)
 ```
 
 

@@ -14,39 +14,52 @@ require 'date'
 
 module AylienNewsApi
   class Entity
+    # The unique ID of the entity
+    attr_accessor :id
+
     # The indices of the entity text
     attr_accessor :indices
 
     attr_accessor :links
 
-    # The entity score
-    attr_accessor :score
-
     # The entity text
     attr_accessor :text
 
-    # An array of the dbpedia types
+    # The stock_ticker of the entity (might be null)
+    attr_accessor :stock_ticker
+
+    # An array of the entity types
     attr_accessor :types
+
+    attr_accessor :sentiment
+
+    attr_accessor :surface_forms
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'indices' => :'indices',
         :'links' => :'links',
-        :'score' => :'score',
         :'text' => :'text',
-        :'types' => :'types'
+        :'stock_ticker' => :'stock_ticker',
+        :'types' => :'types',
+        :'sentiment' => :'sentiment',
+        :'surface_forms' => :'surface_forms'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
         :'indices' => :'Array<Array<Integer>>',
         :'links' => :'EntityLinks',
-        :'score' => :'Float',
         :'text' => :'String',
-        :'types' => :'Array<String>'
+        :'stock_ticker' => :'String',
+        :'types' => :'Array<String>',
+        :'sentiment' => :'EntitySentiment',
+        :'surface_forms' => :'Array<EntitySurfaceForm>'
       }
     end
 
@@ -71,6 +84,10 @@ module AylienNewsApi
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.key?(:'indices')
         if (value = attributes[:'indices']).is_a?(Array)
           self.indices = value
@@ -81,17 +98,27 @@ module AylienNewsApi
         self.links = attributes[:'links']
       end
 
-      if attributes.key?(:'score')
-        self.score = attributes[:'score']
-      end
-
       if attributes.key?(:'text')
         self.text = attributes[:'text']
+      end
+
+      if attributes.key?(:'stock_ticker')
+        self.stock_ticker = attributes[:'stock_ticker']
       end
 
       if attributes.key?(:'types')
         if (value = attributes[:'types']).is_a?(Array)
           self.types = value
+        end
+      end
+
+      if attributes.key?(:'sentiment')
+        self.sentiment = attributes[:'sentiment']
+      end
+
+      if attributes.key?(:'surface_forms')
+        if (value = attributes[:'surface_forms']).is_a?(Array)
+          self.surface_forms = value
         end
       end
     end
@@ -100,37 +127,13 @@ module AylienNewsApi
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@score.nil? && @score > 1
-        invalid_properties.push('invalid value for "score", must be smaller than or equal to 1.')
-      end
-
-      if !@score.nil? && @score < 0
-        invalid_properties.push('invalid value for "score", must be greater than or equal to 0.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@score.nil? && @score > 1
-      return false if !@score.nil? && @score < 0
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] score Value to be assigned
-    def score=(score)
-      if !score.nil? && score > 1
-        fail ArgumentError, 'invalid value for "score", must be smaller than or equal to 1.'
-      end
-
-      if !score.nil? && score < 0
-        fail ArgumentError, 'invalid value for "score", must be greater than or equal to 0.'
-      end
-
-      @score = score
     end
 
     # Checks equality by comparing each attribute.
@@ -138,11 +141,14 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           indices == o.indices &&
           links == o.links &&
-          score == o.score &&
           text == o.text &&
-          types == o.types
+          stock_ticker == o.stock_ticker &&
+          types == o.types &&
+          sentiment == o.sentiment &&
+          surface_forms == o.surface_forms
     end
 
     # @see the `==` method
@@ -154,7 +160,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [indices, links, score, text, types].hash
+      [id, indices, links, text, stock_ticker, types, sentiment, surface_forms].hash
     end
 
     # Builds the object from hash

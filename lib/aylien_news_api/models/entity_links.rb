@@ -14,20 +14,30 @@ require 'date'
 
 module AylienNewsApi
   class EntityLinks
-    # A dbpedia resource URL
+    # A dbpedia resource URL (deprecated)
     attr_accessor :dbpedia
+
+    # A wikipedia resource URL
+    attr_accessor :wikipedia
+
+    # A wikidata resource URL
+    attr_accessor :wikidata
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'dbpedia' => :'dbpedia'
+        :'dbpedia' => :'dbpedia',
+        :'wikipedia' => :'wikipedia',
+        :'wikidata' => :'wikidata'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'dbpedia' => :'String'
+        :'dbpedia' => :'String',
+        :'wikipedia' => :'String',
+        :'wikidata' => :'String'
       }
     end
 
@@ -55,6 +65,14 @@ module AylienNewsApi
       if attributes.key?(:'dbpedia')
         self.dbpedia = attributes[:'dbpedia']
       end
+
+      if attributes.key?(:'wikipedia')
+        self.wikipedia = attributes[:'wikipedia']
+      end
+
+      if attributes.key?(:'wikidata')
+        self.wikidata = attributes[:'wikidata']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -75,7 +93,9 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          dbpedia == o.dbpedia
+          dbpedia == o.dbpedia &&
+          wikipedia == o.wikipedia &&
+          wikidata == o.wikidata
     end
 
     # @see the `==` method
@@ -87,7 +107,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [dbpedia].hash
+      [dbpedia, wikipedia, wikidata].hash
     end
 
     # Builds the object from hash

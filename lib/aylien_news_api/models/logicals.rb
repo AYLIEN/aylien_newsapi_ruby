@@ -13,30 +13,28 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  class TimeSeries
-    # The count of time series bin
-    attr_accessor :count
+  class Logicals
+    attr_accessor :_and
 
-    # The published date of the time series bin
-    attr_accessor :published_at
+    attr_accessor :_or
 
-    attr_accessor :sentiment
+    attr_accessor :_not
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'count' => :'count',
-        :'published_at' => :'published_at',
-        :'sentiment' => :'sentiment'
+        :'_and' => :'$and',
+        :'_or' => :'$or',
+        :'_not' => :'$not'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'count' => :'Integer',
-        :'published_at' => :'DateTime',
-        :'sentiment' => :'AggregatedSentiment'
+        :'_and' => :'Array<AnyOfLogicalsParameter>',
+        :'_or' => :'Array<AnyOfLogicalsParameter>',
+        :'_not' => :'Array<AnyOfLogicalsParameter>'
       }
     end
 
@@ -50,27 +48,33 @@ module AylienNewsApi
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::TimeSeries` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::Logicals` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::TimeSeries`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::Logicals`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'count')
-        self.count = attributes[:'count']
+      if attributes.key?(:'_and')
+        if (value = attributes[:'_and']).is_a?(Array)
+          self._and = value
+        end
       end
 
-      if attributes.key?(:'published_at')
-        self.published_at = attributes[:'published_at']
+      if attributes.key?(:'_or')
+        if (value = attributes[:'_or']).is_a?(Array)
+          self._or = value
+        end
       end
 
-      if attributes.key?(:'sentiment')
-        self.sentiment = attributes[:'sentiment']
+      if attributes.key?(:'_not')
+        if (value = attributes[:'_not']).is_a?(Array)
+          self._not = value
+        end
       end
     end
 
@@ -92,9 +96,9 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          count == o.count &&
-          published_at == o.published_at &&
-          sentiment == o.sentiment
+          _and == o._and &&
+          _or == o._or &&
+          _not == o._not
     end
 
     # @see the `==` method
@@ -106,7 +110,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [count, published_at, sentiment].hash
+      [_and, _or, _not].hash
     end
 
     # Builds the object from hash

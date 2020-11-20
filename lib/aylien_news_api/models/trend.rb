@@ -20,11 +20,14 @@ module AylienNewsApi
     # The value of the trend
     attr_accessor :value
 
+    attr_accessor :sentiment
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'count' => :'count',
-        :'value' => :'value'
+        :'value' => :'value',
+        :'sentiment' => :'sentiment'
       }
     end
 
@@ -32,7 +35,8 @@ module AylienNewsApi
     def self.openapi_types
       {
         :'count' => :'Integer',
-        :'value' => :'String'
+        :'value' => :'String',
+        :'sentiment' => :'AggregatedSentiment'
       }
     end
 
@@ -64,6 +68,10 @@ module AylienNewsApi
       if attributes.key?(:'value')
         self.value = attributes[:'value']
       end
+
+      if attributes.key?(:'sentiment')
+        self.sentiment = attributes[:'sentiment']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -85,7 +93,8 @@ module AylienNewsApi
       return true if self.equal?(o)
       self.class == o.class &&
           count == o.count &&
-          value == o.value
+          value == o.value &&
+          sentiment == o.sentiment
     end
 
     # @see the `==` method
@@ -97,7 +106,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [count, value].hash
+      [count, value, sentiment].hash
     end
 
     # Builds the object from hash

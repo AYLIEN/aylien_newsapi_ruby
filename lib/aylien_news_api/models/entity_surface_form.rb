@@ -13,30 +13,26 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  class TimeSeries
-    # The count of time series bin
-    attr_accessor :count
+  class EntitySurfaceForm
+    # The entity text
+    attr_accessor :text
 
-    # The published date of the time series bin
-    attr_accessor :published_at
-
-    attr_accessor :sentiment
+    # The indices of the entity text
+    attr_accessor :indices
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'count' => :'count',
-        :'published_at' => :'published_at',
-        :'sentiment' => :'sentiment'
+        :'text' => :'text',
+        :'indices' => :'indices'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'count' => :'Integer',
-        :'published_at' => :'DateTime',
-        :'sentiment' => :'AggregatedSentiment'
+        :'text' => :'String',
+        :'indices' => :'Array<Array<Integer>>'
       }
     end
 
@@ -50,27 +46,25 @@ module AylienNewsApi
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::TimeSeries` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::EntitySurfaceForm` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::TimeSeries`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::EntitySurfaceForm`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'count')
-        self.count = attributes[:'count']
+      if attributes.key?(:'text')
+        self.text = attributes[:'text']
       end
 
-      if attributes.key?(:'published_at')
-        self.published_at = attributes[:'published_at']
-      end
-
-      if attributes.key?(:'sentiment')
-        self.sentiment = attributes[:'sentiment']
+      if attributes.key?(:'indices')
+        if (value = attributes[:'indices']).is_a?(Array)
+          self.indices = value
+        end
       end
     end
 
@@ -92,9 +86,8 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          count == o.count &&
-          published_at == o.published_at &&
-          sentiment == o.sentiment
+          text == o.text &&
+          indices == o.indices
     end
 
     # @see the `==` method
@@ -106,7 +99,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [count, published_at, sentiment].hash
+      [text, indices].hash
     end
 
     # Builds the object from hash

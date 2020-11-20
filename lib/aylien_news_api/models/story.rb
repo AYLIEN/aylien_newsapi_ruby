@@ -72,6 +72,9 @@ module AylienNewsApi
     # Word count of the story body
     attr_accessor :words_count
 
+    # License type of the story
+    attr_accessor :license_type
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -96,7 +99,8 @@ module AylienNewsApi
         :'summary' => :'summary',
         :'title' => :'title',
         :'translations' => :'translations',
-        :'words_count' => :'words_count'
+        :'words_count' => :'words_count',
+        :'license_type' => :'license_type'
       }
     end
 
@@ -124,7 +128,8 @@ module AylienNewsApi
         :'summary' => :'Summary',
         :'title' => :'String',
         :'translations' => :'StoryTranslations',
-        :'words_count' => :'Integer'
+        :'words_count' => :'Integer',
+        :'license_type' => :'Integer'
       }
     end
 
@@ -246,6 +251,10 @@ module AylienNewsApi
       if attributes.key?(:'words_count')
         self.words_count = attributes[:'words_count']
       end
+
+      if attributes.key?(:'license_type')
+        self.license_type = attributes[:'license_type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -287,7 +296,8 @@ module AylienNewsApi
           summary == o.summary &&
           title == o.title &&
           translations == o.translations &&
-          words_count == o.words_count
+          words_count == o.words_count &&
+          license_type == o.license_type
     end
 
     # @see the `==` method
@@ -299,7 +309,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [author, body, categories, characters_count, clusters, entities, hashtags, id, keywords, language, links, media, paragraphs_count, published_at, sentences_count, sentiment, social_shares_count, source, summary, title, translations, words_count].hash
+      [author, body, categories, characters_count, clusters, entities, hashtags, id, keywords, language, links, media, paragraphs_count, published_at, sentences_count, sentiment, social_shares_count, source, summary, title, translations, words_count, license_type].hash
     end
 
     # Builds the object from hash
