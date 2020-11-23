@@ -467,6 +467,7 @@ module AylienNewsApi
     # @option opts [Integer] :social_shares_count_reddit_min This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
     # @option opts [Integer] :social_shares_count_reddit_max This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
     # @option opts [Array<String>] :clusters This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [Integer] :interval_start This parameter is used for setting the start data point of histogram intervals. 
     # @option opts [Integer] :interval_end This parameter is used for setting the end data point of histogram intervals. 
     # @option opts [Integer] :interval_width This parameter is used for setting the width of histogram intervals. 
@@ -588,6 +589,7 @@ module AylienNewsApi
     # @option opts [Integer] :social_shares_count_reddit_min This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
     # @option opts [Integer] :social_shares_count_reddit_max This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
     # @option opts [Array<String>] :clusters This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [Integer] :interval_start This parameter is used for setting the start data point of histogram intervals. 
     # @option opts [Integer] :interval_end This parameter is used for setting the end data point of histogram intervals. 
     # @option opts [Integer] :interval_width This parameter is used for setting the width of histogram intervals. 
@@ -846,6 +848,7 @@ module AylienNewsApi
       query_params[:'social_shares_count.reddit.min'] = opts[:'social_shares_count_reddit_min'] if !opts[:'social_shares_count_reddit_min'].nil?
       query_params[:'social_shares_count.reddit.max'] = opts[:'social_shares_count_reddit_max'] if !opts[:'social_shares_count_reddit_max'].nil?
       query_params[:'clusters'] = opts[:'clusters'] if !opts[:'clusters'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
       query_params[:'interval.start'] = opts[:'interval_start'] if !opts[:'interval_start'].nil?
       query_params[:'interval.end'] = opts[:'interval_end'] if !opts[:'interval_end'].nil?
       query_params[:'interval.width'] = opts[:'interval_width'] if !opts[:'interval_width'].nil?
@@ -998,6 +1001,7 @@ module AylienNewsApi
     # @option opts [String] :story_url An article or webpage
     # @option opts [String] :story_title Title of the article
     # @option opts [String] :story_body Body of the article
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [String] :boost_by This parameter is used for boosting the result by the specified value. 
     # @option opts [String] :story_language This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.  (default to 'auto')
     # @option opts [Integer] :per_page This parameter is used for specifying number of items in each page.  (default to 3)
@@ -1121,6 +1125,7 @@ module AylienNewsApi
     # @option opts [String] :story_url An article or webpage
     # @option opts [String] :story_title Title of the article
     # @option opts [String] :story_body Body of the article
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [String] :boost_by This parameter is used for boosting the result by the specified value. 
     # @option opts [String] :story_language This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
     # @option opts [Integer] :per_page This parameter is used for specifying number of items in each page. 
@@ -1399,6 +1404,7 @@ module AylienNewsApi
       query_params[:'story_url'] = opts[:'story_url'] if !opts[:'story_url'].nil?
       query_params[:'story_title'] = opts[:'story_title'] if !opts[:'story_title'].nil?
       query_params[:'story_body'] = opts[:'story_body'] if !opts[:'story_body'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
       query_params[:'boost_by'] = opts[:'boost_by'] if !opts[:'boost_by'].nil?
       query_params[:'story_language'] = opts[:'story_language'] if !opts[:'story_language'].nil?
       query_params[:'per_page'] = opts[:'per_page'] if !opts[:'per_page'].nil?
@@ -1550,6 +1556,7 @@ module AylienNewsApi
     # @option opts [String] :story_url An article or webpage
     # @option opts [String] :story_title Title of the article
     # @option opts [String] :story_body Body of the article
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [String] :boost_by This parameter is used for boosting the result by the specified value. 
     # @option opts [String] :story_language This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.  (default to 'auto')
     # @option opts [Integer] :per_page This parameter is used for specifying number of items in each page.  (default to 3)
@@ -1673,6 +1680,7 @@ module AylienNewsApi
     # @option opts [String] :story_url An article or webpage
     # @option opts [String] :story_title Title of the article
     # @option opts [String] :story_body Body of the article
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [String] :boost_by This parameter is used for boosting the result by the specified value. 
     # @option opts [String] :story_language This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
     # @option opts [Integer] :per_page This parameter is used for specifying number of items in each page. 
@@ -1951,6 +1959,7 @@ module AylienNewsApi
       query_params[:'story_url'] = opts[:'story_url'] if !opts[:'story_url'].nil?
       query_params[:'story_title'] = opts[:'story_title'] if !opts[:'story_title'].nil?
       query_params[:'story_body'] = opts[:'story_body'] if !opts[:'story_body'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
       query_params[:'boost_by'] = opts[:'boost_by'] if !opts[:'boost_by'].nil?
       query_params[:'story_language'] = opts[:'story_language'] if !opts[:'story_language'].nil?
       query_params[:'per_page'] = opts[:'per_page'] if !opts[:'per_page'].nil?
@@ -2100,6 +2109,7 @@ module AylienNewsApi
     # @option opts [Integer] :social_shares_count_reddit_max This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
     # @option opts [Array<String>] :clusters This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
     # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [String] :sort_by This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results).  (default to 'published_at')
     # @option opts [String] :sort_direction This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results).  (default to 'desc')
     # @option opts [String] :cursor This parameter is used for finding a specific page. You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results).  (default to '*')
@@ -2222,6 +2232,7 @@ module AylienNewsApi
     # @option opts [Integer] :social_shares_count_reddit_max This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
     # @option opts [Array<String>] :clusters This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
     # @option opts [Array<String>] :_return This parameter is used for specifying return fields.
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [String] :sort_by This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
     # @option opts [String] :sort_direction This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
     # @option opts [String] :cursor This parameter is used for finding a specific page. You can read more about pagination of results [here](https://newsapi.aylien.com/docs/pagination-of-results). 
@@ -2497,6 +2508,7 @@ module AylienNewsApi
       query_params[:'social_shares_count.reddit.max'] = opts[:'social_shares_count_reddit_max'] if !opts[:'social_shares_count_reddit_max'].nil?
       query_params[:'clusters'] = opts[:'clusters'] if !opts[:'clusters'].nil?
       query_params[:'return'] = opts[:'_return'] if !opts[:'_return'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
       query_params[:'sort_by'] = opts[:'sort_by'] if !opts[:'sort_by'].nil?
       query_params[:'sort_direction'] = opts[:'sort_direction'] if !opts[:'sort_direction'].nil?
       query_params[:'cursor'] = opts[:'cursor'] if !opts[:'cursor'].nil?
@@ -2642,6 +2654,7 @@ module AylienNewsApi
     # @option opts [Integer] :social_shares_count_reddit_min This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
     # @option opts [Integer] :social_shares_count_reddit_max This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
     # @option opts [Array<String>] :clusters This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [String] :published_at_start This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).  (default to 'NOW-7DAYS/DAY')
     # @option opts [String] :published_at_end This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).  (default to 'NOW/DAY')
     # @option opts [String] :period The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math).  (default to '+1DAY')
@@ -2758,6 +2771,7 @@ module AylienNewsApi
     # @option opts [Integer] :social_shares_count_reddit_min This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
     # @option opts [Integer] :social_shares_count_reddit_max This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
     # @option opts [Array<String>] :clusters This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @option opts [String] :published_at_start This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
     # @option opts [String] :published_at_end This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
     # @option opts [String] :period The size of each date range is expressed as an interval to be added to the lower bound. It supports Date Math Syntax. Valid options are &#x60;+&#x60; following an integer number greater than 0 and one of the Date Math keywords. e.g. &#x60;+1DAY&#x60;, &#x60;+2MINUTES&#x60; and &#x60;+1MONTH&#x60;. Here are [Supported keywords](https://newsapi.aylien.com/docs/working-with-dates#date-math). 
@@ -3007,6 +3021,7 @@ module AylienNewsApi
       query_params[:'social_shares_count.reddit.min'] = opts[:'social_shares_count_reddit_min'] if !opts[:'social_shares_count_reddit_min'].nil?
       query_params[:'social_shares_count.reddit.max'] = opts[:'social_shares_count_reddit_max'] if !opts[:'social_shares_count_reddit_max'].nil?
       query_params[:'clusters'] = opts[:'clusters'] if !opts[:'clusters'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
       query_params[:'published_at.start'] = opts[:'published_at_start'] if !opts[:'published_at_start'].nil?
       query_params[:'published_at.end'] = opts[:'published_at_end'] if !opts[:'published_at_end'].nil?
       query_params[:'period'] = opts[:'period'] if !opts[:'period'].nil?
@@ -3156,6 +3171,7 @@ module AylienNewsApi
     # @option opts [Integer] :social_shares_count_reddit_min This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
     # @option opts [Integer] :social_shares_count_reddit_max This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
     # @option opts [Array<String>] :clusters This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @return [Trends]
     def list_trends(field, opts = {})
       data, _status_code, _headers = list_trends_with_http_info(field, opts)
@@ -3274,6 +3290,7 @@ module AylienNewsApi
     # @option opts [Integer] :social_shares_count_reddit_min This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
     # @option opts [Integer] :social_shares_count_reddit_max This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
     # @option opts [Array<String>] :clusters This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+    # @option opts [String] :query This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
     # @return [Array<(Trends, Integer, Hash)>] Trends data, response status code and response headers
     def list_trends_with_http_info(field, opts = {})
       if @api_client.config.debugging
@@ -3534,6 +3551,7 @@ module AylienNewsApi
       query_params[:'social_shares_count.reddit.min'] = opts[:'social_shares_count_reddit_min'] if !opts[:'social_shares_count_reddit_min'].nil?
       query_params[:'social_shares_count.reddit.max'] = opts[:'social_shares_count_reddit_max'] if !opts[:'social_shares_count_reddit_max'].nil?
       query_params[:'clusters'] = opts[:'clusters'] if !opts[:'clusters'].nil?
+      query_params[:'query'] = opts[:'query'] if !opts[:'query'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
