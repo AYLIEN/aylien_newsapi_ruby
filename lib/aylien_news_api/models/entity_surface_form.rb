@@ -20,11 +20,15 @@ module AylienNewsApi
     # The indices of the entity text
     attr_accessor :indices
 
+    # Amount of entity surface form mentions in the article
+    attr_accessor :frequency
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'text' => :'text',
-        :'indices' => :'indices'
+        :'indices' => :'indices',
+        :'frequency' => :'frequency'
       }
     end
 
@@ -32,7 +36,8 @@ module AylienNewsApi
     def self.openapi_types
       {
         :'text' => :'String',
-        :'indices' => :'Array<Array<Integer>>'
+        :'indices' => :'Array<Array<Integer>>',
+        :'frequency' => :'Integer'
       }
     end
 
@@ -66,19 +71,38 @@ module AylienNewsApi
           self.indices = value
         end
       end
+
+      if attributes.key?(:'frequency')
+        self.frequency = attributes[:'frequency']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@frequency.nil? && @frequency < 0
+        invalid_properties.push('invalid value for "frequency", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@frequency.nil? && @frequency < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] frequency Value to be assigned
+    def frequency=(frequency)
+      if !frequency.nil? && frequency < 0
+        fail ArgumentError, 'invalid value for "frequency", must be greater than or equal to 0.'
+      end
+
+      @frequency = frequency
     end
 
     # Checks equality by comparing each attribute.
@@ -87,7 +111,8 @@ module AylienNewsApi
       return true if self.equal?(o)
       self.class == o.class &&
           text == o.text &&
-          indices == o.indices
+          indices == o.indices &&
+          frequency == o.frequency
     end
 
     # @see the `==` method
@@ -99,7 +124,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [text, indices].hash
+      [text, indices, frequency].hash
     end
 
     # Builds the object from hash

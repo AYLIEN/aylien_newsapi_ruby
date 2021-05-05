@@ -35,6 +35,9 @@ module AylienNewsApi
 
     attr_accessor :surface_forms
 
+    # Describes how relevant an entity is to the article
+    attr_accessor :prominence_score
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -45,7 +48,8 @@ module AylienNewsApi
         :'stock_ticker' => :'stock_ticker',
         :'types' => :'types',
         :'sentiment' => :'sentiment',
-        :'surface_forms' => :'surface_forms'
+        :'surface_forms' => :'surface_forms',
+        :'prominence_score' => :'prominence_score'
       }
     end
 
@@ -59,7 +63,8 @@ module AylienNewsApi
         :'stock_ticker' => :'String',
         :'types' => :'Array<String>',
         :'sentiment' => :'EntitySentiment',
-        :'surface_forms' => :'Array<EntitySurfaceForm>'
+        :'surface_forms' => :'Array<EntitySurfaceForm>',
+        :'prominence_score' => :'Float'
       }
     end
 
@@ -121,19 +126,47 @@ module AylienNewsApi
           self.surface_forms = value
         end
       end
+
+      if attributes.key?(:'prominence_score')
+        self.prominence_score = attributes[:'prominence_score']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@prominence_score.nil? && @prominence_score > 1
+        invalid_properties.push('invalid value for "prominence_score", must be smaller than or equal to 1.')
+      end
+
+      if !@prominence_score.nil? && @prominence_score < 0
+        invalid_properties.push('invalid value for "prominence_score", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@prominence_score.nil? && @prominence_score > 1
+      return false if !@prominence_score.nil? && @prominence_score < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] prominence_score Value to be assigned
+    def prominence_score=(prominence_score)
+      if !prominence_score.nil? && prominence_score > 1
+        fail ArgumentError, 'invalid value for "prominence_score", must be smaller than or equal to 1.'
+      end
+
+      if !prominence_score.nil? && prominence_score < 0
+        fail ArgumentError, 'invalid value for "prominence_score", must be greater than or equal to 0.'
+      end
+
+      @prominence_score = prominence_score
     end
 
     # Checks equality by comparing each attribute.
@@ -148,7 +181,8 @@ module AylienNewsApi
           stock_ticker == o.stock_ticker &&
           types == o.types &&
           sentiment == o.sentiment &&
-          surface_forms == o.surface_forms
+          surface_forms == o.surface_forms &&
+          prominence_score == o.prominence_score
     end
 
     # @see the `==` method
@@ -160,7 +194,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, indices, links, text, stock_ticker, types, sentiment, surface_forms].hash
+      [id, indices, links, text, stock_ticker, types, sentiment, surface_forms, prominence_score].hash
     end
 
     # Builds the object from hash

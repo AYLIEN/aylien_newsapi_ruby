@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **types** | **Array&lt;String&gt;** | An array of the entity types | [optional] 
 **sentiment** | [**EntitySentiment**](EntitySentiment.md) |  | [optional] 
 **surface_forms** | [**Array&lt;EntitySurfaceForm&gt;**](EntitySurfaceForm.md) |  | [optional] 
+**prominence_score** | **Float** | Describes how relevant an entity is to the article | [optional] 
 
 ## Code Sample
 
@@ -25,7 +26,8 @@ instance = AylienNewsApi::Entity.new(id: null,
                                  stock_ticker: null,
                                  types: null,
                                  sentiment: null,
-                                 surface_forms: null)
+                                 surface_forms: null,
+                                 prominence_score: null)
 ```
 
 

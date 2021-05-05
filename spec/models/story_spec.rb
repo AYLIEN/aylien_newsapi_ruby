@@ -164,4 +164,10 @@ describe 'Story' do
     end
   end
 
+  describe 'test attribute "license_type"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

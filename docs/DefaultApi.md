@@ -387,6 +387,8 @@ opts = {
   social_shares_count_reddit_min: 56, # Integer | This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
   social_shares_count_reddit_max: 56, # Integer | This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
   clusters: ['clusters_example'], # Array<String> | This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+  aql: 'aql_example', # String | This parameter is used to supply a query in AYLIEN Query Language. 
+  aql_default_field: 'text', # String | This parameter is used to supply an optional default field name used in the AQL query. 
   query: 'query_example', # String | This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
   interval_start: 56, # Integer | This parameter is used for setting the start data point of histogram intervals. 
   interval_end: 56, # Integer | This parameter is used for setting the end data point of histogram intervals. 
@@ -516,6 +518,8 @@ Name | Type | Description  | Notes
  **social_shares_count_reddit_min** | **Integer**| This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.  | [optional] 
  **social_shares_count_reddit_max** | **Integer**| This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.  | [optional] 
  **clusters** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).  | [optional] 
+ **aql** | **String**| This parameter is used to supply a query in AYLIEN Query Language.  | [optional] 
+ **aql_default_field** | **String**| This parameter is used to supply an optional default field name used in the AQL query.  | [optional] [default to &#39;text&#39;]
  **query** | **String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | [optional] 
  **interval_start** | **Integer**| This parameter is used for setting the start data point of histogram intervals.  | [optional] 
  **interval_end** | **Integer**| This parameter is used for setting the end data point of histogram intervals.  | [optional] 
@@ -675,6 +679,8 @@ opts = {
   story_url: 'story_url_example', # String | An article or webpage
   story_title: 'story_title_example', # String | Title of the article
   story_body: 'story_body_example', # String | Body of the article
+  aql: 'aql_example', # String | This parameter is used to supply a query in AYLIEN Query Language. 
+  aql_default_field: 'text', # String | This parameter is used to supply an optional default field name used in the AQL query. 
   query: 'query_example', # String | This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
   boost_by: 'boost_by_example', # String | This parameter is used for boosting the result by the specified value. 
   story_language: 'auto', # String | This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
@@ -807,6 +813,8 @@ Name | Type | Description  | Notes
  **story_url** | **String**| An article or webpage | [optional] 
  **story_title** | **String**| Title of the article | [optional] 
  **story_body** | **String**| Body of the article | [optional] 
+ **aql** | **String**| This parameter is used to supply a query in AYLIEN Query Language.  | [optional] 
+ **aql_default_field** | **String**| This parameter is used to supply an optional default field name used in the AQL query.  | [optional] [default to &#39;text&#39;]
  **query** | **String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | [optional] 
  **boost_by** | **String**| This parameter is used for boosting the result by the specified value.  | [optional] 
  **story_language** | **String**| This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.  | [optional] [default to &#39;auto&#39;]
@@ -965,6 +973,8 @@ opts = {
   story_url: 'story_url_example', # String | An article or webpage
   story_title: 'story_title_example', # String | Title of the article
   story_body: 'story_body_example', # String | Body of the article
+  aql: 'aql_example', # String | This parameter is used to supply a query in AYLIEN Query Language. 
+  aql_default_field: 'text', # String | This parameter is used to supply an optional default field name used in the AQL query. 
   query: 'query_example', # String | This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
   boost_by: 'boost_by_example', # String | This parameter is used for boosting the result by the specified value. 
   story_language: 'auto', # String | This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes. 
@@ -1097,6 +1107,8 @@ Name | Type | Description  | Notes
  **story_url** | **String**| An article or webpage | [optional] 
  **story_title** | **String**| Title of the article | [optional] 
  **story_body** | **String**| Body of the article | [optional] 
+ **aql** | **String**| This parameter is used to supply a query in AYLIEN Query Language.  | [optional] 
+ **aql_default_field** | **String**| This parameter is used to supply an optional default field name used in the AQL query.  | [optional] [default to &#39;text&#39;]
  **query** | **String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | [optional] 
  **boost_by** | **String**| This parameter is used for boosting the result by the specified value.  | [optional] 
  **story_language** | **String**| This parameter is used for setting the language of the story. It supports [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language codes.  | [optional] [default to &#39;auto&#39;]
@@ -1253,6 +1265,8 @@ opts = {
   social_shares_count_reddit_max: 56, # Integer | This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
   clusters: ['clusters_example'], # Array<String> | This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
   _return: ['_return_example'], # Array<String> | This parameter is used for specifying return fields.
+  aql: 'aql_example', # String | This parameter is used to supply a query in AYLIEN Query Language. 
+  aql_default_field: 'text', # String | This parameter is used to supply an optional default field name used in the AQL query. 
   query: 'query_example', # String | This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
   sort_by: 'published_at', # String | This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
   sort_direction: 'desc', # String | This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results). 
@@ -1383,6 +1397,8 @@ Name | Type | Description  | Notes
  **social_shares_count_reddit_max** | **Integer**| This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.  | [optional] 
  **clusters** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).  | [optional] 
  **_return** | [**Array&lt;String&gt;**](String.md)| This parameter is used for specifying return fields. | [optional] 
+ **aql** | **String**| This parameter is used to supply a query in AYLIEN Query Language.  | [optional] 
+ **aql_default_field** | **String**| This parameter is used to supply an optional default field name used in the AQL query.  | [optional] [default to &#39;text&#39;]
  **query** | **String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | [optional] 
  **sort_by** | **String**| This parameter is used for changing the order column of the results. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results).  | [optional] [default to &#39;published_at&#39;]
  **sort_direction** | **String**| This parameter is used for changing the order direction of the result. You can read about sorting results [here](https://newsapi.aylien.com/docs/sorting-results).  | [optional] [default to &#39;desc&#39;]
@@ -1535,6 +1551,8 @@ opts = {
   social_shares_count_reddit_min: 56, # Integer | This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
   social_shares_count_reddit_max: 56, # Integer | This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
   clusters: ['clusters_example'], # Array<String> | This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+  aql: 'aql_example', # String | This parameter is used to supply a query in AYLIEN Query Language. 
+  aql_default_field: 'text', # String | This parameter is used to supply an optional default field name used in the AQL query. 
   query: 'query_example', # String | This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
   published_at_start: 'NOW-7DAYS/DAY', # String | This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
   published_at_end: 'NOW/DAY', # String | This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates). 
@@ -1659,6 +1677,8 @@ Name | Type | Description  | Notes
  **social_shares_count_reddit_min** | **Integer**| This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.  | [optional] 
  **social_shares_count_reddit_max** | **Integer**| This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.  | [optional] 
  **clusters** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).  | [optional] 
+ **aql** | **String**| This parameter is used to supply a query in AYLIEN Query Language.  | [optional] 
+ **aql_default_field** | **String**| This parameter is used to supply an optional default field name used in the AQL query.  | [optional] [default to &#39;text&#39;]
  **query** | **String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | [optional] 
  **published_at_start** | **String**| This parameter is used for finding stories whose published at time is less than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).  | [optional] [default to &#39;NOW-7DAYS/DAY&#39;]
  **published_at_end** | **String**| This parameter is used for finding stories whose published at time is greater than the specified value. [Here](https://newsapi.aylien.com/docs/working-with-dates) you can find more information about how [to work with dates](https://newsapi.aylien.com/docs/working-with-dates).  | [optional] [default to &#39;NOW/DAY&#39;]
@@ -1815,6 +1835,8 @@ opts = {
   social_shares_count_reddit_min: 56, # Integer | This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value. 
   social_shares_count_reddit_max: 56, # Integer | This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value. 
   clusters: ['clusters_example'], # Array<String> | This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering). 
+  aql: 'aql_example', # String | This parameter is used to supply a query in AYLIEN Query Language. 
+  aql_default_field: 'text', # String | This parameter is used to supply an optional default field name used in the AQL query. 
   query: 'query_example' # String | This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string. 
 }
 
@@ -1941,6 +1963,8 @@ Name | Type | Description  | Notes
  **social_shares_count_reddit_min** | **Integer**| This parameter is used for finding stories whose Reddit social shares count is greater than or equal to the specified value.  | [optional] 
  **social_shares_count_reddit_max** | **Integer**| This parameter is used for finding stories whose Reddit social shares count is less than or equal to the specified value.  | [optional] 
  **clusters** | [**Array&lt;String&gt;**](String.md)| This parameter is used for finding stories with belonging to one of clusters in a specific set of clusters You can read more about working with clustering [here](https://newsapi.aylien.com/docs/working-with-clustering).  | [optional] 
+ **aql** | **String**| This parameter is used to supply a query in AYLIEN Query Language.  | [optional] 
+ **aql_default_field** | **String**| This parameter is used to supply an optional default field name used in the AQL query.  | [optional] [default to &#39;text&#39;]
  **query** | **String**| This parameter is used to make an advanced query using $and, $or, $not logical operators and $eq for exact match, $text for a text search and $lt, $gt, $lte, $gte for range queries. value must be a json string.  | [optional] 
 
 ### Return type
