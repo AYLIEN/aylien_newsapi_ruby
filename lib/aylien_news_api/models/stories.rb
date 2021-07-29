@@ -13,6 +13,7 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
+  # Stories containing new V3 entities - available for new_v3_entities feature flag
   class Stories
     # The next page cursor
     attr_accessor :next_page_cursor

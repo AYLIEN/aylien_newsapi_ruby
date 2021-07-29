@@ -13,6 +13,7 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
+  # Story containing new V3 entities - available for new_v3_entities feature flag
   class RelatedStories
     # An array of related stories for the input story
     attr_accessor :related_stories

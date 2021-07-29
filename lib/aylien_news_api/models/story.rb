@@ -28,6 +28,7 @@ module AylienNewsApi
     # An array of clusters the story is associated with
     attr_accessor :clusters
 
+    # An array of entities
     attr_accessor :entities
 
     # An array of suggested Story hashtags
@@ -112,7 +113,7 @@ module AylienNewsApi
         :'categories' => :'Array<Category>',
         :'characters_count' => :'Integer',
         :'clusters' => :'Array<Integer>',
-        :'entities' => :'Entities',
+        :'entities' => :'Array<Entity>',
         :'hashtags' => :'Array<String>',
         :'id' => :'Integer',
         :'keywords' => :'Array<String>',
@@ -179,7 +180,9 @@ module AylienNewsApi
       end
 
       if attributes.key?(:'entities')
-        self.entities = attributes[:'entities']
+        if (value = attributes[:'entities']).is_a?(Array)
+          self.entities = value
+        end
       end
 
       if attributes.key?(:'hashtags')
