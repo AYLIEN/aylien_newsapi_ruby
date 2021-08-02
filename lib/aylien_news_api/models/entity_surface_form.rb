@@ -17,18 +17,18 @@ module AylienNewsApi
     # The entity text
     attr_accessor :text
 
-    # The indices of the entity text
-    attr_accessor :indices
-
     # Amount of entity surface form mentions in the article
     attr_accessor :frequency
+
+    # Mentions of the entity text
+    attr_accessor :mentions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'text' => :'text',
-        :'indices' => :'indices',
-        :'frequency' => :'frequency'
+        :'frequency' => :'frequency',
+        :'mentions' => :'mentions'
       }
     end
 
@@ -36,8 +36,8 @@ module AylienNewsApi
     def self.openapi_types
       {
         :'text' => :'String',
-        :'indices' => :'Array<Array<Integer>>',
-        :'frequency' => :'Integer'
+        :'frequency' => :'Integer',
+        :'mentions' => :'Array<EntityMention>'
       }
     end
 
@@ -66,14 +66,14 @@ module AylienNewsApi
         self.text = attributes[:'text']
       end
 
-      if attributes.key?(:'indices')
-        if (value = attributes[:'indices']).is_a?(Array)
-          self.indices = value
-        end
-      end
-
       if attributes.key?(:'frequency')
         self.frequency = attributes[:'frequency']
+      end
+
+      if attributes.key?(:'mentions')
+        if (value = attributes[:'mentions']).is_a?(Array)
+          self.mentions = value
+        end
       end
     end
 
@@ -111,8 +111,8 @@ module AylienNewsApi
       return true if self.equal?(o)
       self.class == o.class &&
           text == o.text &&
-          indices == o.indices &&
-          frequency == o.frequency
+          frequency == o.frequency &&
+          mentions == o.mentions
     end
 
     # @see the `==` method
@@ -124,7 +124,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [text, indices, frequency].hash
+      [text, frequency, mentions].hash
     end
 
     # Builds the object from hash

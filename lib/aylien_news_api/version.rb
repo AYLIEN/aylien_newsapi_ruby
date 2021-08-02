@@ -11,5 +11,5 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 =end
 
 module AylienNewsApi
-  VERSION = '4.4.0'
+  VERSION = '4.5.0'
 end

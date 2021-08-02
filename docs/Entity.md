@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** | The unique ID of the entity | [optional] 
-**indices** | **Array&lt;Array&lt;Integer&gt;&gt;** | The indices of the entity text | [optional] 
 **links** | [**EntityLinks**](EntityLinks.md) |  | [optional] 
-**text** | **String** | The entity text | [optional] 
-**stock_ticker** | **String** | The stock_ticker of the entity (might be null) | [optional] 
+**stock_tickers** | **Array&lt;String&gt;** | The stock tickers of the entity (might be empty) | [optional] 
 **types** | **Array&lt;String&gt;** | An array of the entity types | [optional] 
-**sentiment** | [**EntitySentiment**](EntitySentiment.md) |  | [optional] 
-**surface_forms** | [**Array&lt;EntitySurfaceForm&gt;**](EntitySurfaceForm.md) |  | [optional] 
-**prominence_score** | **Float** | Describes how relevant an entity is to the article | [optional] 
+**overall_sentiment** | [**EntitySentiment**](EntitySentiment.md) |  | [optional] 
+**overall_prominence** | **Float** | Describes how relevant an entity is to the article | [optional] 
+**overall_frequency** | **Integer** | Amount of entity surface form mentions in the article | [optional] 
+**body** | [**EntityInText**](EntityInText.md) |  | [optional] 
+**title** | [**EntityInText**](EntityInText.md) |  | [optional] 
 
 ## Code Sample
 
@@ -20,14 +20,14 @@ Name | Type | Description | Notes
 require 'AylienNewsApi'
 
 instance = AylienNewsApi::Entity.new(id: null,
-                                 indices: null,
                                  links: null,
-                                 text: null,
-                                 stock_ticker: null,
+                                 stock_tickers: null,
                                  types: null,
-                                 sentiment: null,
-                                 surface_forms: null,
-                                 prominence_score: null)
+                                 overall_sentiment: null,
+                                 overall_prominence: null,
+                                 overall_frequency: null,
+                                 body: null,
+                                 title: null)
 ```
 
 
