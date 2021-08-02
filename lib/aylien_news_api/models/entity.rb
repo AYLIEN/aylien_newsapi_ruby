@@ -17,39 +17,38 @@ module AylienNewsApi
     # The unique ID of the entity
     attr_accessor :id
 
-    # The indices of the entity text
-    attr_accessor :indices
-
     attr_accessor :links
 
-    # The entity text
-    attr_accessor :text
-
-    # The stock_ticker of the entity (might be null)
-    attr_accessor :stock_ticker
+    # The stock tickers of the entity (might be empty)
+    attr_accessor :stock_tickers
 
     # An array of the entity types
     attr_accessor :types
 
-    attr_accessor :sentiment
-
-    attr_accessor :surface_forms
+    attr_accessor :overall_sentiment
 
     # Describes how relevant an entity is to the article
-    attr_accessor :prominence_score
+    attr_accessor :overall_prominence
+
+    # Amount of entity surface form mentions in the article
+    attr_accessor :overall_frequency
+
+    attr_accessor :body
+
+    attr_accessor :title
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'indices' => :'indices',
         :'links' => :'links',
-        :'text' => :'text',
-        :'stock_ticker' => :'stock_ticker',
+        :'stock_tickers' => :'stock_tickers',
         :'types' => :'types',
-        :'sentiment' => :'sentiment',
-        :'surface_forms' => :'surface_forms',
-        :'prominence_score' => :'prominence_score'
+        :'overall_sentiment' => :'overall_sentiment',
+        :'overall_prominence' => :'overall_prominence',
+        :'overall_frequency' => :'overall_frequency',
+        :'body' => :'body',
+        :'title' => :'title'
       }
     end
 
@@ -57,14 +56,14 @@ module AylienNewsApi
     def self.openapi_types
       {
         :'id' => :'String',
-        :'indices' => :'Array<Array<Integer>>',
         :'links' => :'EntityLinks',
-        :'text' => :'String',
-        :'stock_ticker' => :'String',
+        :'stock_tickers' => :'Array<String>',
         :'types' => :'Array<String>',
-        :'sentiment' => :'EntitySentiment',
-        :'surface_forms' => :'Array<EntitySurfaceForm>',
-        :'prominence_score' => :'Float'
+        :'overall_sentiment' => :'EntitySentiment',
+        :'overall_prominence' => :'Float',
+        :'overall_frequency' => :'Integer',
+        :'body' => :'EntityInText',
+        :'title' => :'EntityInText'
       }
     end
 
@@ -93,22 +92,14 @@ module AylienNewsApi
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'indices')
-        if (value = attributes[:'indices']).is_a?(Array)
-          self.indices = value
-        end
-      end
-
       if attributes.key?(:'links')
         self.links = attributes[:'links']
       end
 
-      if attributes.key?(:'text')
-        self.text = attributes[:'text']
-      end
-
-      if attributes.key?(:'stock_ticker')
-        self.stock_ticker = attributes[:'stock_ticker']
+      if attributes.key?(:'stock_tickers')
+        if (value = attributes[:'stock_tickers']).is_a?(Array)
+          self.stock_tickers = value
+        end
       end
 
       if attributes.key?(:'types')
@@ -117,18 +108,24 @@ module AylienNewsApi
         end
       end
 
-      if attributes.key?(:'sentiment')
-        self.sentiment = attributes[:'sentiment']
+      if attributes.key?(:'overall_sentiment')
+        self.overall_sentiment = attributes[:'overall_sentiment']
       end
 
-      if attributes.key?(:'surface_forms')
-        if (value = attributes[:'surface_forms']).is_a?(Array)
-          self.surface_forms = value
-        end
+      if attributes.key?(:'overall_prominence')
+        self.overall_prominence = attributes[:'overall_prominence']
       end
 
-      if attributes.key?(:'prominence_score')
-        self.prominence_score = attributes[:'prominence_score']
+      if attributes.key?(:'overall_frequency')
+        self.overall_frequency = attributes[:'overall_frequency']
+      end
+
+      if attributes.key?(:'body')
+        self.body = attributes[:'body']
+      end
+
+      if attributes.key?(:'title')
+        self.title = attributes[:'title']
       end
     end
 
@@ -136,12 +133,16 @@ module AylienNewsApi
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@prominence_score.nil? && @prominence_score > 1
-        invalid_properties.push('invalid value for "prominence_score", must be smaller than or equal to 1.')
+      if !@overall_prominence.nil? && @overall_prominence > 1
+        invalid_properties.push('invalid value for "overall_prominence", must be smaller than or equal to 1.')
       end
 
-      if !@prominence_score.nil? && @prominence_score < 0
-        invalid_properties.push('invalid value for "prominence_score", must be greater than or equal to 0.')
+      if !@overall_prominence.nil? && @overall_prominence < 0
+        invalid_properties.push('invalid value for "overall_prominence", must be greater than or equal to 0.')
+      end
+
+      if !@overall_frequency.nil? && @overall_frequency < 0
+        invalid_properties.push('invalid value for "overall_frequency", must be greater than or equal to 0.')
       end
 
       invalid_properties
@@ -150,23 +151,34 @@ module AylienNewsApi
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@prominence_score.nil? && @prominence_score > 1
-      return false if !@prominence_score.nil? && @prominence_score < 0
+      return false if !@overall_prominence.nil? && @overall_prominence > 1
+      return false if !@overall_prominence.nil? && @overall_prominence < 0
+      return false if !@overall_frequency.nil? && @overall_frequency < 0
       true
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] prominence_score Value to be assigned
-    def prominence_score=(prominence_score)
-      if !prominence_score.nil? && prominence_score > 1
-        fail ArgumentError, 'invalid value for "prominence_score", must be smaller than or equal to 1.'
+    # @param [Object] overall_prominence Value to be assigned
+    def overall_prominence=(overall_prominence)
+      if !overall_prominence.nil? && overall_prominence > 1
+        fail ArgumentError, 'invalid value for "overall_prominence", must be smaller than or equal to 1.'
       end
 
-      if !prominence_score.nil? && prominence_score < 0
-        fail ArgumentError, 'invalid value for "prominence_score", must be greater than or equal to 0.'
+      if !overall_prominence.nil? && overall_prominence < 0
+        fail ArgumentError, 'invalid value for "overall_prominence", must be greater than or equal to 0.'
       end
 
-      @prominence_score = prominence_score
+      @overall_prominence = overall_prominence
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] overall_frequency Value to be assigned
+    def overall_frequency=(overall_frequency)
+      if !overall_frequency.nil? && overall_frequency < 0
+        fail ArgumentError, 'invalid value for "overall_frequency", must be greater than or equal to 0.'
+      end
+
+      @overall_frequency = overall_frequency
     end
 
     # Checks equality by comparing each attribute.
@@ -175,14 +187,14 @@ module AylienNewsApi
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          indices == o.indices &&
           links == o.links &&
-          text == o.text &&
-          stock_ticker == o.stock_ticker &&
+          stock_tickers == o.stock_tickers &&
           types == o.types &&
-          sentiment == o.sentiment &&
-          surface_forms == o.surface_forms &&
-          prominence_score == o.prominence_score
+          overall_sentiment == o.overall_sentiment &&
+          overall_prominence == o.overall_prominence &&
+          overall_frequency == o.overall_frequency &&
+          body == o.body &&
+          title == o.title
     end
 
     # @see the `==` method
@@ -194,7 +206,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, indices, links, text, stock_ticker, types, sentiment, surface_forms, prominence_score].hash
+      [id, links, stock_tickers, types, overall_sentiment, overall_prominence, overall_frequency, body, title].hash
     end
 
     # Builds the object from hash

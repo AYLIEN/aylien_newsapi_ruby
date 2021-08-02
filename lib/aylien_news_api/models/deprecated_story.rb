@@ -13,7 +13,7 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  class Story
+  class DeprecatedStory
     attr_accessor :author
 
     # Body of the story
@@ -28,7 +28,6 @@ module AylienNewsApi
     # An array of clusters the story is associated with
     attr_accessor :clusters
 
-    # An array of entities
     attr_accessor :entities
 
     # An array of suggested Story hashtags
@@ -113,7 +112,7 @@ module AylienNewsApi
         :'categories' => :'Array<Category>',
         :'characters_count' => :'Integer',
         :'clusters' => :'Array<Integer>',
-        :'entities' => :'Array<Entity>',
+        :'entities' => :'DeprecatedEntities',
         :'hashtags' => :'Array<String>',
         :'id' => :'Integer',
         :'keywords' => :'Array<String>',
@@ -144,13 +143,13 @@ module AylienNewsApi
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::Story` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::DeprecatedStory` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::Story`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::DeprecatedStory`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -180,9 +179,7 @@ module AylienNewsApi
       end
 
       if attributes.key?(:'entities')
-        if (value = attributes[:'entities']).is_a?(Array)
-          self.entities = value
-        end
+        self.entities = attributes[:'entities']
       end
 
       if attributes.key?(:'hashtags')

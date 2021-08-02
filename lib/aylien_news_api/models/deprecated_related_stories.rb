@@ -13,13 +13,19 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  # Stories containing new V3 entities - available for new_v3_entities feature flag
-  class Stories
-    # The next page cursor
-    attr_accessor :next_page_cursor
+  # Story with deprecated entities
+  class DeprecatedRelatedStories
+    # An array of related stories for the input story
+    attr_accessor :related_stories
 
-    # An array of stories
-    attr_accessor :stories
+    # The input story body
+    attr_accessor :story_body
+
+    # The input story language
+    attr_accessor :story_language
+
+    # The input story title
+    attr_accessor :story_title
 
     # The end of a period in which searched stories were published
     attr_accessor :published_at_end
@@ -27,28 +33,27 @@ module AylienNewsApi
     # The start of a period in which searched stories were published
     attr_accessor :published_at_start
 
-    # Notifies about possible issues that occurred when searching for stories
-    attr_accessor :warnings
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'next_page_cursor' => :'next_page_cursor',
-        :'stories' => :'stories',
+        :'related_stories' => :'related_stories',
+        :'story_body' => :'story_body',
+        :'story_language' => :'story_language',
+        :'story_title' => :'story_title',
         :'published_at_end' => :'published_at.end',
-        :'published_at_start' => :'published_at.start',
-        :'warnings' => :'warnings'
+        :'published_at_start' => :'published_at.start'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'next_page_cursor' => :'String',
-        :'stories' => :'Array<Story>',
+        :'related_stories' => :'Array<DeprecatedStory>',
+        :'story_body' => :'String',
+        :'story_language' => :'String',
+        :'story_title' => :'String',
         :'published_at_end' => :'DateTime',
-        :'published_at_start' => :'DateTime',
-        :'warnings' => :'Array<Warning>'
+        :'published_at_start' => :'DateTime'
       }
     end
 
@@ -62,25 +67,33 @@ module AylienNewsApi
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::Stories` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::DeprecatedRelatedStories` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::Stories`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::DeprecatedRelatedStories`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'next_page_cursor')
-        self.next_page_cursor = attributes[:'next_page_cursor']
+      if attributes.key?(:'related_stories')
+        if (value = attributes[:'related_stories']).is_a?(Array)
+          self.related_stories = value
+        end
       end
 
-      if attributes.key?(:'stories')
-        if (value = attributes[:'stories']).is_a?(Array)
-          self.stories = value
-        end
+      if attributes.key?(:'story_body')
+        self.story_body = attributes[:'story_body']
+      end
+
+      if attributes.key?(:'story_language')
+        self.story_language = attributes[:'story_language']
+      end
+
+      if attributes.key?(:'story_title')
+        self.story_title = attributes[:'story_title']
       end
 
       if attributes.key?(:'published_at_end')
@@ -89,12 +102,6 @@ module AylienNewsApi
 
       if attributes.key?(:'published_at_start')
         self.published_at_start = attributes[:'published_at_start']
-      end
-
-      if attributes.key?(:'warnings')
-        if (value = attributes[:'warnings']).is_a?(Array)
-          self.warnings = value
-        end
       end
     end
 
@@ -116,11 +123,12 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          next_page_cursor == o.next_page_cursor &&
-          stories == o.stories &&
+          related_stories == o.related_stories &&
+          story_body == o.story_body &&
+          story_language == o.story_language &&
+          story_title == o.story_title &&
           published_at_end == o.published_at_end &&
-          published_at_start == o.published_at_start &&
-          warnings == o.warnings
+          published_at_start == o.published_at_start
     end
 
     # @see the `==` method
@@ -132,7 +140,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [next_page_cursor, stories, published_at_end, published_at_start, warnings].hash
+      [related_stories, story_body, story_language, story_title, published_at_end, published_at_start].hash
     end
 
     # Builds the object from hash

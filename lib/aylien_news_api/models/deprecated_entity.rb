@@ -13,42 +13,58 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  # Stories containing new V3 entities - available for new_v3_entities feature flag
-  class Stories
-    # The next page cursor
-    attr_accessor :next_page_cursor
+  class DeprecatedEntity
+    # The unique ID of the entity
+    attr_accessor :id
 
-    # An array of stories
-    attr_accessor :stories
+    # The indices of the entity text
+    attr_accessor :indices
 
-    # The end of a period in which searched stories were published
-    attr_accessor :published_at_end
+    attr_accessor :links
 
-    # The start of a period in which searched stories were published
-    attr_accessor :published_at_start
+    # The entity text
+    attr_accessor :text
 
-    # Notifies about possible issues that occurred when searching for stories
-    attr_accessor :warnings
+    # The stock_ticker of the entity (might be null)
+    attr_accessor :stock_ticker
+
+    # An array of the entity types
+    attr_accessor :types
+
+    attr_accessor :sentiment
+
+    attr_accessor :surface_forms
+
+    # Describes how relevant an entity is to the article
+    attr_accessor :prominence_score
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'next_page_cursor' => :'next_page_cursor',
-        :'stories' => :'stories',
-        :'published_at_end' => :'published_at.end',
-        :'published_at_start' => :'published_at.start',
-        :'warnings' => :'warnings'
+        :'id' => :'id',
+        :'indices' => :'indices',
+        :'links' => :'links',
+        :'text' => :'text',
+        :'stock_ticker' => :'stock_ticker',
+        :'types' => :'types',
+        :'sentiment' => :'sentiment',
+        :'surface_forms' => :'surface_forms',
+        :'prominence_score' => :'prominence_score'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'next_page_cursor' => :'String',
-        :'stories' => :'Array<Story>',
-        :'published_at_end' => :'DateTime',
-        :'published_at_start' => :'DateTime',
-        :'warnings' => :'Array<Warning>'
+        :'id' => :'String',
+        :'indices' => :'Array<Array<Integer>>',
+        :'links' => :'EntityLinks',
+        :'text' => :'String',
+        :'stock_ticker' => :'String',
+        :'types' => :'Array<String>',
+        :'sentiment' => :'EntitySentiment',
+        :'surface_forms' => :'Array<DeprecatedEntitySurfaceForm>',
+        :'prominence_score' => :'Float'
       }
     end
 
@@ -62,39 +78,57 @@ module AylienNewsApi
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::Stories` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::DeprecatedEntity` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::Stories`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::DeprecatedEntity`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'next_page_cursor')
-        self.next_page_cursor = attributes[:'next_page_cursor']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'stories')
-        if (value = attributes[:'stories']).is_a?(Array)
-          self.stories = value
+      if attributes.key?(:'indices')
+        if (value = attributes[:'indices']).is_a?(Array)
+          self.indices = value
         end
       end
 
-      if attributes.key?(:'published_at_end')
-        self.published_at_end = attributes[:'published_at_end']
+      if attributes.key?(:'links')
+        self.links = attributes[:'links']
       end
 
-      if attributes.key?(:'published_at_start')
-        self.published_at_start = attributes[:'published_at_start']
+      if attributes.key?(:'text')
+        self.text = attributes[:'text']
       end
 
-      if attributes.key?(:'warnings')
-        if (value = attributes[:'warnings']).is_a?(Array)
-          self.warnings = value
+      if attributes.key?(:'stock_ticker')
+        self.stock_ticker = attributes[:'stock_ticker']
+      end
+
+      if attributes.key?(:'types')
+        if (value = attributes[:'types']).is_a?(Array)
+          self.types = value
         end
+      end
+
+      if attributes.key?(:'sentiment')
+        self.sentiment = attributes[:'sentiment']
+      end
+
+      if attributes.key?(:'surface_forms')
+        if (value = attributes[:'surface_forms']).is_a?(Array)
+          self.surface_forms = value
+        end
+      end
+
+      if attributes.key?(:'prominence_score')
+        self.prominence_score = attributes[:'prominence_score']
       end
     end
 
@@ -102,13 +136,37 @@ module AylienNewsApi
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@prominence_score.nil? && @prominence_score > 1
+        invalid_properties.push('invalid value for "prominence_score", must be smaller than or equal to 1.')
+      end
+
+      if !@prominence_score.nil? && @prominence_score < 0
+        invalid_properties.push('invalid value for "prominence_score", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@prominence_score.nil? && @prominence_score > 1
+      return false if !@prominence_score.nil? && @prominence_score < 0
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] prominence_score Value to be assigned
+    def prominence_score=(prominence_score)
+      if !prominence_score.nil? && prominence_score > 1
+        fail ArgumentError, 'invalid value for "prominence_score", must be smaller than or equal to 1.'
+      end
+
+      if !prominence_score.nil? && prominence_score < 0
+        fail ArgumentError, 'invalid value for "prominence_score", must be greater than or equal to 0.'
+      end
+
+      @prominence_score = prominence_score
     end
 
     # Checks equality by comparing each attribute.
@@ -116,11 +174,15 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          next_page_cursor == o.next_page_cursor &&
-          stories == o.stories &&
-          published_at_end == o.published_at_end &&
-          published_at_start == o.published_at_start &&
-          warnings == o.warnings
+          id == o.id &&
+          indices == o.indices &&
+          links == o.links &&
+          text == o.text &&
+          stock_ticker == o.stock_ticker &&
+          types == o.types &&
+          sentiment == o.sentiment &&
+          surface_forms == o.surface_forms &&
+          prominence_score == o.prominence_score
     end
 
     # @see the `==` method
@@ -132,7 +194,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [next_page_cursor, stories, published_at_end, published_at_start, warnings].hash
+      [id, indices, links, text, stock_ticker, types, sentiment, surface_forms, prominence_score].hash
     end
 
     # Builds the object from hash

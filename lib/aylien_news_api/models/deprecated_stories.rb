@@ -13,8 +13,8 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  # Stories containing new V3 entities - available for new_v3_entities feature flag
-  class Stories
+  # Stories containing deprecated entities
+  class DeprecatedStories
     # The next page cursor
     attr_accessor :next_page_cursor
 
@@ -45,7 +45,7 @@ module AylienNewsApi
     def self.openapi_types
       {
         :'next_page_cursor' => :'String',
-        :'stories' => :'Array<Story>',
+        :'stories' => :'Array<DeprecatedStory>',
         :'published_at_end' => :'DateTime',
         :'published_at_start' => :'DateTime',
         :'warnings' => :'Array<Warning>'
@@ -62,13 +62,13 @@ module AylienNewsApi
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::Stories` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::DeprecatedStories` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::Stories`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::DeprecatedStories`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
