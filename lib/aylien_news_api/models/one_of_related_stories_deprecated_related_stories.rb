@@ -13,31 +13,47 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  class DeprecatedEntitySurfaceForm
-    # The entity text
-    attr_accessor :text
+  # Wrapper of RelatedStories or DeprecatedRelatedStories
+  class OneOfRelatedStoriesDeprecatedRelatedStories
+    # An array of related stories for the input story
+    attr_accessor :related_stories
 
-    # The indices of the entity text
-    attr_accessor :indices
+    # The input story body
+    attr_accessor :story_body
 
-    # Amount of entity surface form mentions in the article
-    attr_accessor :frequency
+    # The input story language
+    attr_accessor :story_language
+
+    # The input story title
+    attr_accessor :story_title
+
+    # The end of a period in which searched stories were published
+    attr_accessor :published_at_end
+
+    # The start of a period in which searched stories were published
+    attr_accessor :published_at_start
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'text' => :'text',
-        :'indices' => :'indices',
-        :'frequency' => :'frequency'
+        :'related_stories' => :'related_stories',
+        :'story_body' => :'story_body',
+        :'story_language' => :'story_language',
+        :'story_title' => :'story_title',
+        :'published_at_end' => :'published_at.end',
+        :'published_at_start' => :'published_at.start'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'text' => :'String',
-        :'indices' => :'Array<Array<Integer>>',
-        :'frequency' => :'Integer'
+        :'related_stories' => :'Array<DeprecatedStory>',
+        :'story_body' => :'String',
+        :'story_language' => :'String',
+        :'story_title' => :'String',
+        :'published_at_end' => :'DateTime',
+        :'published_at_start' => :'DateTime'
       }
     end
 
@@ -47,33 +63,53 @@ module AylienNewsApi
       ])
     end
 
+    # List of class defined in oneOf (OpenAPI v3)
+    def self.openapi_one_of
+      [
+      :'DeprecatedRelatedStories',
+      :'RelatedStories'
+      ]
+    end
+
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::DeprecatedEntitySurfaceForm` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::OneOfRelatedStoriesDeprecatedRelatedStories` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::DeprecatedEntitySurfaceForm`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::OneOfRelatedStoriesDeprecatedRelatedStories`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'text')
-        self.text = attributes[:'text']
-      end
-
-      if attributes.key?(:'indices')
-        if (value = attributes[:'indices']).is_a?(Array)
-          self.indices = value
+      if attributes.key?(:'related_stories')
+        if (value = attributes[:'related_stories']).is_a?(Array)
+          self.related_stories = value
         end
       end
 
-      if attributes.key?(:'frequency')
-        self.frequency = attributes[:'frequency']
+      if attributes.key?(:'story_body')
+        self.story_body = attributes[:'story_body']
+      end
+
+      if attributes.key?(:'story_language')
+        self.story_language = attributes[:'story_language']
+      end
+
+      if attributes.key?(:'story_title')
+        self.story_title = attributes[:'story_title']
+      end
+
+      if attributes.key?(:'published_at_end')
+        self.published_at_end = attributes[:'published_at_end']
+      end
+
+      if attributes.key?(:'published_at_start')
+        self.published_at_start = attributes[:'published_at_start']
       end
     end
 
@@ -81,28 +117,29 @@ module AylienNewsApi
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@frequency.nil? && @frequency < 0
-        invalid_properties.push('invalid value for "frequency", must be greater than or equal to 0.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@frequency.nil? && @frequency < 0
-      true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] frequency Value to be assigned
-    def frequency=(frequency)
-      if !frequency.nil? && frequency < 0
-        fail ArgumentError, 'invalid value for "frequency", must be greater than or equal to 0.'
+      _one_of_found = false
+      self.class.openapi_one_of.each do |_class|
+        _one_of = AylienNewsApi.const_get(_class).build_from_hash(self.to_hash)
+        if _one_of.valid?
+          if _one_of_found
+            return false
+          else
+            _one_of_found = true
+          end
+        end
       end
 
-      @frequency = frequency
+      if !_one_of_found
+        return false
+      end
+
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -110,9 +147,12 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          text == o.text &&
-          indices == o.indices &&
-          frequency == o.frequency
+          related_stories == o.related_stories &&
+          story_body == o.story_body &&
+          story_language == o.story_language &&
+          story_title == o.story_title &&
+          published_at_end == o.published_at_end &&
+          published_at_start == o.published_at_start
     end
 
     # @see the `==` method
@@ -124,7 +164,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [text, indices, frequency].hash
+      [related_stories, story_body, story_language, story_title, published_at_end, published_at_start].hash
     end
 
     # Builds the object from hash
