@@ -13,12 +13,12 @@ Name | Type | Description | Notes
 **categories_taxonomy** | [**Query**](Query.md) |  | [optional] 
 **clusters** | [**Query**](Query.md) |  | [optional] 
 **links_permalink** | [**Query**](Query.md) |  | [optional] 
-**entities_id** | [**Query**](Query.md) |  | [optional] 
-**entities_surface_forms_text** | [**Query**](Query.md) |  | [optional] 
-**entities_links_wikipedia** | [**Query**](Query.md) |  | [optional] 
-**entities_links_wikidata** | [**Query**](Query.md) |  | [optional] 
-**entities_title_surface_forms_text** | [**Query**](Query.md) |  | [optional] 
-**entities_body_surface_forms_text** | [**Query**](Query.md) |  | [optional] 
+**entities_body_links_dbpedia** | [**Query**](Query.md) |  | [optional] 
+**entities_body_text** | [**Query**](Query.md) |  | [optional] 
+**entities_body_type** | [**Query**](Query.md) |  | [optional] 
+**entities_title_links_dbpedia** | [**Query**](Query.md) |  | [optional] 
+**entities_title_text** | [**Query**](Query.md) |  | [optional] 
+**entities_title_type** | [**Query**](Query.md) |  | [optional] 
 **id** | [**Query**](Query.md) |  | [optional] 
 **language** | [**Query**](Query.md) |  | [optional] 
 **media_images_content_length_max** | [**Query**](Query.md) |  | [optional] 
@@ -75,12 +75,12 @@ instance = AylienNewsApi::Parameter.new(author_id: null,
                                  categories_taxonomy: null,
                                  clusters: null,
                                  links_permalink: null,
-                                 entities_id: null,
-                                 entities_surface_forms_text: null,
-                                 entities_links_wikipedia: null,
-                                 entities_links_wikidata: null,
-                                 entities_title_surface_forms_text: null,
-                                 entities_body_surface_forms_text: null,
+                                 entities_body_links_dbpedia: null,
+                                 entities_body_text: null,
+                                 entities_body_type: null,
+                                 entities_title_links_dbpedia: null,
+                                 entities_title_text: null,
+                                 entities_title_type: null,
                                  id: null,
                                  language: null,
                                  media_images_content_length_max: null,
