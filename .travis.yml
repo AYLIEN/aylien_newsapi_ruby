@@ -8,4 +8,4 @@ script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build aylien_news_api.gemspec
-  - gem install ./aylien_news_api-4.7.0.gem
+  - gem install ./aylien_news_api-5.1.0.gem
