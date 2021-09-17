@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **id** | **String** | The ID of the category | [optional] 
 **label** | **String** | The label of the category | [optional] 
 **level** | **Integer** | The level of the category | [optional] 
-**links** | [**CategoryLinks**](CategoryLinks.md) |  | [optional] 
 **score** | **Float** | The score of the category | [optional] 
 **taxonomy** | [**CategoryTaxonomy**](CategoryTaxonomy.md) |  | [optional] 
+**links** | [**CategoryLinks**](CategoryLinks.md) |  | [optional] 
 
 ## Code Sample
 
@@ -21,9 +21,9 @@ instance = AylienNewsApi::Category.new(confident: null,
                                  id: null,
                                  label: null,
                                  level: null,
-                                 links: null,
                                  score: null,
-                                 taxonomy: null)
+                                 taxonomy: null,
+                                 links: null)
 ```
 
 
