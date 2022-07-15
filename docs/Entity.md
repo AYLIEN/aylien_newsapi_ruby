@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **overall_frequency** | **Integer** | Amount of entity surface form mentions in the article | [optional] 
 **body** | [**EntityInText**](EntityInText.md) |  | [optional] 
 **title** | [**EntityInText**](EntityInText.md) |  | [optional] 
+**external_ids** | [**ExternalIds**](ExternalIds.md) |  | [optional] 
 
 ## Code Sample
 
@@ -27,7 +28,8 @@ instance = AylienNewsApi::Entity.new(id: null,
                                  overall_prominence: null,
                                  overall_frequency: null,
                                  body: null,
-                                 title: null)
+                                 title: null,
+                                 external_ids: null)
 ```
 
 

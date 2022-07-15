@@ -13,26 +13,20 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module AylienNewsApi
-  class ShareCount
-    # The number of shares
-    attr_accessor :count
-
-    # The fetched date of the shares
-    attr_accessor :fetched_at
+  class DunsNumber
+    attr_accessor :id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'count' => :'count',
-        :'fetched_at' => :'fetched_at'
+        :'id' => :'id'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'count' => :'Integer',
-        :'fetched_at' => :'DateTime'
+        :'id' => :'String'
       }
     end
 
@@ -46,23 +40,19 @@ module AylienNewsApi
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::ShareCount` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AylienNewsApi::DunsNumber` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::ShareCount`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AylienNewsApi::DunsNumber`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'count')
-        self.count = attributes[:'count']
-      end
-
-      if attributes.key?(:'fetched_at')
-        self.fetched_at = attributes[:'fetched_at']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
     end
 
@@ -84,8 +74,7 @@ module AylienNewsApi
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          count == o.count &&
-          fetched_at == o.fetched_at
+          id == o.id
     end
 
     # @see the `==` method
@@ -97,7 +86,7 @@ module AylienNewsApi
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [count, fetched_at].hash
+      [id].hash
     end
 
     # Builds the object from hash

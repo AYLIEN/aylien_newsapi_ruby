@@ -15,6 +15,7 @@ docs/CategoryTaxonomy.md
 docs/Cluster.md
 docs/Clusters.md
 docs/DefaultApi.md
+docs/DunsNumber.md
 docs/Entity.md
 docs/EntityInText.md
 docs/EntityLinks.md
@@ -25,6 +26,7 @@ docs/EntitySurfaceForm.md
 docs/Error.md
 docs/ErrorLinks.md
 docs/Errors.md
+docs/ExternalIds.md
 docs/HistogramInterval.md
 docs/Histograms.md
 docs/Location.md
@@ -75,6 +77,7 @@ lib/aylien_news_api/models/category_links.rb
 lib/aylien_news_api/models/category_taxonomy.rb
 lib/aylien_news_api/models/cluster.rb
 lib/aylien_news_api/models/clusters.rb
+lib/aylien_news_api/models/duns_number.rb
 lib/aylien_news_api/models/entity.rb
 lib/aylien_news_api/models/entity_in_text.rb
 lib/aylien_news_api/models/entity_links.rb
@@ -85,6 +88,7 @@ lib/aylien_news_api/models/entity_surface_form.rb
 lib/aylien_news_api/models/error.rb
 lib/aylien_news_api/models/error_links.rb
 lib/aylien_news_api/models/errors.rb
+lib/aylien_news_api/models/external_ids.rb
 lib/aylien_news_api/models/histogram_interval.rb
 lib/aylien_news_api/models/histograms.rb
 lib/aylien_news_api/models/location.rb
@@ -132,6 +136,7 @@ spec/models/category_spec.rb
 spec/models/category_taxonomy_spec.rb
 spec/models/cluster_spec.rb
 spec/models/clusters_spec.rb
+spec/models/duns_number_spec.rb
 spec/models/entity_in_text_spec.rb
 spec/models/entity_links_spec.rb
 spec/models/entity_mention_index_spec.rb
@@ -142,6 +147,7 @@ spec/models/entity_surface_form_spec.rb
 spec/models/error_links_spec.rb
 spec/models/error_spec.rb
 spec/models/errors_spec.rb
+spec/models/external_ids_spec.rb
 spec/models/histogram_interval_spec.rb
 spec/models/histograms_spec.rb
 spec/models/location_spec.rb
