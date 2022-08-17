@@ -1,8 +1,10 @@
 .gitignore
+.openapi-generator-ignore
 .rspec
 .rubocop.yml
 .travis.yml
 Gemfile
+README.md
 Rakefile
 aylien_news_api.gemspec
 docs/AggregatedSentiment.md
@@ -15,7 +17,12 @@ docs/CategoryTaxonomy.md
 docs/Cluster.md
 docs/Clusters.md
 docs/DefaultApi.md
-docs/DunsNumber.md
+docs/DeprecatedEntities.md
+docs/DeprecatedEntity.md
+docs/DeprecatedEntitySurfaceForm.md
+docs/DeprecatedRelatedStories.md
+docs/DeprecatedStories.md
+docs/DeprecatedStory.md
 docs/Entity.md
 docs/EntityInText.md
 docs/EntityLinks.md
@@ -26,7 +33,6 @@ docs/EntitySurfaceForm.md
 docs/Error.md
 docs/ErrorLinks.md
 docs/Errors.md
-docs/ExternalIds.md
 docs/HistogramInterval.md
 docs/Histograms.md
 docs/Location.md
@@ -39,7 +45,6 @@ docs/Parameter.md
 docs/Query.md
 docs/Rank.md
 docs/Rankings.md
-docs/RelatedStories.md
 docs/RepresentativeStory.md
 docs/Scope.md
 docs/ScopeLevel.md
@@ -49,8 +54,6 @@ docs/Sentiments.md
 docs/ShareCount.md
 docs/ShareCounts.md
 docs/Source.md
-docs/Stories.md
-docs/Story.md
 docs/StoryCluster.md
 docs/StoryLinks.md
 docs/StoryTranslation.md
@@ -77,7 +80,12 @@ lib/aylien_news_api/models/category_links.rb
 lib/aylien_news_api/models/category_taxonomy.rb
 lib/aylien_news_api/models/cluster.rb
 lib/aylien_news_api/models/clusters.rb
-lib/aylien_news_api/models/duns_number.rb
+lib/aylien_news_api/models/deprecated_entities.rb
+lib/aylien_news_api/models/deprecated_entity.rb
+lib/aylien_news_api/models/deprecated_entity_surface_form.rb
+lib/aylien_news_api/models/deprecated_related_stories.rb
+lib/aylien_news_api/models/deprecated_stories.rb
+lib/aylien_news_api/models/deprecated_story.rb
 lib/aylien_news_api/models/entity.rb
 lib/aylien_news_api/models/entity_in_text.rb
 lib/aylien_news_api/models/entity_links.rb
@@ -88,7 +96,6 @@ lib/aylien_news_api/models/entity_surface_form.rb
 lib/aylien_news_api/models/error.rb
 lib/aylien_news_api/models/error_links.rb
 lib/aylien_news_api/models/errors.rb
-lib/aylien_news_api/models/external_ids.rb
 lib/aylien_news_api/models/histogram_interval.rb
 lib/aylien_news_api/models/histograms.rb
 lib/aylien_news_api/models/location.rb
@@ -101,7 +108,6 @@ lib/aylien_news_api/models/parameter.rb
 lib/aylien_news_api/models/query.rb
 lib/aylien_news_api/models/rank.rb
 lib/aylien_news_api/models/rankings.rb
-lib/aylien_news_api/models/related_stories.rb
 lib/aylien_news_api/models/representative_story.rb
 lib/aylien_news_api/models/scope.rb
 lib/aylien_news_api/models/scope_level.rb
@@ -111,8 +117,6 @@ lib/aylien_news_api/models/sentiments.rb
 lib/aylien_news_api/models/share_count.rb
 lib/aylien_news_api/models/share_counts.rb
 lib/aylien_news_api/models/source.rb
-lib/aylien_news_api/models/stories.rb
-lib/aylien_news_api/models/story.rb
 lib/aylien_news_api/models/story_cluster.rb
 lib/aylien_news_api/models/story_links.rb
 lib/aylien_news_api/models/story_translation.rb
@@ -136,7 +140,12 @@ spec/models/category_spec.rb
 spec/models/category_taxonomy_spec.rb
 spec/models/cluster_spec.rb
 spec/models/clusters_spec.rb
-spec/models/duns_number_spec.rb
+spec/models/deprecated_entities_spec.rb
+spec/models/deprecated_entity_spec.rb
+spec/models/deprecated_entity_surface_form_spec.rb
+spec/models/deprecated_related_stories_spec.rb
+spec/models/deprecated_stories_spec.rb
+spec/models/deprecated_story_spec.rb
 spec/models/entity_in_text_spec.rb
 spec/models/entity_links_spec.rb
 spec/models/entity_mention_index_spec.rb
@@ -147,7 +156,6 @@ spec/models/entity_surface_form_spec.rb
 spec/models/error_links_spec.rb
 spec/models/error_spec.rb
 spec/models/errors_spec.rb
-spec/models/external_ids_spec.rb
 spec/models/histogram_interval_spec.rb
 spec/models/histograms_spec.rb
 spec/models/location_spec.rb
@@ -160,7 +168,6 @@ spec/models/parameter_spec.rb
 spec/models/query_spec.rb
 spec/models/rank_spec.rb
 spec/models/rankings_spec.rb
-spec/models/related_stories_spec.rb
 spec/models/representative_story_spec.rb
 spec/models/scope_level_spec.rb
 spec/models/scope_spec.rb
@@ -170,10 +177,8 @@ spec/models/sentiments_spec.rb
 spec/models/share_count_spec.rb
 spec/models/share_counts_spec.rb
 spec/models/source_spec.rb
-spec/models/stories_spec.rb
 spec/models/story_cluster_spec.rb
 spec/models/story_links_spec.rb
-spec/models/story_spec.rb
 spec/models/story_translation_spec.rb
 spec/models/story_translations_spec.rb
 spec/models/summary_spec.rb
