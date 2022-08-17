@@ -17,8 +17,7 @@ Name | Type | Description | Notes
 **links** | [**StoryLinks**](StoryLinks.md) |  | [optional] 
 **media** | [**Array&lt;Media&gt;**](Media.md) | An array of extracted media such as images and videos | [optional] 
 **paragraphs_count** | **Integer** | Paragraph count of the story body | [optional] 
-**published_datetime** | **DateTime** | Publication time of the story, if available, otherwise time of acquisition | [optional] 
-**published_at** | **DateTime** | Acquisition time of the story | [optional] 
+**published_at** | **DateTime** | Published date of the story | [optional] 
 **sentences_count** | **Integer** | Sentence count of the story body | [optional] 
 **sentiment** | [**Sentiments**](Sentiments.md) |  | [optional] 
 **social_shares_count** | [**ShareCounts**](ShareCounts.md) |  | [optional] 
@@ -28,7 +27,6 @@ Name | Type | Description | Notes
 **translations** | [**StoryTranslations**](StoryTranslations.md) |  | [optional] 
 **words_count** | **Integer** | Word count of the story body | [optional] 
 **license_type** | **Integer** | License type of the story | [optional] 
-**industries** | [**Array&lt;Category&gt;**](Category.md) | An array of industries categories | [optional] 
 
 ## Code Sample
 
@@ -48,7 +46,6 @@ instance = AylienNewsApi::Story.new(author: null,
                                  links: null,
                                  media: null,
                                  paragraphs_count: null,
-                                 published_datetime: null,
                                  published_at: null,
                                  sentences_count: null,
                                  sentiment: null,
@@ -58,8 +55,7 @@ instance = AylienNewsApi::Story.new(author: null,
                                  title: null,
                                  translations: null,
                                  words_count: null,
-                                 license_type: null,
-                                 industries: null)
+                                 license_type: null)
 ```
 
 
